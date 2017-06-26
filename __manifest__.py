@@ -21,11 +21,14 @@
 
     'depends': [
         'base',
-        'sale'
+        'sale',
+        'sale_workflow_rights'
     ],
 
     'data': [
-        'views/production_types.xml',
+        'views/production_type.xml',
+        'views/production.xml',
+        'views/sale_order.xml',
         'views/menu_buttons.xml'
     ],
 }

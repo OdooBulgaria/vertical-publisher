@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+                 
+        <!-- <record id="view_publisher_production_types_tree" model="ir.ui.view">
+            <field name="name">view_publisher_production_types_tree</field>
+            <field name="model">publisher.production_type</field>
+            <field name="arch" type="xml">
+                <tree string="Production Types">
+                    <field name="name"/>
+                    <field name="product_category"/>
+                    <field name="media"/>
+                    <field name="website"/>
+                    <field name="invoicing_mode"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_publisher_production_types_form" model="ir.ui.view">
+            <field name="name">view_publisher_production_types_form</field>
+            <field name="model">publisher.production_type</field>
+            <field name="arch" type="xml">
+                <form string="Production Type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="website"/>
+                                <field name="product_category"/>
+                            </group>
+                            <group>
+                                <field name="media"/>
+                                <field name="invoicing_mode"/>
+                                <label for="down_payment" attrs="{'invisible': [('invoicing_mode', '!=', 'both')]}"/>
+                                <div attrs="{'invisible': [('invoicing_mode', '!=', 'both')]}">
+                                    <field name="down_payment" class="oe_inline"/>
+                                    <label string="%%" class="oe_inline"/>
+                                </div>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record> -->
+
+    </data>
+</odoo>

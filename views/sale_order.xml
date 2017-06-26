@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+                 
+        <record id="view_order_form_publisher" model="ir.ui.view">
+            <field name="name">view_order_form_publisher</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <data>
+
+                    <!-- Make Tree view non-editable -->
+                    <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                        <attribute name="editable" />
+                    </xpath>
+
+                    <!-- Add commission field -->
+                    <xpath expr="//field[@name='order_line']/form//field[@name='tax_id']" position="after">
+                        <label for="commission" />
+                        <div>
+                            <field name="commission" class="oe_inline" />
+                            <label string="%%" class="oe_inline" />
+                        </div>
+                    </xpath>
+
+                    <!-- Remove original invoice lines & replace by tabs (production, invoice lines) -->
+                    <xpath expr="//field[@name='order_line']/form/div[@groups='base.group_no_one']" position="replace">
+                        <notebook>
+                            <page string="Production" name="production">
+                                <group>
+                                    <group>
+                                        <field name="format_id" />
+                                        <field name="location_id" />
+                                        <field name="color_id" />
+                                        <field name="full_equipment_received" />
+                                    </group>
+                                    <group>
+                                        <field name="website" />
+                                        <field name="date_start" />
+                                        <field name="date_end" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Invoice Lines" groups="base.group_no_one">
+                                <field name="invoice_lines" />
+                            </page>
+                        </notebook>
+                    </xpath>
+
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>
