@@ -8,12 +8,12 @@
     'description': """
         Vertical Publisher Management
         
+        Manages a publisher system
         
-        
-        This module has been developed by Valentin Thirion @ AbAKUS it-solutions.
+        This module has been developed by Valentin Thirion, Jason PINDAT @ AbAKUS it-solutions.
     """,
 
-    'author': "Valentin THIRION, AbAKUS it-solutions SARL",
+    'author': "Valentin THIRION, Jason PINDAT, AbAKUS it-solutions SARL",
     'website': "http://www.abakusitsolutions.eu",
 
     'category': 'Sale',
@@ -25,5 +25,7 @@
     ],
 
     'data': [
+        'views/production_types.xml',
+        'views/menu_buttons.xml'
     ],
 }
