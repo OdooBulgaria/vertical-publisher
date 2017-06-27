@@ -9,4 +9,4 @@ class Media(models.Model):
     _name = 'publisher.media'
     _order = 'name'
 
-    name = fields.Char(string='Name', copy=False, index=True)
+    name = fields.Char(string='Name', copy=False, index=True, required=True)

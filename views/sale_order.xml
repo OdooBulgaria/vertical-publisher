@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <odoo>
     <data>
-                 
         <record id="view_order_form_publisher" model="ir.ui.view">
             <field name="name">view_order_form_publisher</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <data>
-
                     <!-- Make Tree view non-editable -->
                     <xpath expr="//field[@name='order_line']/tree" position="attributes">
                         <attribute name="editable" />
+                    </xpath>
+
+                    <!-- Add production_id field -->
+                    <xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="after">
+                        <field name="production_id" />
                     </xpath>
 
                     <!-- Add commission field -->
@@ -30,15 +32,19 @@
                             <page string="Production" name="production">
                                 <group>
                                     <group>
-                                        <field name="format_id" />
-                                        <field name="location_id" />
+                                        <field name="format_needed" invisible="1" />
+                                        <field name="format_id" attrs="{'required': [('format_needed', '=', True)]}" />
                                         <field name="color_id" />
                                         <field name="full_equipment_received" />
                                     </group>
                                     <group>
-                                        <field name="website" />
-                                        <field name="date_start" />
-                                        <field name="date_end" />
+                                        <field name="location_needed" invisible="1" />
+                                        <field name="website_related" invisible="1" />
+                                        <field name="location_id" attrs="{'required': [('location_needed', '=', True)]}" domain="[('website_related', '=', website_related)]" />
+                                        <field name="date_start_needed" invisible="1" />
+                                        <field name="date_start" attrs="{'required': [('date_start_needed', '=', True)], 'invisible': [('website_related', '=', False)]}" />
+                                        <field name="date_end_needed" invisible="1" />
+                                        <field name="date_end" attrs="{'required': [('date_end_needed', '=', True)], 'invisible': [('website_related', '=', False)]}" />
                                     </group>
                                 </group>
                             </page>
@@ -47,10 +53,8 @@
                             </page>
                         </notebook>
                     </xpath>
-
                 </data>
             </field>
         </record>
-
     </data>
 </odoo>

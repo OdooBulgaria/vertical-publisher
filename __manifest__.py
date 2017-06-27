@@ -29,6 +29,7 @@
         'views/production_type.xml',
         'views/production.xml',
         'views/sale_order.xml',
+        'views/product_template.xml',
         'views/menu_buttons.xml'
     ],
 }

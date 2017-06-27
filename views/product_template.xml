@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_template_form_view_publisher" model="ir.ui.view">
+            <field name="name">product_template_form_view_publisher</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//page[@name='notes']" position="before">
+                        <page string="Production" name="production">
+                            <group>
+                                <group>
+                                    <field name="format_needed" />
+                                    <field name="location_needed" />
+                                </group>
+                                <group>
+                                    <field name="date_start_needed" />
+                                    <field name="date_end_needed" />
+                                </group>
+                            </group>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

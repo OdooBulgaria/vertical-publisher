@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <odoo>
     <data>
-                 
-        <!-- <record id="view_publisher_production_types_tree" model="ir.ui.view">
+        <!--<record id="view_publisher_production_types_tree" model="ir.ui.view">
             <field name="name">view_publisher_production_types_tree</field>
-            <field name="model">publisher.production_type</field>
+            <field name="model">publisher.production.type</field>
             <field name="arch" type="xml">
                 <tree string="Production Types">
                     <field name="name"/>
-                    <field name="product_category"/>
-                    <field name="media"/>
+                    <field name="product_category_id"/>
+                    <field name="media_id"/>
                     <field name="website"/>
                     <field name="invoicing_mode"/>
                 </tree>
@@ -19,7 +17,7 @@
 
         <record id="view_publisher_production_types_form" model="ir.ui.view">
             <field name="name">view_publisher_production_types_form</field>
-            <field name="model">publisher.production_type</field>
+            <field name="model">publisher.production.type</field>
             <field name="arch" type="xml">
                 <form string="Production Type">
                     <sheet>
@@ -27,10 +25,10 @@
                             <group>
                                 <field name="name"/>
                                 <field name="website"/>
-                                <field name="product_category"/>
+                                <field name="product_category_id"/>
                             </group>
                             <group>
-                                <field name="media"/>
+                                <field name="media_id"/>
                                 <field name="invoicing_mode"/>
                                 <label for="down_payment" attrs="{'invisible': [('invoicing_mode', '!=', 'both')]}"/>
                                 <div attrs="{'invisible': [('invoicing_mode', '!=', 'both')]}">
@@ -42,7 +40,6 @@
                     </sheet>
                 </form>
             </field>
-        </record> -->
-
+        </record>-->
     </data>
 </odoo>
