@@ -1,45 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!--<record id="view_publisher_production_types_tree" model="ir.ui.view">
-            <field name="name">view_publisher_production_types_tree</field>
-            <field name="model">publisher.production.type</field>
+        <record id="view_publisher_production_tree" model="ir.ui.view">
+            <field name="name">view_publisher_production_tree</field>
+            <field name="model">publisher.production</field>
             <field name="arch" type="xml">
-                <tree string="Production Types">
+                <tree string="Productions">
                     <field name="name"/>
-                    <field name="product_category_id"/>
-                    <field name="media_id"/>
-                    <field name="website"/>
-                    <field name="invoicing_mode"/>
+                    <field name="state"/>
+                    <field name="production_type_id"/>
+                    <field name="sale_lines_confirmed_count"/>
+                    <field name="sale_lines_full_equipment_count"/>
+                    <field name="date_full_equipment_limit"/>
+                    <field name="turnover_delta"/>
                 </tree>
             </field>
         </record>
 
-        <record id="view_publisher_production_types_form" model="ir.ui.view">
-            <field name="name">view_publisher_production_types_form</field>
-            <field name="model">publisher.production.type</field>
+        <record id="view_publisher_production_form" model="ir.ui.view">
+            <field name="name">view_publisher_production_form</field>
+            <field name="model">publisher.production</field>
             <field name="arch" type="xml">
-                <form string="Production Type">
+                <form string="Production">
+                    <header>
+                        <field name="state" widget="statusbar" clickable="True" />
+                    </header>
                     <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
                         <group>
                             <group>
-                                <field name="name"/>
-                                <field name="website"/>
-                                <field name="product_category_id"/>
+                                <field name="date_start" />
+                                <field name="date_end" />
+                                <field name="date_full_equipment_limit" />
+                                <!-- <field name="sale_lines_count"/> -->
+                                <field name="sale_lines_confirmed_count"/>
+                                <field name="sale_lines_full_equipment_count"/>
                             </group>
                             <group>
-                                <field name="media_id"/>
+                                <field name="production_type_id" />
                                 <field name="invoicing_mode"/>
                                 <label for="down_payment" attrs="{'invisible': [('invoicing_mode', '!=', 'both')]}"/>
                                 <div attrs="{'invisible': [('invoicing_mode', '!=', 'both')]}">
                                     <field name="down_payment" class="oe_inline"/>
                                     <label string="%%" class="oe_inline"/>
                                 </div>
+                                <field name="expected_turnover"/>
+                                <field name="actual_turnover"/>
+                                <field name="turnover_delta"/>
                             </group>
+                            <field name="sale_line_ids" />
                         </group>
                     </sheet>
                 </form>
             </field>
-        </record>-->
+        </record>
     </data>
 </odoo>

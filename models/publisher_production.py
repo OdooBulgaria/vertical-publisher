@@ -19,7 +19,7 @@ class Production(models.Model):
     production_type_id = fields.Many2one('publisher.production.type', string='Production Type', required=True)
     date_start = fields.Date(string='Publication Date / Event')
     date_end = fields.Date(string='End Date')
-    date_full_equipment_received = fields.Date(string='Full Equipment Received Date')
+    date_full_equipment_limit = fields.Date(string='Full Equipment Limit Date')
     sale_line_ids = fields.One2many('sale.order.line', 'production_id', string='Production Lines')
     expected_turnover = fields.Integer(string="Expected Turnover")
     invoicing_mode = fields.Selection([
@@ -29,40 +29,44 @@ class Production(models.Model):
         ], string='Invoicing Mode', default='before', required=True)
     down_payment = fields.Float(string='Down Payment', default=0)
 
-    @api.one
-    def _compute_sale_lines_count(self):
-        self.sale_lines_count = len(self.sale_line_ids)
+    # sale_lines_count = fields.Integer(string="Production Lines Count", compute=_compute_sale_lines_count)
+    sale_lines_confirmed_count = fields.Char(string="Confirmed Lines", compute='_compute_sale_lines_confirmed_count')
+    sale_lines_full_equipment_count = fields.Char(string="Equip. Received Lines", compute='_compute_sale_lines_full_equipment_count')
+    actual_turnover = fields.Integer(string="Actual Turnover", compute='_compute_actual_turnover')
+    turnover_delta = fields.Integer(string='Diff. Actual / Expected Turnover', compute='_compute_turnover_delta')
 
-    sale_lines_count = fields.Integer(string="Production Lines Count", compute=_compute_sale_lines_count)
+    # @api.one
+    # def _compute_sale_lines_count(self):
+    #     self.sale_lines_count = len(self.sale_line_ids)
+
 
     @api.one
     def _compute_sale_lines_confirmed_count(self):
-        self.sale_lines_confirmed_count = 0
+        count = 0
         for line in self.sale_line_ids:
             if line.order_id.state in ['sale', 'done']:
-                self.sale_lines_confirmed_count += 1
+                count += 1
 
-    sale_lines_confirmed_count = fields.Integer(string="Production Lines Count", compute=_compute_sale_lines_confirmed_count)
+        self.sale_lines_confirmed_count = str(count) + '/' + str(len(self.sale_line_ids))
+
 
     @api.one
     def _compute_sale_lines_full_equipment_count(self):
-        self.sale_lines_full_equipment_count = 0
+        count = 0
         for line in self.sale_line_ids:
             if line.full_equipment_received:
-                self.sale_lines_full_equipment_count += 1
+                count += 1
 
-    sale_lines_full_equipment_count = fields.Integer(string="Production Lines Count", compute=_compute_sale_lines_full_equipment_count)
+        self.sale_lines_full_equipment_count = str(count) + '/' + str(len(self.sale_line_ids))
 
+    
     @api.one
     def _compute_actual_turnover(self):
         # Warning: if the related sale's total price is manually changed this sum is not accurate
         self.actual_turnover = sum([line.price_subtotal for line in self.sale_line_ids])
 
-    actual_turnover = fields.Integer(string="Actual Turnover", compute=_compute_actual_turnover)
 
     @api.one
     def _compute_turnover_delta(self):
         # Warning: if the related sale's total price is manually changed this calculation is not accurate
         self.turnover_delta = self.actual_turnover - self.expected_turnover
-
-    turnover_delta = fields.Integer(string='Diff. Actual / Expected Turnover', compute=_compute_turnover_delta)
