@@ -9,7 +9,10 @@
                 <data>
                     <!-- SALE ORDER -->
 
-                    <!-- Reorganize Form & &add agency_id field -->
+                    <!-- Hide client_order_refs field -->
+                    <xpath expr="//field[@name='client_order_ref']" position="replace" />
+
+                    <!-- Reorganize form & add agency_id & client_order_refs fields -->
                     <xpath expr="/form/sheet/group" position="replace">
                         <group col="3">
                             <group>
@@ -23,12 +26,17 @@
                             </group>
                         </group>
                         <group>
-                            <field name="date_order" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])]}"/>
-                            <field name="validity_date" attrs="{'invisible': [('state', 'in', ['sale', 'done'])]}" />
-                            <field name="confirmation_date" attrs="{'invisible': [('state', 'in', ['draft', 'sent', 'cancel'])]}"/>
-                            <field name="pricelist_id" groups="product.group_sale_pricelist" />
-                            <field name="currency_id" invisible="1" />
-                            <field name="payment_term_id" options="{'no_create': True}" />
+                            <group>
+                                <field name="date_order" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])]}"/>
+                                <field name="validity_date" attrs="{'invisible': [('state', 'in', ['sale', 'done'])]}" />
+                                <field name="confirmation_date" attrs="{'invisible': [('state', 'in', ['draft', 'sent', 'cancel'])]}"/>
+                                <field name="pricelist_id" groups="product.group_sale_pricelist" />
+                                <field name="currency_id" invisible="1" />
+                                <field name="payment_term_id" options="{'no_create': True}" />
+                            </group>
+                            <group>
+                                <field name="client_order_ref" />
+                            </group>
                         </group>
                     </xpath>
 
