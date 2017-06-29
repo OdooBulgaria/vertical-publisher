@@ -62,7 +62,7 @@
                     </xpath>
 
                     <!-- Remove original invoice lines & replace by tabs (production, invoice lines) -->
-                    <!--<xpath expr="//field[@name='order_line']/form/div[@groups='base.group_no_one']" position="replace">
+                    <xpath expr="//field[@name='order_line']/form/div[@groups='base.group_no_one']" position="replace">
                         <notebook>
                             <page string="Production" name="production">
                                 <group>
@@ -116,7 +116,7 @@
                                 <field name="invoice_lines" />
                             </page>
                         </notebook>
-                    </xpath>-->
+                    </xpath>
                 </data>
             </field>
         </record>
