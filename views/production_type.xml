@@ -6,11 +6,10 @@
             <field name="model">publisher.production.type</field>
             <field name="arch" type="xml">
                 <tree string="Production Types">
-                    <field name="name"/>
-                    <field name="product_category_id"/>
-                    <field name="media_id"/>
-                    <field name="website"/>
-                    <field name="invoicing_mode"/>
+                    <field name="name" />
+                    <field name="product_category_id" />
+                    <field name="media_id" />
+                    <field name="invoicing_mode" />
                 </tree>
             </field>
         </record>
@@ -23,17 +22,16 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="name"/>
-                                <field name="website"/>
-                                <field name="product_category_id"/>
+                                <field name="name" />
+                                <field name="product_category_id" />
                             </group>
                             <group>
-                                <field name="media_id"/>
-                                <field name="invoicing_mode"/>
-                                <label for="down_payment" attrs="{'invisible': [('invoicing_mode', '!=', 'both')]}"/>
+                                <field name="media_id" />
+                                <field name="invoicing_mode" />
+                                <label for="down_payment" attrs="{'invisible': [('invoicing_mode', '!=', 'both')]}" />
                                 <div attrs="{'invisible': [('invoicing_mode', '!=', 'both')]}">
-                                    <field name="down_payment" class="oe_inline"/>
-                                    <label string="%%" class="oe_inline"/>
+                                    <field name="down_payment" class="oe_inline" />
+                                    <label string="%%" class="oe_inline" />
                                 </div>
                             </group>
                         </group>

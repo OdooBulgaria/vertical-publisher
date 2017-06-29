@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_publisher_color_tree" model="ir.ui.view">
+            <field name="name">view_publisher_color_tree</field>
+            <field name="model">publisher.color</field>
+            <field name="arch" type="xml">
+                <tree string="Colors">
+                    <field name="name" />
+                    <field name="media_ids" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_publisher_color_form" model="ir.ui.view">
+            <field name="name">view_publisher_color_form</field>
+            <field name="model">publisher.color</field>
+            <field name="arch" type="xml">
+                <form string="Color">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="media_ids" domain="[('color_needed', '=', True)]" widget="many2many_checkboxes" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

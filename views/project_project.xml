@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_project_kanban_publisher" model="ir.ui.view">
+            <field name="name">view_project_kanban_publisher</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//kanban" position="inside">
+                        <field name="production_id" />
+                    </xpath>
+
+                    <xpath expr="//div[@class='o_primary']" position="after">
+                        <a name="project_project_production_action" type="object" attrs="{'invisible': [('production_id', '=', False)]}">Show Production</a>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record id="view_project_form_publisher" model="ir.ui.view">
+            <field name="name">view_project_form_publisher</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='user_id']" position="after">
+                        <field name="production_id" readonly="1" attrs="{'invisible': [('production_id', '=', False)]}" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

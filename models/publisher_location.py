@@ -10,4 +10,4 @@ class Location(models.Model):
     _order = 'name'
 
     name = fields.Char(string='Name', copy=False, index=True, required=True)
-    website_related = fields.Boolean(string='Website Related')
+    media_ids = fields.Many2many('publisher.media', string='Medias', required=True)

@@ -22,14 +22,21 @@
     'depends': [
         'base',
         'sale',
+        'project',
         'sale_workflow_rights'
     ],
 
     'data': [
+        'views/media.xml',
+        'views/format.xml',
+        'views/location.xml',
+        'views/color.xml',
         'views/production_type.xml',
         'views/production.xml',
+        'views/production_line.xml',
         'views/sale_order.xml',
-        'views/product_template.xml',
+        'views/project_project.xml',
         'views/menu_buttons.xml'
+        #'views/templates.xml'
     ],
 }
