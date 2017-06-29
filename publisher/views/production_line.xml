@@ -5,7 +5,7 @@
             <field name="name">view_publisher_production_line_tree</field>
             <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
-                <tree name="Production Lines">
+                <tree name="Production Lines" create="false">
                     <field name="product_id" />
                     <field name="name" />
                     <field name="order_partner_id" />
@@ -28,7 +28,7 @@
             <field name="name">view_publisher_production_line_form</field>
             <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
-                <form>
+                <form create="false" edit="false">
                     <sheet>
                         <group>
                             <group>

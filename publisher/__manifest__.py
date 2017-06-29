@@ -36,6 +36,7 @@
         'views/production.xml',
         'views/production_line.xml',
         'views/res_partner.xml',
+        'views/product_template.xml',
         'views/sale_order.xml',
         'views/project_project.xml',
         'views/menu_buttons.xml'

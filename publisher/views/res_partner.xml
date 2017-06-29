@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record id="res_partner_sale_order_line_action" model="ir.actions.act_window">
+            <field name="name">Production Lines</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">['&amp;', ('production_id', '!=', False), ('order_id.partner_id.id', '=', context.get('partner_id'))]</field>
+            <field name="view_id" ref="view_publisher_production_line_tree" />
+        </record>
+
         <record id="view_partner_form_publisher" model="ir.ui.view">
             <field name="name">view_partner_form_publisher</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <data>
+                    <xpath expr="//div[@name='button_box']" position="inside">
+                        <button class="oe_stat_button" name="%(res_partner_sale_order_line_action)d" type="action" icon="fa-industry" context="{'partner_id': id}">
+                            <field string="Production Lines" name="production_line_count" widget="statinfo" modifiers="{'readonly': true}"/>
+                        </button>
+                    </xpath>
+
                     <xpath expr="//page[@name='sales_purchases']//field[@name='customer']" position="after">
                         <field name="agency" />
                     </xpath>
