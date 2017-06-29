@@ -6,6 +6,7 @@
             <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
                 <tree name="Production Lines">
+                    <field name="product_id" />
                     <field name="name" />
                     <field name="order_partner_id" />
                     <field name="full_equipment_received" />
