@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Vertical Publisher",
+    'name': "Publisher",
 
     'summary': """
     """,
