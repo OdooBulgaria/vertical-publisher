@@ -16,7 +16,7 @@
                     <xpath expr="/form/sheet/group" position="replace">
                         <group col="3">
                             <group>
-                                <field name="agency_id" attrs="{'readonly': [('state', 'not in', ['draft', 'sent'])]}" context="{'show_address': 1}" options="{'always_reload': True}" />
+                                <field name="agency_id" domain="[('agency','=',True)]" attrs="{'readonly': [('state', 'not in', ['draft', 'sent'])]}" context="{'show_address': 1}" options="{'always_reload': True}" />
                             </group>
                             <group>
                                 <field name="partner_id" domain="[('customer','=',True)]" context="{'search_default_customer':1, 'show_address': 1}" options="{'always_reload': True}" />

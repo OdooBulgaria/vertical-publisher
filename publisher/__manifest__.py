@@ -23,6 +23,7 @@
         'base',
         'sale',
         'project',
+        'contacts',
         'sale_workflow_rights'
     ],
 
@@ -34,6 +35,7 @@
         'views/production_type.xml',
         'views/production.xml',
         'views/production_line.xml',
+        'views/res_partner.xml',
         'views/sale_order.xml',
         'views/project_project.xml',
         'views/menu_buttons.xml'
