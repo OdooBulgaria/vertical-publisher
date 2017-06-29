@@ -60,7 +60,7 @@
                                     <field name="turnover_delta" widget="monetary" class="oe_inline" />
                                 </div>
                             </group>
-                            <field name="sale_line_ids">
+                            <field name="sale_line_ids" readonly="1">
                                 <tree name="Production Lines">
                                     <field name="name" />
                                     <field name="order_partner_id" />
