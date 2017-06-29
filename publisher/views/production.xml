@@ -66,6 +66,11 @@
                                     <field name="name" />
                                     <field name="order_partner_id" />
                                     <field name="full_equipment_received" />
+                                    <field name="format_id" />
+                                    <field name="color_id" />
+                                    <field name="location_id" />
+                                    <field name="date_start" />
+                                    <field name="date_end" />
                                     <field name="price_subtotal" />
                                 </tree>
                             </field>
