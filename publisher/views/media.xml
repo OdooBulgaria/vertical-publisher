@@ -23,8 +23,10 @@
                 <form string="Media">
                     <sheet>
                         <group>
+                            <field name="name" />
+                        </group>
+                        <group string="Production item requirements">
                             <group>
-                                <field name="name" />
                                 <field name="format_needed" />
                                 <field name="color_needed" />
                             </group>
