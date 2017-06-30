@@ -76,7 +76,7 @@ class Production(models.Model):
 
     @api.one
     def _compute_turnover_delta_sign(self):
-        self.turnover_delta_sign = '+' if self.actual_turnover >= 0 else '-'
+        self.turnover_delta_sign = '+' if self.turnover_delta >= 0 else ''
 
     @api.one
     def action_create_project(self):
