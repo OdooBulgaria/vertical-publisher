@@ -16,6 +16,7 @@ class SaleOrderLine(models.Model):
     date_start = fields.Date(string='Publication Date')
     date_end = fields.Date(string='End Date')
     full_equipment_received = fields.Boolean(string='Full Equipment Received')
+    attachment_ids = fields.Many2many('ir.attachment', string="Attachments")
 
     format_needed = fields.Boolean(related='production_id.production_type_id.media_id.format_needed', string="Format Needed")
     location_needed = fields.Boolean(related='production_id.production_type_id.media_id.location_needed', string="Location Needed")
