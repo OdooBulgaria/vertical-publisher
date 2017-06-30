@@ -49,6 +49,7 @@
 
                     <!-- Add production line fields to sale order line -->
                     <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="after">
+                        <field name="production_id" />
                         <field name="format_id" />
                         <field name="color_id" />
                         <field name="location_id" />
