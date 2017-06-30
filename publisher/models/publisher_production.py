@@ -69,11 +69,13 @@ class Production(models.Model):
         self.actual_turnover = sum([line.price_subtotal for line in self.sale_line_ids])
 
 
+    @api.depends('expected_turnover')
     @api.one
     def _compute_turnover_delta(self):
         self.turnover_delta = self.actual_turnover - self.expected_turnover
 
 
+    @api.depends('expected_turnover')
     @api.one
     def _compute_turnover_delta_sign(self):
         self.turnover_delta_sign = '+' if self.turnover_delta >= 0 else ''
