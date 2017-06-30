@@ -31,7 +31,11 @@
             id="menu_sale_publisher_settings_production_types" parent="menu_sale_publisher_settings"
             sequence="1" action="menu_sale_publisher_settings_production_types_action" />
 
-        <record id="menu_sale_publisher_settings_media_action" model="ir.actions.act_window">
+        <menuitem name="Media Options"
+            id="menu_sale_publisher_settings_media" parent="menu_sale_publisher_settings"
+            sequence="100"/>
+
+        <record id="menu_sale_publisher_settings_media_media_action" model="ir.actions.act_window">
             <field name="name">Media</field>
             <field name="res_model">publisher.media</field>
             <field name="view_type">form</field>
@@ -39,10 +43,10 @@
         </record>
 
         <menuitem name="Media"
-            id="menu_sale_publisher_settings_media" parent="menu_sale_publisher_settings"
-            sequence="2" action="menu_sale_publisher_settings_media_action" />
+            id="menu_sale_publisher_settings_media_media" parent="menu_sale_publisher_settings_media"
+            sequence="2" action="menu_sale_publisher_settings_media_media_action" />
 
-        <record id="menu_sale_publisher_settings_formats_action" model="ir.actions.act_window">
+        <record id="menu_sale_publisher_settings_media_formats_action" model="ir.actions.act_window">
             <field name="name">Formats</field>
             <field name="res_model">publisher.format</field>
             <field name="view_type">form</field>
@@ -50,10 +54,10 @@
         </record>
 
         <menuitem name="Formats"
-            id="menu_sale_publisher_settings_formats" parent="menu_sale_publisher_settings"
-            sequence="3" action="menu_sale_publisher_settings_formats_action" />
+            id="menu_sale_publisher_settings_media_formats" parent="menu_sale_publisher_settings_media"
+            sequence="3" action="menu_sale_publisher_settings_media_formats_action" />
 
-        <record id="menu_sale_publisher_settings_locations_action" model="ir.actions.act_window">
+        <record id="menu_sale_publisher_settings_media_locations_action" model="ir.actions.act_window">
             <field name="name">Locations</field>
             <field name="res_model">publisher.location</field>
             <field name="view_type">form</field>
@@ -61,10 +65,10 @@
         </record>
 
         <menuitem name="Locations"
-            id="menu_sale_publisher_settings_locations" parent="menu_sale_publisher_settings"
-            sequence="4" action="menu_sale_publisher_settings_locations_action" />
+            id="menu_sale_publisher_settings_media_locations" parent="menu_sale_publisher_settings_media"
+            sequence="4" action="menu_sale_publisher_settings_media_locations_action" />
 
-        <record id="menu_sale_publisher_settings_colors_action" model="ir.actions.act_window">
+        <record id="menu_sale_publisher_settings_media_colors_action" model="ir.actions.act_window">
             <field name="name">Colors</field>
             <field name="res_model">publisher.color</field>
             <field name="view_type">form</field>
@@ -72,7 +76,7 @@
         </record>
 
         <menuitem name="Colors"
-            id="menu_sale_publisher_settings_colors" parent="menu_sale_publisher_settings"
-            sequence="5" action="menu_sale_publisher_settings_colors_action" />
+            id="menu_sale_publisher_settings_media_colors" parent="menu_sale_publisher_settings_media"
+            sequence="5" action="menu_sale_publisher_settings_media_colors_action" />
     </data>
 </odoo>
