@@ -83,3 +83,10 @@ class Production(models.Model):
         self.project_id = self.env['project.project'].create({
             'name': self.name, 'production_id': self.id
         })
+
+    @api.multi
+    @api.onchange('production_type_id')
+    def onchange_production_type_id(self):
+        for production in self:
+            production.invoicing_mode = production.production_type_id.invoicing_mode
+            production.down_payment = production.production_type_id.down_payment
