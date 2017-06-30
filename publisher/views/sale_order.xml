@@ -12,6 +12,9 @@
                     <!-- Hide client_order_refs field -->
                     <xpath expr="//field[@name='client_order_ref']" position="replace" />
 
+                    <!-- Hide Lock Header Button -->
+                    <xpath expr="//button[@name='action_done']" position="replace" />
+
                     <!-- Reorganize form & add agency_id & client_order_refs fields -->
                     <xpath expr="/form/sheet/group" position="replace">
                         <group col="3">
