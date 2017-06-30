@@ -5,7 +5,11 @@
             <field name="name">view_publisher_production_line_tree</field>
             <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
-                <tree name="Production Lines" create="false">
+                <tree name="Production Lines" create="false" colors="
+                    blue: state=='sale' and not full_equipment_received;
+                    green: state=='sale' and full_equipment_received;
+                    red: state!='sale' ">
+                    <field name="state" invisible="1" />
                     <field name="product_id" />
                     <field name="name" />
                     <field name="order_partner_id" />

@@ -34,6 +34,7 @@ class Production(models.Model):
     # sale_lines_count = fields.Integer(string="Production Lines Count", compute=_compute_sale_lines_count)
     sale_lines_confirmed_count = fields.Char(string="Confirmed Lines", compute='_compute_sale_lines_confirmed_count')
     sale_lines_full_equipment_count = fields.Char(string="Equip. Received Lines", compute='_compute_sale_lines_full_equipment_count')
+    potential_turnover = fields.Monetary(string="Potential Turnover", compute='_compute_potential_turnover')
     actual_turnover = fields.Monetary(string="Actual Turnover", compute='_compute_actual_turnover')
     turnover_delta = fields.Monetary(string='Diff. Actual / Expected Turnover', compute='_compute_turnover_delta')
     turnover_delta_sign = fields.Char(string='Turnover Delta Sign', compute='_compute_turnover_delta_sign')
@@ -64,9 +65,16 @@ class Production(models.Model):
 
 
     @api.one
+    def _compute_potential_turnover(self):
+        self.potential_turnover = sum([line.price_subtotal for line in self.sale_line_ids])
+
+
+    @api.one
     def _compute_actual_turnover(self):
-        # Warning: if the related sale's total price is manually changed this sum is not accurate
-        self.actual_turnover = sum([line.price_subtotal for line in self.sale_line_ids])
+        self.actual_turnover = 0
+        for line in self.sale_line_ids:
+            if line.order_id.state in ['sale', 'done']:
+                self.actual_turnover += line.price_subtotal
 
 
     @api.depends('expected_turnover')

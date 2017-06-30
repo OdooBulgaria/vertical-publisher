@@ -58,6 +58,7 @@
                                 </div>
                                 <field name="currency_id" invisible="1"/>
                                 <field name="expected_turnover" widget="monetary" />
+                                <field name="potential_turnover" widget="monetary" />
                                 <field name="actual_turnover" widget="monetary" />
                                 <label for="turnover_delta" />
                                 <div>
@@ -66,7 +67,11 @@
                                 </div>
                             </group>
                             <field name="sale_line_ids">
-                                <tree name="Production Lines" create="false" delete="false">
+                                <tree name="Production Lines" create="false" delete="false" colors="
+                                    blue: state=='sale' and not full_equipment_received;
+                                    green: state=='sale' and full_equipment_received;
+                                    red: state!='sale' ">
+                                    <field name="state" invisible="1" />
                                     <field name="product_id" />
                                     <field name="name" />
                                     <field name="order_partner_id" />
