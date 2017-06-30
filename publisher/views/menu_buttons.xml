@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <menuitem name="Publisher"
-            id="menu_sale_publisher" parent="sales_team.menu_base_partner"
+            id="menu_sale_publisher"
             sequence="20"/>
 
         <record id="menu_sale_publisher_productions_action" model="ir.actions.act_window">
