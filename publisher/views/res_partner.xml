@@ -22,6 +22,10 @@
                         </button>
                     </xpath>
 
+                    <xpath expr="//field[@name='category_id']" position="after">
+                        <field name="create_date" />
+                    </xpath>
+
                     <xpath expr="//page[@name='sales_purchases']//field[@name='customer']" position="after">
                         <field name="agency" />
                     </xpath>
