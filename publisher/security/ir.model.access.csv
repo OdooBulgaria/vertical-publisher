@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_publisher_production,access.publisher.production,model_publisher_production,sales_team.group_sale_salesman_all_leads,1,0,0,0
+access_publisher_production_type,access.publisher.production.type,model_publisher_production_type,sales_team.group_sale_salesman_all_leads,1,0,0,0
+access_publisher_production_manager,access.publisher.production.manager,model_publisher_production,sales_team.group_sale_manager,1,1,1,1
+access_publisher_production_type_manager,access.publisher.production.type.manager,model_publisher_production_type,sales_team.group_sale_manager,1,1,1,1
+access_publisher_media_manager,access.publisher.media.manager,model_publisher_media,sales_team.group_sale_manager,1,1,1,1
+access_publisher_format_manager,access.publisher.format.manager,model_publisher_format,sales_team.group_sale_manager,1,1,1,1
+access_publisher_location_manager,access.publisher.location.manager,model_publisher_location,sales_team.group_sale_manager,1,1,1,1
+access_publisher_color_manager,access.publisher.color.manager,model_publisher_color,sales_team.group_sale_manager,1,1,1,1

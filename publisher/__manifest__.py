@@ -39,7 +39,8 @@
         'views/product_template.xml',
         'views/sale_order.xml',
         'views/project_project.xml',
-        'views/menu_buttons.xml'
+        'views/menu_buttons.xml',
+        'security/ir.model.access.csv'
         #'views/templates.xml'
     ],
 }
