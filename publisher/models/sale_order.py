@@ -50,3 +50,37 @@ class SaleOrder(models.Model):
         self.update({
             'partner_invoice_id': addr
         })
+
+    @api.multi
+    def print_quotation_noprice(self):
+        self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
+        return self.env['report'].get_action(self, 'publisher.report_saleorder_noprice')
+
+    # @api.multi
+    # def print_quotation(self):
+    #     self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
+
+    #     _logger.info("\n\n"+str(self.env['report'].get_action(self, 'sale.report_saleorder'))+"\n\n")
+
+    #     return self.env['report'].get_action(self, 'sale.report_saleorder')
+
+
+
+# class SaleOrderReport(models.AbstractModel):
+#     _name = 'report.publisher.report_saleorder_noprice'
+
+#     @api.model
+#     def render_html(self, docids, data=None):
+
+#         # return self.env['report.sale.report_saleorder'].render_html(docids, data)
+
+#         report_obj = self.env['report']
+#         report = report_obj._get_report_from_name('sale.report_saleorder_document')
+#         docargs = {
+#             'doc_ids': docids,
+#             'doc_model': report.model,
+#             'docs': self,
+#             'doc': self.env['sale.order'].search([('id', '=', docids[0])]),
+#             'no_price': True
+#         }
+#         return report_obj.render('sale.report_saleorder_document', docargs)

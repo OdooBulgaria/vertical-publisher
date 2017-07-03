@@ -15,6 +15,11 @@
                     <!-- Hide Lock Header Button -->
                     <xpath expr="//button[@name='action_done']" position="replace" />
 
+                    <!-- Add Print (No Price) Button -->
+                    <xpath expr="//button[@name='print_quotation']" position="after">
+                        <button name="print_quotation_noprice" string="Print (No Price)" type="object" states="sent,option,sale" attrs="{'invisible': [('state', 'not in', ['sent', 'option', 'sale'])]}" />
+                    </xpath>
+
                     <!-- Reorganize form & add agency_id & client_order_refs fields -->
                     <xpath expr="/form/sheet/group" position="replace">
                         <group col="3">

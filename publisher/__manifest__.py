@@ -40,6 +40,8 @@
         'views/sale_order.xml',
         'views/project_project.xml',
         'views/menu_buttons.xml',
+        'report/sale_report_templates.xml',
+        'report/sale_report.xml',
         'security/ir.model.access.csv'
         #'views/templates.xml'
     ],
