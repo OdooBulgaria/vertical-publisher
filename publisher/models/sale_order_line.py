@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, exceptions, _
+import odoo.addons.decimal_precision as dp
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -12,7 +13,6 @@ class SaleOrderLine(models.Model):
     format_id = fields.Many2one('publisher.format', string="Format")
     location_id = fields.Many2one('publisher.location', string="Location")
     color_id = fields.Many2one('publisher.color', string="Color")
-    commission = fields.Float(string="Commission")
     date_start = fields.Date(string='Publication Date')
     date_end = fields.Date(string='End Date')
     full_equipment_received = fields.Boolean(string='Full Equipment Received')
@@ -25,6 +25,41 @@ class SaleOrderLine(models.Model):
     date_end_needed = fields.Boolean(related='production_id.production_type_id.media_id.date_end_needed', string="End Date Needed")
 
     media_id = fields.Many2one(related='production_id.production_type_id.media_id', string="Media")
+
+    discount_base = fields.Float(string='Discount (%)', digits=dp.get_precision('Discount'), default=0.0)
+    discount = fields.Float(string='Total Discount (%)', digits=dp.get_precision('Discount'), default=0.0, compute='_compute_discount')
+
+
+    @api.one
+    @api.depends('discount_base', 'order_id.commission')
+    def _compute_discount(self):
+        self.discount = (1.0 - (100.0-self.discount_base)/100.0 * (100.0-self.order_id.commission)/100.0) * 100.0
+
+
+    @api.onchange('product_id', 'price_unit', 'product_uom', 'product_uom_qty', 'tax_id')
+    def _onchange_discount(self):
+        self.discount_base = 0.0
+        if not (self.product_id and self.product_uom and
+                self.order_id.partner_id and self.order_id.pricelist_id and
+                self.order_id.pricelist_id.discount_policy == 'without_discount' and
+                self.env.user.has_group('sale.group_discount_per_so_line')):
+            return
+
+        context_partner = dict(self.env.context, partner_id=self.order_id.partner_id.id, date=self.order_id.date_order)
+        pricelist_context = dict(context_partner, uom=self.product_uom.id)
+
+        price, rule_id = self.order_id.pricelist_id.with_context(pricelist_context).get_product_price_rule(self.product_id, self.product_uom_qty or 1.0, self.order_id.partner_id)
+        new_list_price, currency_id = self.with_context(context_partner)._get_real_price_currency(self.product_id, rule_id, self.product_uom_qty, self.product_uom, self.order_id.pricelist_id.id)
+        new_list_price = self.env['account.tax']._fix_tax_included_price(new_list_price, self.product_id.taxes_id, self.tax_id)
+
+        if new_list_price != 0:
+            if self.product_id.company_id and self.order_id.pricelist_id.currency_id != self.product_id.company_id.currency_id:
+                # new_list_price is in company's currency while price in pricelist currency
+                new_list_price = self.env['res.currency'].browse(currency_id).with_context(context_partner).compute(new_list_price, self.order_id.pricelist_id.currency_id)
+            discount_base = (new_list_price - price) / new_list_price * 100
+            if discount_base > 0:
+                self.discount_base = discount_base
+
 
     # @api.one
     # def toggle_full_equipment_received(self):

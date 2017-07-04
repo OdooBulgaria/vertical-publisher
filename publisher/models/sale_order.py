@@ -9,6 +9,14 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     agency_id = fields.Many2one('res.partner', string="Agency")
+    commission = fields.Float(string="Commission")
+
+    # @api.multi
+    # @api.onchange('commission')
+    # def onchange_commission(self):
+    #     for line in self.order_line:
+    #         line._compute_discount()
+    #     return {}
 
     @api.multi
     @api.onchange('partner_invoice_id', 'partner_id', 'agency_id')
@@ -55,6 +63,16 @@ class SaleOrder(models.Model):
     def print_quotation_noprice(self):
         self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
         return self.env['report'].get_action(self, 'publisher.report_saleorder_noprice')
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', _('New')) == _('New'):
+            if 'company_id' in vals:
+                vals['name'] = self.env['ir.sequence'].with_context(force_company=vals['company_id']).next_by_code('sale.order.publisher') or _('New')
+            else:
+                vals['name'] = self.env['ir.sequence'].next_by_code('sale.order.publisher') or _('New')
+
+        return super(SaleOrder, self).create(vals)
 
     # @api.multi
     # def print_quotation(self):

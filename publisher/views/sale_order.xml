@@ -20,7 +20,7 @@
                         <button name="print_quotation_noprice" string="Print (No Price)" type="object" states="sent,option,sale" attrs="{'invisible': [('state', 'not in', ['sent', 'option', 'sale'])]}" />
                     </xpath>
 
-                    <!-- Reorganize form & add agency_id & client_order_refs fields -->
+                    <!-- Reorganize form & add agency_id & client_order_refs fields & commission -->
                     <xpath expr="/form/sheet/group" position="replace">
                         <group col="3">
                             <group>
@@ -41,6 +41,11 @@
                                 <field name="pricelist_id" groups="product.group_sale_pricelist" />
                                 <field name="currency_id" invisible="1" />
                                 <field name="payment_term_id" options="{'no_create': True}" />
+                                <label for="commission" />
+                                <div>
+                                    <field name="commission" class="oe_inline" />
+                                    <label string="%%" class="oe_inline" />
+                                </div>
                             </group>
                             <group>
                                 <field name="client_order_ref" />
@@ -53,6 +58,12 @@
                     <!-- Make Tree view non-editable (to allow the form to open) -->
                     <xpath expr="//field[@name='order_line']/tree" position="attributes">
                         <attribute name="editable" />
+                    </xpath>
+
+                    <!-- Replace Total discount by line discount field -->
+                    <xpath expr="//field[@name='order_line']/tree//field[@name='discount']" position="replace">
+                        <field name="discount_base" />
+                        <!--<field name="discount" /> For testing purpose -->
                     </xpath>
 
                     <!-- Add production line fields to sale order line -->
@@ -70,13 +81,13 @@
                         <field name="production_id" />
                     </xpath>
 
-                    <!-- Add commission field -->
-                    <xpath expr="//field[@name='order_line']/form//field[@name='tax_id']" position="after">
-                        <label for="commission" />
-                        <div>
-                            <field name="commission" class="oe_inline" />
-                            <label string="%%" class="oe_inline" />
-                        </div>
+                    <!-- Replace Total discount by line discount field -->
+                    <xpath expr="//field[@name='order_line']/form//label[@for='discount']" position="replace">
+                        <label for="discount_base" />
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/form//field[@name='discount']" position="replace">
+                        <field name="discount" invisible="1" />
+                        <field name="discount_base" class="oe_inline" />
                     </xpath>
 
                     <!-- Remove original invoice lines & replace by tabs (production, invoice lines) -->
