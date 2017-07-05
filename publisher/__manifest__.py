@@ -44,8 +44,8 @@
 
         'report/sale_report_templates.xml',
         'report/sale_report.xml',
-        # 'report/production_report_templates.xml',
-        # 'report/production_report.xml',
+        'report/production_report_templates.xml',
+        'report/production_report.xml',
 
         'data/sale_order_sequence.xml',
 

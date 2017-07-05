@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, exceptions, _
+from itertools import groupby
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -100,3 +101,25 @@ class Production(models.Model):
         for production in self:
             production.invoicing_mode = production.production_type_id.invoicing_mode
             production.down_payment = production.production_type_id.down_payment
+
+    @api.multi
+    def order_lines_layouted(self):
+        """
+        Returns this order lines classified by sale_layout_category and separated in
+        pages according to the category pagebreaks. Used to render the report.
+        """
+        self.ensure_one()
+        report_pages = [[]]
+        for category, lines in groupby(self.sale_line_ids, lambda l: l.layout_category_id):
+            # If last added category induced a pagebreak, this one will be on a new page
+            if report_pages[-1] and report_pages[-1][-1]['pagebreak']:
+                report_pages.append([])
+            # Append category to current report page
+            report_pages[-1].append({
+                'name': category and category.name or 'Uncategorized',
+                'subtotal': category and category.subtotal,
+                'pagebreak': category and category.pagebreak,
+                'lines': list(lines)
+            })
+
+        return report_pages
