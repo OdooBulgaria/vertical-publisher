@@ -16,7 +16,10 @@
                     <xpath expr="//button[@name='action_done']" position="replace" />
 
                     <!-- Add Print (No Price) Button -->
-                    <xpath expr="//button[@name='print_quotation']" position="after">
+                    <xpath expr="//button[@name='print_quotation' and @states='draft']" position="after">
+                        <button name="print_quotation_noprice" string="Print (No Price)" class="btn-primary" type="object" states="draft" attrs="{'invisible': [('state', 'not in', ['draft'])]}" />
+                    </xpath>
+                    <xpath expr="//button[@name='print_quotation' and @states='sent,option,sale']" position="after">
                         <button name="print_quotation_noprice" string="Print (No Price)" type="object" states="sent,option,sale" attrs="{'invisible': [('state', 'not in', ['sent', 'option', 'sale'])]}" />
                     </xpath>
 

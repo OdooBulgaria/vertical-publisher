@@ -39,11 +39,18 @@
         'views/product_template.xml',
         'views/sale_order.xml',
         'views/project_project.xml',
+
         'views/menu_buttons.xml',
+
         'report/sale_report_templates.xml',
         'report/sale_report.xml',
+        # 'report/production_report_templates.xml',
+        # 'report/production_report.xml',
+
         'data/sale_order_sequence.xml',
+
         'security/ir.model.access.csv',
+
         'views/assets.xml'
     ],
 }
