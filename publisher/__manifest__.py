@@ -43,7 +43,7 @@
         'report/sale_report_templates.xml',
         'report/sale_report.xml',
         'data/sale_order_sequence.xml',
-        'security/ir.model.access.csv'
-        #'views/templates.xml'
+        'security/ir.model.access.csv',
+        'views/assets.xml'
     ],
 }
