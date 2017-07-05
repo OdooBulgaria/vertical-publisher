@@ -1,32 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- <record model="ir.actions.report.xml" id="report_sale_order_no_price">
-            <field name="model">sale.order</field>
-            <field name="report_type">qweb-pdf</field>
-            <field name="file">sale.report_saleorder</field>
-            <field name="name">Quotation / Order (No Price Displayed)</field>
-            <field name="type">object</field>
-        </record> -->
-
-        <!-- <report 
-            id="report_sale_order"
-            string="Quotation / Order (No Price Displayed)"
-            model="sale.order" 
-            report_type="qweb-pdf"
-            file="sale.report_saleorder"
-            name="publisher.report_saleorder_noprice" 
-        /> -->
-
         <report 
             id="report_sale_order_noprice"
             string="Quotation / Order (No Price Displayed)"
             model="sale.order" 
             report_type="qweb-pdf"
-            file="publisher.report_saleorder_noprice"
+            file="sale.report_saleorder_noprice"
             name="publisher.report_saleorder_noprice" 
         />
     </data>
 </odoo>
-
-<!-- _no_price -->
