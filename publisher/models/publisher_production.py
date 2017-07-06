@@ -5,6 +5,10 @@ from itertools import groupby
 
 import logging
 _logger = logging.getLogger(__name__)
+import tempfile
+import zipfile
+import base64
+import urllib
 
 class Production(models.Model):
     _name = 'publisher.production'
@@ -39,6 +43,8 @@ class Production(models.Model):
     actual_turnover = fields.Monetary(string="Actual Turnover", compute='_compute_actual_turnover')
     turnover_delta = fields.Monetary(string='Diff. Actual / Expected Turnover', compute='_compute_turnover_delta')
     turnover_delta_sign = fields.Char(string='Turnover Delta Sign', compute='_compute_turnover_delta_sign')
+
+    export_file = fields.Binary(attachment=True, help="This field holds the export file for Sage 50.", readonly=True)
 
     # @api.one
     # def _compute_sale_lines_count(self):
@@ -123,3 +129,55 @@ class Production(models.Model):
             })
 
         return report_pages
+
+    @api.multi
+    def print_production(self):
+        return self.env['report'].get_action(self, 'publisher.report_production')
+
+    @api.multi
+    def download_attachments(self):
+
+        def get_valid_filename(string):
+            remove_illegals_map = dict((ord(char), None) for char in '\/*?:"<>|')
+            return string.translate(remove_illegals_map)
+
+        temp_zip = tempfile.mktemp(suffix='.zip')
+        temp_file = tempfile.mktemp(suffix='')
+        zip_file_object = zipfile.ZipFile(temp_zip, "w")
+
+        existing_folders = {}
+
+        for line in self.sale_line_ids:
+
+            base_folder_name = get_valid_filename(line.order_id.partner_id.name + " - " + line.product_id.name + " (" + line.order_id.name + " #" + str(line.sequence_computed) + ")")
+
+            folder_name = base_folder_name
+            counter = 1
+            while folder_name in existing_folders:
+                counter += 1
+                folder_name = base_folder_name + " - " + str(counter)
+
+            existing_folders[folder_name] = True
+
+            for f in line.attachment_ids:
+                fn = open(temp_file, 'w')
+                fn.write(base64.b64decode(f.datas))
+                fn.close()
+                zip_file_object.write(temp_file, folder_name+"/"+f.name)
+
+        zip_file_object.close()
+
+        fn = open(temp_zip, 'r')
+        self.export_file = base64.encodestring(fn.read())
+        fn.close()
+
+        return {
+            'type' : 'ir.actions.act_url',
+            'url': '/web/binary/download_document?' + urllib.urlencode({
+                'model': 'publisher.production',
+                'field': 'export_file',
+                'id': self.id,
+                'filename': get_valid_filename(self.name) + " (Attachments).zip"
+            }),
+            'target': 'blank',
+        }

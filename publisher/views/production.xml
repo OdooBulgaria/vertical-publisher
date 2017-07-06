@@ -24,9 +24,9 @@
                 <form string="Production">
                     <header>
                         <button string="Create invoice" class="btn-primary" />
-                        <button string="Print Production" class="btn-primary" />
+                        <button string="Print Production" class="btn-primary" type="object" name="print_production" />
                         <button string="Print Invoice Status" class="btn-primary" />
-                        <button string="Download Attachments" class="btn-primary" />
+                        <button string="Download Attachments" class="btn-primary" type="object" name="download_attachments" />
                         <button string="Cancel" />
                         <field name="state" widget="statusbar" clickable="True" />
                     </header>

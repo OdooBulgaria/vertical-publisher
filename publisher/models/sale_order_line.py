@@ -17,6 +17,7 @@ class SaleOrderLine(models.Model):
     date_end = fields.Date(string='End Date')
     full_equipment_received = fields.Boolean(string='Full Equipment Received')
     attachment_ids = fields.Many2many('ir.attachment', string="Attachments")
+    sequence_computed = fields.Integer(string="Sequence Order", compute='_compute_sequence_computed')
 
     format_needed = fields.Boolean(related='production_id.production_type_id.media_id.format_needed', string="Format Needed")
     location_needed = fields.Boolean(related='production_id.production_type_id.media_id.location_needed', string="Location Needed")
@@ -60,6 +61,13 @@ class SaleOrderLine(models.Model):
             if discount_base > 0:
                 self.discount_base = discount_base
 
+    @api.one
+    def _compute_sequence_computed(self):
+        self.sequence_computed = 1
+        for line in self.order_id.order_line:
+            if line.id == self.id:
+                break
+            self.sequence_computed += 1
 
     # @api.one
     # def toggle_full_equipment_received(self):
