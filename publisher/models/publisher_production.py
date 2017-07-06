@@ -136,7 +136,8 @@ class Production(models.Model):
 
     @api.multi
     def download_attachments(self):
-
+        self.ensure_one()
+        
         def get_valid_filename(string):
             remove_illegals_map = dict((ord(char), None) for char in '\/*?:"<>|')
             return string.translate(remove_illegals_map)
