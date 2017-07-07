@@ -25,7 +25,7 @@
                     <header>
                         <button string="Create invoices" class="btn-primary" type="object" name="create_invoices" />
                         <button string="Print Production" class="btn-primary" type="object" name="print_production" />
-                        <button string="Print Invoice Status" class="btn-primary" />
+                        <button string="Print Invoice Status" class="btn-primary" type="object" name="print_production_invoice_status" />
                         <button string="Download Attachments" class="btn-primary" type="object" name="download_attachments" />
                         <button string="Cancel" />
                         <field name="state" widget="statusbar" clickable="True" />

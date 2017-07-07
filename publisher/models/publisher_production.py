@@ -47,6 +47,7 @@ class Production(models.Model):
     turnover_delta_sign = fields.Char(string='Turnover Delta Sign', compute='_compute_turnover_delta_sign')
 
     export_file = fields.Binary(attachment=True, help="This field holds the export file for Sage 50.", readonly=True)
+    sale_ids = fields.Many2many('sale.order', string="Sales", compute='_compute_sale_ids')
 
     # @api.one
     # def _compute_sale_lines_count(self):
@@ -98,6 +99,14 @@ class Production(models.Model):
         self.turnover_delta_sign = '+' if self.turnover_delta >= 0 else ''
 
     @api.one
+    def _compute_sale_ids(self):
+        sale_ids_id = []
+        for line in self.sale_line_ids:
+            if line.order_id.id not in sale_ids_id:
+                sale_ids_id.append(line.order_id.id)
+        self.sale_ids = self.env['sale.order'].search([('id', 'in', sale_ids_id)])
+
+    @api.one
     def action_create_project(self):
         self.project_id = self.env['project.project'].create({
             'name': self.name, 'production_id': self.id
@@ -135,6 +144,10 @@ class Production(models.Model):
     @api.multi
     def print_production(self):
         return self.env['report'].get_action(self, 'publisher.report_production')
+
+    @api.multi
+    def print_production_invoice_status(self):
+        return self.env['report'].get_action(self, 'publisher.report_production_invoice_status')
 
     @api.multi
     def download_attachments(self):

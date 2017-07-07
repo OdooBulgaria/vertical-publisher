@@ -3,11 +3,20 @@
     <data>
         <report 
             id="report_production"
-            string="Production State"
+            string="Production"
             model="publisher.production" 
             report_type="qweb-pdf"
             file="publisher.report_production"
             name="publisher.report_production_template" 
+        />
+
+        <report 
+            id="report_production_invoice_status"
+            string="Production Invoice Status"
+            model="publisher.production" 
+            report_type="qweb-pdf"
+            file="publisher.report_production_invoice_status"
+            name="publisher.report_production_invoice_status_template" 
         />
     </data>
 </odoo>
