@@ -53,4 +53,6 @@
 
         'views/assets.xml'
     ],
+
+    'application': True,
 }
