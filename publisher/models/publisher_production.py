@@ -10,6 +10,8 @@ import zipfile
 import base64
 import urllib
 
+import datetime
+
 class Production(models.Model):
     _name = 'publisher.production'
     _order = 'name'
@@ -137,7 +139,7 @@ class Production(models.Model):
     @api.multi
     def download_attachments(self):
         self.ensure_one()
-        
+
         def get_valid_filename(string):
             remove_illegals_map = dict((ord(char), None) for char in '\/*?:"<>|')
             return string.translate(remove_illegals_map)
@@ -182,3 +184,105 @@ class Production(models.Model):
             }),
             'target': 'blank',
         }
+
+
+
+    @api.multi
+    def create_invoices(self):
+        self.ensure_one()
+
+        # Extract every sale to invoice & associate lines
+        sale_map = {}
+        for line in self.sale_line_ids:
+            if line.invoice_status == 'to invoice':
+                if not line.order_id.id in sale_map:
+                    sale_map[line.order_id.id] = [line]
+                else:
+                    sale_map[line.order_id.id].append(line)
+
+        company_id = self.env.user.company_id
+        account_journal_id = self.env['account.journal'].search([('company_id', '=', company_id.id), ('type', '=', 'sale')])
+        now = datetime.datetime.now()
+
+        invoice_ids = []
+
+        # browse every sale to invoice
+        for sale_id_id in sale_map:
+            
+            lines = sale_map[sale_id_id]
+            sale_id = lines[0].order_id
+            partner_invoice_id = sale_id.partner_invoice_id
+
+            invoice_id = False
+
+            # browse every line to invoice
+            for line in lines:
+
+                def get_invoice_quantity(self, line):
+
+                    def get_ratio_to_be_invoiced(self):
+                        if now < datetime.datetime.strptime(self.date_start, '%Y-%m-%d'):
+                            if self.invoicing_mode == 'after':
+                                return False
+                            elif self.invoicing_mode == 'both':
+                                if self.down_payment:
+                                    return self.down_payment / 100.0
+                                return False
+                        return 1.0
+
+                    ratio = get_ratio_to_be_invoiced(self)
+
+                    if not ratio:
+                        return False
+
+                    invoice_quantity = line.product_uom_qty * ratio - line.qty_invoiced
+
+                    if invoice_quantity <= 0.0:
+                        return False
+
+                    return invoice_quantity
+
+                quantity = get_invoice_quantity(self, line)
+
+                # if there is something to invoice
+                if quantity:
+
+                    # if invoice does not exist yet
+                    if not invoice_id:
+                        invoice_id = self.env['account.invoice'].create({
+                            'company_id' : company_id.id,
+                            'currency_id' : self.currency_id.id,
+                            'journal_id' : account_journal_id.id,
+                            'partner_id' : partner_invoice_id.id,
+                            'date_invoice' : now.strftime('%Y-%m-%d'),
+                            'state' : 'draft',
+                            'reference_type' : 'none',
+                            'fiscal_position_id' : sale_id.fiscal_position_id.id,
+                            'payment_term_id' : sale_id.payment_term_id.id,
+                            'account_id' : partner_invoice_id.property_account_receivable_id.id,
+                        })
+                        invoice_ids.append(invoice_id.id)
+
+                    invoice_line_id = self.env['account.invoice.line'].create({
+                        'invoice_id' : invoice_id.id,
+                        'product_id' : line.product_id.id,
+                        'name' : line.name,
+                        'quantity' : quantity,
+                        'price_unit' : line.price_unit,
+                        'account_id' : partner_invoice_id.property_account_receivable_id.id,
+                        'sale_line_ids': [(4, [line.id])]
+                    })
+
+        if not invoice_ids:
+            raise exceptions.ValidationError('Not any line to invoice, make sure the sale orders are confirmed and the production publication date / invoicing mode are ok.')
+            return False
+
+        action = self.env.ref('account.action_invoice_tree1').read()[0]
+
+        if len(invoice_ids) > 1:
+            action['domain'] = [('id', 'in', invoice_ids)]
+        else:
+            action['views'] = [(self.env.ref('account.invoice_form').id, 'form')]
+            action['res_id'] = invoice_ids[0]
+
+        return action
