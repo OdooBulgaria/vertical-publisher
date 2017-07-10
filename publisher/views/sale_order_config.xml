@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sales_publisher_config" model="ir.ui.view">
+            <field name="name">sale publisher settings</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sales_team.view_sale_config_settings"/>
+            <field name="arch" type="xml">
+                <div id="main" position="inside">
+                    <group string="Publisher">
+                        <field name="reports_logo" widget="image" />
+                    </group>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -4,7 +4,7 @@
         <template id="report_saleorder_document_customized" inherit_id="sale.report_saleorder_document">
             <xpath expr="//div[@class='page']//div[@class='row']" position="before">
                 <div style="background-color:#999999; text-align:right; padding:1.5em; margin-bottom:2.5em;">
-                    <img src="/publisher/static/img/logommm.png" style="width:33%; height:33%;" />
+                    <img t-attf-src="data:image/*;base64,{{doc.env['sale.config.settings'].search([])[-1].reports_logo}}" t-att-alt="user.company_id.name" style="height:6em;" />
                 </div>
             </xpath>
         </template>

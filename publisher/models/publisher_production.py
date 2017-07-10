@@ -143,11 +143,11 @@ class Production(models.Model):
 
     @api.multi
     def print_production(self):
-        return self.env['report'].get_action(self, 'publisher.report_production')
+        return self.env['report'].get_action(self, 'publisher.report_production_template')
 
     @api.multi
     def print_production_invoice_status(self):
-        return self.env['report'].get_action(self, 'publisher.report_production_invoice_status')
+        return self.env['report'].get_action(self, 'publisher.report_production_invoice_status_template')
 
     @api.multi
     def download_attachments(self):
