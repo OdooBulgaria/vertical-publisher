@@ -42,7 +42,7 @@
 
         'views/menu_buttons.xml',
 
-        'views/sale_order_config.xml',
+        'views/company_config.xml',
 
         'report/sale_report_templates.xml',
         'report/sale_report.xml',
