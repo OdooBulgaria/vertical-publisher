@@ -29,6 +29,29 @@
                     <xpath expr="//page[@name='sales_purchases']//field[@name='customer']" position="after">
                         <field name="agency" />
                     </xpath>
+
+                    <xpath expr="//notebook" position="inside">
+                        <page string="Publisher Options">
+                            <group>
+                                <group>
+                                    <field name="toolbox" />
+                                    <field name="fed" />
+                                    <field name="fleet_dating" />
+                                    <field name="footy" />
+                                    <field name="fi_awards" />
+                                    <field name="awards_be" />
+                                </group>
+                                <group>
+                                    <field name="network" />
+                                    <field name="l2ffa" />
+                                    <field name="experts_table" />
+                                    <field name="test_drive" />
+                                    <field name="fleet_dealer" />
+                                    <field name="newsletter" />
+                                </group>
+                            </group>
+                        </page>
+                    </xpath>
                 </data>
             </field>
         </record>
