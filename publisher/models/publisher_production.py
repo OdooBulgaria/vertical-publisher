@@ -26,7 +26,7 @@ class Production(models.Model):
         ], string='State', default='draft', required=True)
     production_type_id = fields.Many2one('publisher.production.type', string='Production Type', required=True)
     project_id = fields.Many2one('project.project', string="Project");
-    date_start = fields.Date(string='Publication Date / Event')
+    date_start = fields.Date(string='Publication Date / Event', required=True)
     date_end = fields.Date(string='End Date')
     date_full_equipment_limit = fields.Date(string='Full Equipment Limit Date')
     sale_line_ids = fields.One2many('sale.order.line', 'production_id', string='Production Lines')
