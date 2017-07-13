@@ -48,6 +48,8 @@ class Production(models.Model):
 
     export_file = fields.Binary(attachment=True, help="This field holds the export file for Sage 50.", readonly=True)
     sale_ids = fields.Many2many('sale.order', string="Sales", compute='_compute_sale_ids')
+    invoice_ids = fields.Many2many('account.invoice', string="Invoices", compute='_compute_invoice_ids')
+    invoice_count = fields.Integer(string="Invoice Count", compute='_compute_invoice_count')
 
     # @api.one
     # def _compute_sale_lines_count(self):
@@ -107,10 +109,37 @@ class Production(models.Model):
         self.sale_ids = self.env['sale.order'].search([('id', 'in', sale_ids_id)])
 
     @api.one
+    def _compute_invoice_ids(self):
+        invoice_ids_id = []
+        for line in self.sale_line_ids:
+            for invoice_line in line.invoice_lines:
+                if not invoice_line.invoice_id.id in invoice_ids_id:
+                    invoice_ids_id.append(invoice_line.invoice_id.id)
+        self.invoice_ids = self.env['account.invoice'].search([('id', 'in', invoice_ids_id)])
+
+    @api.one
+    @api.depends('invoice_ids')
+    def _compute_invoice_count(self):
+        self.invoice_count = len(self.invoice_ids)
+
+    @api.one
     def action_create_project(self):
         self.project_id = self.env['project.project'].create({
             'name': self.name, 'production_id': self.id
         })
+
+    @api.multi
+    def action_view_invoice(self):
+        invoices = self.mapped('invoice_ids')
+        action = self.env.ref('account.action_invoice_tree1').read()[0]
+        if len(invoices) > 1:
+            action['domain'] = [('id', 'in', invoices.ids)]
+        elif len(invoices) == 1:
+            action['views'] = [(self.env.ref('account.invoice_form').id, 'form')]
+            action['res_id'] = invoices.ids[0]
+        else:
+            action = {'type': 'ir.actions.act_window_close'}
+        return action
 
     @api.multi
     @api.onchange('production_type_id')
