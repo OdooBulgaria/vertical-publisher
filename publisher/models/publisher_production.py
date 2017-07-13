@@ -276,12 +276,21 @@ class Production(models.Model):
                         })
                         invoice_ids.append(invoice_id.id)
 
+                    description = '\n'.join(filter(None, [
+                        line.name,
+                        self.name,
+                        'Format : '+line.format_id.name if line.format_id else '',
+                        'Your Customer : '+sale_id.partner_id.name if sale_id.partner_invoice_id else '',
+                        'Price : '+str(quantity*line.price_unit)+self.currency_id.symbol+(' - '+str(line.discount_base)+' % customer discount' if line.discount_base>0 else '')+(' = '+str(quantity*line.price_unit*(1-line.discount_base/100))+self.currency_id.symbol if line.discount_base>0 and sale_id.commission>0 else '')+(' - '+str(sale_id.commission)+' % agency commission' if sale_id.commission>0 else ''),
+                    ]))
+
                     invoice_line_id = self.env['account.invoice.line'].create({
                         'invoice_id' : invoice_id.id,
                         'product_id' : line.product_id.id,
-                        'name' : line.name,
+                        'name' : description,
                         'quantity' : quantity,
                         'price_unit' : line.price_unit,
+                        'discount' : line.discount,
                         'account_id' : partner_invoice_id.property_account_receivable_id.id,
                         'sale_line_ids': [(4, [line.id])]
                     })
