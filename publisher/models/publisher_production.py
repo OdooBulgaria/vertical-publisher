@@ -243,7 +243,7 @@ class Production(models.Model):
                     sale_map[line.order_id.id].append(line)
 
         company_id = self.env.user.company_id
-        account_journal_id = self.env['account.journal'].search([('company_id', '=', company_id.id), ('type', '=', 'sale')])
+        account_journal_id = self.env['account.journal'].search([('company_id', '=', company_id.id), ('type', '=', 'sale')])[0]
         now = datetime.datetime.now()
 
         invoice_ids = []
