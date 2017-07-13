@@ -207,7 +207,10 @@
                             <span t-field="sale.state" />
                         </div>
                         <h4>
-                            <span t-field="sale.partner_id" />
+                            <t t-if="sale.agency_id">
+                                <div>Agency : <span t-field="sale.agency_id" /></div>
+                            </t>
+                            <div>Customer : <span t-field="sale.partner_id" /></div>
                         </h4>
 
                         <table class="table table-condensed">
@@ -217,6 +220,7 @@
                                     <th>Publication Date</th>
                                     <th class="text-right">Unit Price</th>
                                     <th class="text-right">Quantity</th>
+                                    <th class="text-right">Invoices</th>
                                     <th class="text-right">Subtotal</th>
                                     <th class="text-right">Amount Invoiced</th>
                                     <th class="text-right">Amount To Invoice</th>
@@ -235,6 +239,17 @@
                                             <td><span t-field="l.date_start"/></td>
                                             <td class="text-right"><span t-field="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></td>
                                             <td class="text-right"><span t-field="l.product_uom_qty"/></td>
+                                            <td class="text-right">
+                                                <t t-set="invoices" t-value="[]"/>
+                                                <t t-foreach="l.invoice_lines" t-as="invoice_line">
+                                                    <t t-if="invoice_line.invoice_id.number and not invoice_line.invoice_id.number in invoices">
+                                                        <t t-set="invoice_date" t-value="invoice_line.invoice_id.date_invoice.split('-')"/>
+                                                        <t t-set="invoices" t-value="invoices + [invoice_line.invoice_id.number + ' (' + invoice_date[2] + '/' + invoice_date[1] + '/' + invoice_date[0] + ')']"/>
+                                                    </t>
+                                                </t>
+                                                <t t-set="invoices_str" t-value="', '.join(invoices)"/>
+                                                <span t-esc="invoices_str" />
+                                            </td>
                                             <td class="text-right"><span t-field="l.price_subtotal"/></td>
                                             <td class="text-right"><span t-esc="amount_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></td>
                                             <td class="text-right"><span t-esc="amount_to_invoice" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></td>
