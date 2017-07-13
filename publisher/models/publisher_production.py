@@ -312,7 +312,7 @@ class Production(models.Model):
                         self.name,
                         'Format : '+line.format_id.name if line.format_id else '',
                         'Your Customer : '+sale_id.partner_id.name if sale_id.partner_invoice_id else '',
-                        'Price : '+str(quantity*line.price_unit)+self.currency_id.symbol+(' - '+str(line.discount_base)+' % customer discount' if line.discount_base>0 else '')+(' = '+str(quantity*line.price_unit*(1-line.discount_base/100))+self.currency_id.symbol if line.discount_base>0 and sale_id.commission>0 else '')+(' - '+str(sale_id.commission)+' % agency commission' if sale_id.commission>0 else ''),
+                        'Price : '+str(quantity*line.price_unit)+self.currency_id.symbol+(' - '+str(line.discount_base)+' % customer discount' if line.discount_base>0 else '')+(' = '+str(quantity*line.price_unit*(1-line.discount_base/100))+self.currency_id.symbol if line.discount_base>0 and line.commission>0 else '')+(' - '+str(line.commission)+' % agency commission' if line.commission>0 else ''),
                     ]))
 
                     invoice_line_id = self.env['account.invoice.line'].create({

@@ -44,11 +44,6 @@
                                 <field name="pricelist_id" groups="product.group_sale_pricelist" />
                                 <field name="currency_id" invisible="1" />
                                 <field name="payment_term_id" options="{'no_create': True}" />
-                                <label for="commission" />
-                                <div>
-                                    <field name="commission" class="oe_inline" />
-                                    <label string="%%" class="oe_inline" />
-                                </div>
                             </group>
                             <group>
                                 <field name="client_order_ref" />
@@ -67,7 +62,7 @@
                     <!-- Replace Total discount by line discount field -->
                     <xpath expr="//field[@name='order_line']/tree//field[@name='discount']" position="replace">
                         <field name="discount_base" />
-                        <!--<field name="discount" /> For testing purpose -->
+                        <field name="commission" />
                     </xpath>
 
                     <!-- Add production line fields to sale order line -->
@@ -92,6 +87,12 @@
                     <xpath expr="//field[@name='order_line']/form//field[@name='discount']" position="replace">
                         <field name="discount" invisible="1" />
                         <field name="discount_base" class="oe_inline" />
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
+                        <label for="commission" />
+                        <div>
+                            <field name="commission" class="oe_inline" />
+                        </div>
                     </xpath>
 
                     <!-- Remove original invoice lines & replace by tabs (production, invoice lines) -->

@@ -9,15 +9,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     agency_id = fields.Many2one('res.partner', string="Agency")
-    commission = fields.Float(string="Commission")
     reference = fields.Char(string='Internal Reference')
-
-    # @api.multi
-    # @api.onchange('commission')
-    # def onchange_commission(self):
-    #     for line in self.order_line:
-    #         line._compute_discount()
-    #     return {}
 
     @api.multi
     @api.onchange('partner_invoice_id', 'partner_id', 'agency_id')

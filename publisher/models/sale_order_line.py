@@ -28,13 +28,14 @@ class SaleOrderLine(models.Model):
     media_id = fields.Many2one(related='production_id.production_type_id.media_id', string="Media")
 
     discount_base = fields.Float(string='Discount (%)', digits=dp.get_precision('Discount'), default=0.0)
+    commission = fields.Float(string='Agency Commission (%)', digits=dp.get_precision('Discount'), default=0.0)
     discount = fields.Float(string='Total Discount (%)', digits=dp.get_precision('Discount'), default=0.0, compute='_compute_discount')
 
 
     @api.one
-    @api.depends('discount_base', 'order_id.commission')
+    @api.depends('discount_base', 'commission')
     def _compute_discount(self):
-        self.discount = (1.0 - (100.0-self.discount_base)/100.0 * (100.0-self.order_id.commission)/100.0) * 100.0
+        self.discount = (1.0 - (100.0-self.discount_base)/100.0 * (100.0-self.commission)/100.0) * 100.0
 
 
     @api.onchange('product_id', 'price_unit', 'product_uom', 'product_uom_qty', 'tax_id')
