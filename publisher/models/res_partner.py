@@ -27,4 +27,4 @@ class ResPartner(models.Model):
     
     @api.one
     def _compute_production_line_count(self):
-        self.production_line_count = len(self.env['sale.order.line'].search(['&', ('production_id', '!=', False), ('order_id.partner_id.id', '=', self.id)]))
+        self.production_line_count = len(self.env['sale.order.line'].search(['&', ('production_id', '!=', False), '|', ('order_id.partner_id.id', '=', self.id), ('order_id.agency_id.id', '=', self.id)]))

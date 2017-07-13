@@ -6,7 +6,7 @@
             <field name="res_model">sale.order.line</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">['&amp;', ('production_id', '!=', False), ('order_id.partner_id.id', '=', context.get('partner_id'))]</field>
+            <field name="domain">['&amp;', ('production_id', '!=', False), '|', ('order_id.partner_id.id', '=', context.get('partner_id')), ('order_id.agency_id.id', '=', context.get('partner_id'))]</field>
             <field name="view_id" ref="view_publisher_production_line_tree" />
         </record>
 
