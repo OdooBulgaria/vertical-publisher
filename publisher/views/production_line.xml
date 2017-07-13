@@ -14,6 +14,7 @@
                     <field name="name" />
                     <field name="order_partner_id" />
                     <field name="full_equipment_received" />
+                    <field name="attachment_count" />
                     <!-- <field name="full_equipment_received" widget="widgetonbutton" /> -->
                     <!-- <label for="full_equipment_received" /> -->
                     <!-- <button name="toggle_full_equipment_received" class="oe_inline oe_edit_only checkbox-button" icon="fa-check" type="object" attrs="{'invisible': [('full_equipment_received', '=', False)]}" confirm="Set equipment as not received ?" />

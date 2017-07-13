@@ -17,6 +17,7 @@ class SaleOrderLine(models.Model):
     date_end = fields.Date(string='End Date')
     full_equipment_received = fields.Boolean(string='Full Equipment Received')
     attachment_ids = fields.Many2many('ir.attachment', string="Attachments")
+    attachment_count = fields.Integer(string="Attachment Count", compute='_compute_attachment_count')
     sequence_computed = fields.Integer(string="Sequence Order", compute='_compute_sequence_computed')
 
     format_needed = fields.Boolean(related='production_id.production_type_id.media_id.format_needed', string="Format Needed")
@@ -69,6 +70,10 @@ class SaleOrderLine(models.Model):
             if line.id == self.id:
                 break
             self.sequence_computed += 1
+
+    @api.one
+    def _compute_attachment_count(self):
+        self.attachment_count = len(self.attachment_ids)
 
     # @api.one
     # def toggle_full_equipment_received(self):

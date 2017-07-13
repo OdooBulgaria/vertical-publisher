@@ -86,6 +86,7 @@
                                     <field name="name" />
                                     <field name="order_partner_id" />
                                     <field name="full_equipment_received" />
+                                    <field name="attachment_count" />
                                     <field name="format_id" />
                                     <field name="color_id" />
                                     <field name="location_id" />
