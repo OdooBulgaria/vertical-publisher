@@ -39,6 +39,7 @@
         'views/product_template.xml',
         'views/sale_order.xml',
         'views/project_project.xml',
+        'views/invitation.xml',
 
         'views/menu_buttons.xml',
 

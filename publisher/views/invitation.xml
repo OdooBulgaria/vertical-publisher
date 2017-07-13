@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_publisher_invitation_tree" model="ir.ui.view">
+            <field name="name">view_publisher_invitation_tree</field>
+            <field name="model">publisher.invitation</field>
+            <field name="arch" type="xml">
+                <tree string="Medias">
+                    <field name="name" />
+                    <field name="company_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_publisher_invitation_form" model="ir.ui.view">
+            <field name="name">view_publisher_invitation_form</field>
+            <field name="model">publisher.invitation</field>
+            <field name="arch" type="xml">
+                <form string="Media">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                            </group>
+                            <group>
+                                <field name="company_id" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

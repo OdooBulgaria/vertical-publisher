@@ -7,3 +7,4 @@ access_publisher_media_manager,access.publisher.media.manager,model_publisher_me
 access_publisher_format_manager,access.publisher.format.manager,model_publisher_format,sales_team.group_sale_manager,1,1,1,1
 access_publisher_location_manager,access.publisher.location.manager,model_publisher_location,sales_team.group_sale_manager,1,1,1,1
 access_publisher_color_manager,access.publisher.color.manager,model_publisher_color,sales_team.group_sale_manager,1,1,1,1
+access_publisher_invitation_manager,access.publisher.invitation.manager,model_publisher_invitation,sales_team.group_sale_manager,1,1,1,1

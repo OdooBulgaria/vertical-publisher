@@ -33,7 +33,7 @@
 
         <menuitem name="Media Options"
             id="menu_sale_publisher_settings_media" parent="menu_sale_publisher_settings"
-            sequence="100"/>
+            sequence="1"/>
 
         <record id="menu_sale_publisher_settings_media_media_action" model="ir.actions.act_window">
             <field name="name">Media</field>
@@ -78,5 +78,20 @@
         <menuitem name="Colors"
             id="menu_sale_publisher_settings_media_colors" parent="menu_sale_publisher_settings_media"
             sequence="5" action="menu_sale_publisher_settings_media_colors_action" />
+
+        <menuitem name="Partners Management"
+            id="menu_sale_publisher_settings_partners" parent="menu_sale_publisher_settings"
+            sequence="12"/>
+
+        <record id="menu_sale_publisher_settings_partners_invitations_action" model="ir.actions.act_window">
+            <field name="name">Invitations Settings</field>
+            <field name="res_model">publisher.invitation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Invitations Settings"
+            id="menu_sale_publisher_settings_partners_invitations" parent="menu_sale_publisher_settings_partners"
+            sequence="1" action="menu_sale_publisher_settings_partners_invitations_action" />
     </data>
 </odoo>
