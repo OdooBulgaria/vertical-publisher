@@ -217,10 +217,9 @@
                             <thead>
                                 <tr>
                                     <th>Product</th>
-                                    <th>Publication Date</th>
                                     <th class="text-right">Unit Price</th>
                                     <th class="text-right">Quantity</th>
-                                    <th class="text-right">Invoices</th>
+                                    <th>Invoices</th>
                                     <th class="text-right">Subtotal</th>
                                     <th class="text-right">Amount Invoiced</th>
                                     <th class="text-right">Amount To Invoice</th>
@@ -236,10 +235,9 @@
 
                                         <tr>
                                             <td><span t-field="l.product_id"/></td>
-                                            <td><span t-field="l.date_start"/></td>
                                             <td class="text-right"><span t-field="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></td>
                                             <td class="text-right"><span t-field="l.product_uom_qty"/></td>
-                                            <td class="text-right">
+                                            <td>
                                                 <t t-set="invoices" t-value="[]"/>
                                                 <t t-foreach="l.invoice_lines" t-as="invoice_line">
                                                     <t t-if="invoice_line.invoice_id.number and not invoice_line.invoice_id.number in invoices">
