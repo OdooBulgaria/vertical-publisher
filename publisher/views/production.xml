@@ -49,6 +49,7 @@
                             <group>
                                 <field name="date_start" required="1" />
                                 <field name="date_end" />
+                                <field name="date_closing" />
                                 <field name="date_full_equipment_limit" />
                                 <!-- <field name="sale_lines_count"/> -->
                                 <field name="sale_lines_confirmed_count"/>

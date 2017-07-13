@@ -63,6 +63,10 @@
                             <strong>End Date:</strong>
                             <p t-field="doc.date_end"/>
                         </div>
+                        <div t-if="doc.date_closing" class="col-xs-3">
+                            <strong>Closing Date:</strong>
+                            <p t-field="doc.date_closing"/>
+                        </div>
                         <div t-if="doc.state" class="col-xs-3">
                             <strong>State:</strong>
                             <p t-field="doc.state"/>
@@ -192,6 +196,10 @@
                         <div t-if="doc.date_end" class="col-xs-3">
                             <strong>End Date:</strong>
                             <p t-field="doc.date_end"/>
+                        </div>
+                        <div t-if="doc.date_closing" class="col-xs-3">
+                            <strong>Closing Date:</strong>
+                            <p t-field="doc.date_closing"/>
                         </div>
                         <div t-if="doc.state" class="col-xs-3">
                             <strong>State:</strong>

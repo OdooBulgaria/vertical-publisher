@@ -28,6 +28,7 @@ class Production(models.Model):
     project_id = fields.Many2one('project.project', string="Project");
     date_start = fields.Date(string='Publication Date / Event', required=True)
     date_end = fields.Date(string='End Date')
+    date_closing = fields.Date(string='Closing Date')
     date_full_equipment_limit = fields.Date(string='Full Equipment Limit Date')
     sale_line_ids = fields.One2many('sale.order.line', 'production_id', string='Production Lines')
     expected_turnover = fields.Monetary(string="Expected Turnover")
