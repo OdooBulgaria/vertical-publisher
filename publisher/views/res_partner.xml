@@ -26,12 +26,11 @@
                         <field name="create_date" />
                     </xpath>
 
-                    <xpath expr="//page[@name='sales_purchases']//field[@name='customer']" position="after">
-                        <field name="agency" />
-                    </xpath>
-
                     <xpath expr="//notebook" position="inside">
                         <page string="Publisher Options">
+                            <group>
+                                <field name="agency" />
+                            </group>
                             <group>
                                 <group>
                                     <field name="toolbox" />
