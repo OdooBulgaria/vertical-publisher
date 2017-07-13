@@ -45,9 +45,9 @@
                         <strong>Source :</strong>
                         <span t-field="o.origin"/>
                     </div>
-                    <div t-if="o.name">
+                    <div t-if="o.client_ref">
                         <strong>Customer Reference :</strong>
-                        <span t-field="o.name"/>
+                        <span t-field="o.client_ref"/>
                     </div>
                     <div t-if="o.reference">
                         <strong>Internal Reference :</strong>
@@ -56,10 +56,6 @@
                         <!-- <div class="col-xs-2" t-if="o.date_due and o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
                             <strong>Due Date:</strong>
                             <p t-field="o.date_due"/>
-                        </div>
-                        <div class="col-xs-2" t-if="o.origin">
-                            <strong>Source:</strong>
-                            <p t-field="o.origin"/>
                         </div>
                         <div class="col-xs-2" t-if="o.partner_id.ref">
                             <strong>Customer Code:</strong>

@@ -9,7 +9,7 @@
                 <data>
                     <!-- SALE ORDER -->
 
-                    <!-- Hide client_order_refs field -->
+                    <!-- Hide client_order_ref field -->
                     <xpath expr="//field[@name='client_order_ref']" position="replace" />
 
                     <!-- Hide Lock Header Button -->
@@ -23,7 +23,7 @@
                         <button name="print_quotation_noprice" string="Print (No Price)" type="object" states="sent,option,sale" attrs="{'invisible': [('state', 'not in', ['sent', 'option', 'sale'])]}" />
                     </xpath>
 
-                    <!-- Reorganize form & add agency_id & client_order_refs fields & commission -->
+                    <!-- Reorganize form & add agency_id, reference & client_order_refs fields & commission -->
                     <xpath expr="/form/sheet/group" position="replace">
                         <group col="3">
                             <group>
@@ -52,6 +52,7 @@
                             </group>
                             <group>
                                 <field name="client_order_ref" />
+                                <field name="reference" />
                             </group>
                         </group>
                     </xpath>

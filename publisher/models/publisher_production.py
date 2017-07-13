@@ -296,6 +296,8 @@ class Production(models.Model):
                             'currency_id' : self.currency_id.id,
                             'journal_id' : account_journal_id.id,
                             'partner_id' : partner_invoice_id.id,
+                            'client_ref' : sale_id.client_order_ref,
+                            'reference' : sale_id.reference,
                             'date_invoice' : now.strftime('%Y-%m-%d'),
                             'state' : 'draft',
                             'reference_type' : 'none',

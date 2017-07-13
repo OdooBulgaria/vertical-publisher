@@ -40,6 +40,7 @@
         'views/sale_order.xml',
         'views/project_project.xml',
         'views/invitation.xml',
+        'views/account_invoice.xml',
 
         'views/menu_buttons.xml',
 

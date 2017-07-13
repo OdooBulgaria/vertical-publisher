@@ -10,6 +10,7 @@ class SaleOrder(models.Model):
 
     agency_id = fields.Many2one('res.partner', string="Agency")
     commission = fields.Float(string="Commission")
+    reference = fields.Char(string='Internal Reference')
 
     # @api.multi
     # @api.onchange('commission')
