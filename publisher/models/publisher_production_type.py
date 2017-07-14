@@ -18,6 +18,7 @@ class ProductionType(models.Model):
         ('both', 'Before & After Publication')
         ], string='Invoicing Mode', default='before', required=True)
     down_payment = fields.Float(string='Down Payment', default=0, required=True)
+    sequence_id = fields.Many2one('ir.sequence', string="Sequence", required=True)
     production_count = fields.Integer(string="Production Count", compute='_compute_production_count')
     
     @api.one

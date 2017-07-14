@@ -37,6 +37,7 @@
                             <group>
                                 <field name="name" />
                                 <field name="product_category_id" />
+                                <field name="sequence_id" />
                             </group>
                             <group>
                                 <field name="media_id" />

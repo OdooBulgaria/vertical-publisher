@@ -15,6 +15,11 @@ import datetime
 class Production(models.Model):
     _name = 'publisher.production'
     _order = 'name'
+    _sql_constraints = [(
+        'seq_number_unique', 
+        'unique(seq_number)',
+        'This sequence number is already taken'
+    )]
 
     name = fields.Char(string='Name', index=True, required=True)
     currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.user.company_id.currency_id)
@@ -38,6 +43,7 @@ class Production(models.Model):
         ('both', 'Before & After Publication')
         ], string='Invoicing Mode', default='before', required=True)
     down_payment = fields.Float(string='Down Payment', default=0)
+    seq_number = fields.Char(string="Sequence Number", required=True, readonly=True, copy=False, states={'draft': [('readonly', False)]}, index=True, default=lambda self: _('New'))
 
     # sale_lines_count = fields.Integer(string="Production Lines Count", compute=_compute_sale_lines_count)
     sale_lines_confirmed_count = fields.Char(string="Confirmed Lines", compute='_compute_sale_lines_confirmed_count')
@@ -59,6 +65,14 @@ class Production(models.Model):
     # @api.one
     # def _compute_sale_lines_count(self):
     #     self.sale_lines_count = len(self.sale_line_ids)
+
+
+    @api.model
+    def create(self, vals):
+        if vals.get('seq_number', _('New')) == _('New'):
+            vals['seq_number'] = self.env['publisher.production.type'].search([('id', '=', vals['production_type_id'])]).sequence_id.next_by_id() or _('New')
+
+        return super(Production, self).create(vals)
 
 
     @api.one
