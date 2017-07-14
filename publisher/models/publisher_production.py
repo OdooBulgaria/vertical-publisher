@@ -51,6 +51,10 @@ class Production(models.Model):
     sale_ids = fields.Many2many('sale.order', string="Sales", compute='_compute_sale_ids')
     invoice_ids = fields.Many2many('account.invoice', string="Invoices", compute='_compute_invoice_ids')
     invoice_count = fields.Integer(string="Invoice Count", compute='_compute_invoice_count')
+    invoice_status = fields.Selection([
+        ('no', 'Nothing to Invoice'),
+        ('to invoice', 'To Invoice')
+    ], string="Invoice Status", compute='_compute_invoice_status')
 
     # @api.one
     # def _compute_sale_lines_count(self):
@@ -122,6 +126,15 @@ class Production(models.Model):
     @api.depends('invoice_ids')
     def _compute_invoice_count(self):
         self.invoice_count = len(self.invoice_ids)
+
+    @api.one
+    def _compute_invoice_status(self):
+        if self.state in ['confirmed', 'done']:
+            for line in self.sale_line_ids:
+                if line.invoice_status == 'to invoice':
+                    self.invoice_status = 'to invoice'
+                    return
+        self.invoice_status = 'no'
 
     @api.one
     def action_create_project(self):
