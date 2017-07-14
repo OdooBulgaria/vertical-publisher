@@ -9,10 +9,15 @@
                 <data>
                     <xpath expr="//notebook" position="inside">
                         <page string="Reports">
-                            <label for="reports_logo" />
-                            <div>
-                                <field name="reports_logo" widget="image" />
-                            </div>
+                            <group>
+                                <label for="reports_logo" />
+                                <div>
+                                    <field name="reports_logo" widget="image" />
+                                </div>
+                            </group>
+                            <group>
+                                <field name="sfc" widget="html"/>
+                            </group>
                         </page>
                     </xpath>
                 </data>

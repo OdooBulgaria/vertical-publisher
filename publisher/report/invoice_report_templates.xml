@@ -150,6 +150,9 @@
                         <span t-field="o.fiscal_position_id.note"/>
                     </p>
                 </div>
+                <div class="page">
+                    <span t-raw="user.company_id.sfc" />
+                </div>
             </xpath>
         </template>
     </data>
