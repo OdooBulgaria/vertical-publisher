@@ -3,7 +3,7 @@
     <data>
         <menuitem name="Publisher"
             id="menu_sale_publisher"
-            sequence="20"/>
+            sequence="20" web_icon="publisher,static/description/menu.png" />
 
         <record id="menu_sale_publisher_productions_action" model="ir.actions.act_window">
             <field name="name">Productions</field>
