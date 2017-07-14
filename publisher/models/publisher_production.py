@@ -272,8 +272,11 @@ class Production(models.Model):
                     sale_map[line.order_id.id].append(line)
 
         company_id = self.env.user.company_id
-        account_journal_id = self.env['account.journal'].search([('company_id', '=', company_id.id), ('type', '=', 'sale')])[0]
+        account_journal_id = self.env['account.invoice'].default_get(['journal_id'])['journal_id']
         now = datetime.datetime.now()
+
+        if not account_journal_id:
+            raise UserError(_('Please define an accounting sale journal for this company.'))
 
         invoice_ids = []
 
@@ -321,18 +324,23 @@ class Production(models.Model):
                     # if invoice does not exist yet
                     if not invoice_id:
                         invoice_id = self.env['account.invoice'].create({
+                            #'origin' : sale_id.name,
+                            'type': 'out_invoice',
                             'company_id' : company_id.id,
                             'currency_id' : self.currency_id.id,
-                            'journal_id' : account_journal_id.id,
+                            'journal_id' : account_journal_id,
                             'partner_id' : partner_invoice_id.id,
                             'client_ref' : sale_id.client_order_ref,
                             'reference' : sale_id.reference,
-                            'date_invoice' : now.strftime('%Y-%m-%d'),
+                            #'date_invoice' : now.strftime('%Y-%m-%d'),
                             'state' : 'draft',
                             'reference_type' : 'none',
-                            'fiscal_position_id' : sale_id.fiscal_position_id.id,
+                            'fiscal_position_id' : sale_id.fiscal_position_id.id or partner_invoice_id.property_account_position_id.id,
                             'payment_term_id' : sale_id.payment_term_id.id,
                             'account_id' : partner_invoice_id.property_account_receivable_id.id,
+                            'user_id': sale_id.user_id and sale_id.user_id.id,
+                            'team_id': sale_id.team_id.id,
+                            'comment' : sale_id.note
                         })
                         invoice_ids.append(invoice_id.id)
 
