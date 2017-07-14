@@ -10,6 +10,19 @@
             <field name="view_id" ref="view_publisher_production_line_tree" />
         </record>
 
+        <record id="view_partner_tree_publisher" model="ir.ui.view">
+            <field name="name">view_partner_tree_publisher</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='email']" position="after">
+                        <field name="create_date" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
         <record id="view_partner_form_publisher" model="ir.ui.view">
             <field name="name">view_partner_form_publisher</field>
             <field name="model">res.partner</field>
