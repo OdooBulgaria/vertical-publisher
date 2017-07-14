@@ -39,6 +39,16 @@ class SaleOrderLine(models.Model):
         self.discount = (1.0 - (100.0-self.discount_base)/100.0 * (100.0-self.commission)/100.0) * 100.0
 
 
+    @api.multi
+    def write(self, vals):
+        if self.production_id:
+            if 'full_equipment_received' in vals:
+                self.production_id.message_post(subject=self.name, body=self.name + " : " + (_("Full equipment is received") if vals['full_equipment_received'] else _("Equipment set as not received")))
+            if 'attachment_ids' in vals:
+                delta = len(vals['attachment_ids'][0][2]) - len(self.attachment_ids)
+                self.production_id.message_post(subject=self.name, body=self.name + " : " + str(abs(delta)) + " " + (_(" attachment(s) added") if delta>0 else _(" attachment(s) deleted")))
+        return super(SaleOrderLine, self).write(vals)
+
     @api.onchange('product_id', 'price_unit', 'product_uom', 'product_uom_qty', 'tax_id')
     def _onchange_discount(self):
         self.discount_base = 0.0

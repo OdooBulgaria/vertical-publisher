@@ -14,6 +14,7 @@ import datetime
 
 class Production(models.Model):
     _name = 'publisher.production'
+    _inherit = 'mail.thread'
     _order = 'name'
     _sql_constraints = [(
         'seq_number_unique', 
@@ -21,28 +22,28 @@ class Production(models.Model):
         'This sequence number is already taken'
     )]
 
-    name = fields.Char(string='Name', index=True, required=True)
+    name = fields.Char(string='Name', index=True, required=True, readonly=True, states={'draft': [('readonly', False)]})
     currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.user.company_id.currency_id)
     state = fields.Selection([
         ('draft', 'Draft'),
         ('confirmed', 'Confirmed'),
         ('done', 'Done'),
         ('archived', 'Archived')
-        ], string='State', default='draft', required=True)
-    production_type_id = fields.Many2one('publisher.production.type', string='Production Type', required=True)
-    project_id = fields.Many2one('project.project', string="Project");
-    date_start = fields.Date(string='Publication Date / Event', required=True)
-    date_end = fields.Date(string='End Date')
-    date_closing = fields.Date(string='Closing Date')
-    date_full_equipment_limit = fields.Date(string='Full Equipment Limit Date')
+        ], string='State', default='draft', required=True, track_visibility='always')
+    production_type_id = fields.Many2one('publisher.production.type', string='Production Type', required=True, readonly=True, states={'draft': [('readonly', False)]})
+    project_id = fields.Many2one('project.project', string="Project", track_visibility='always');
+    date_start = fields.Date(string='Publication Date / Event', required=True, readonly=True, states={'draft': [('readonly', False)]})
+    date_end = fields.Date(string='End Date', readonly=True, states={'draft': [('readonly', False)]})
+    date_closing = fields.Date(string='Closing Date', readonly=True, states={'draft': [('readonly', False)]})
+    date_full_equipment_limit = fields.Date(string='Full Equipment Limit Date', readonly=True, states={'draft': [('readonly', False)]})
     sale_line_ids = fields.One2many('sale.order.line', 'production_id', string='Production Lines')
-    expected_turnover = fields.Monetary(string="Expected Turnover")
+    expected_turnover = fields.Monetary(string="Expected Turnover", readonly=True, states={'draft': [('readonly', False)]})
     invoicing_mode = fields.Selection([
         ('before', 'Before Publication'),
         ('after', 'After Publication'),
         ('both', 'Before & After Publication')
-        ], string='Invoicing Mode', default='before', required=True)
-    down_payment = fields.Float(string='Down Payment', default=0)
+        ], string='Invoicing Mode', default='before', required=True, readonly=True, states={'draft': [('readonly', False)]})
+    down_payment = fields.Float(string='Down Payment', default=0, states={'draft': [('readonly', False)]})
     seq_number = fields.Char(string="Sequence Number", required=True, readonly=True, copy=False, states={'draft': [('readonly', False)]}, index=True, default=lambda self: _('New'))
 
     # sale_lines_count = fields.Integer(string="Production Lines Count", compute=_compute_sale_lines_count)
@@ -67,7 +68,7 @@ class Production(models.Model):
     #     self.sale_lines_count = len(self.sale_line_ids)
 
 
-    @api.model
+    @api.multi
     def create(self, vals):
         if vals.get('seq_number', _('New')) == _('New'):
             vals['seq_number'] = self.env['publisher.production.type'].search([('id', '=', vals['production_type_id'])]).sequence_id.next_by_id() or _('New')
