@@ -62,6 +62,7 @@ class Production(models.Model):
         ('no', 'Nothing to Invoice'),
         ('to invoice', 'To Invoice')
     ], string="Invoice Status", compute='_compute_invoice_status')
+    calendar_view = fields.Boolean(string="Allow Calendar View", compute='_compute_calendar_view')
 
     # @api.one
     # def _compute_sale_lines_count(self):
@@ -150,6 +151,10 @@ class Production(models.Model):
                     self.invoice_status = 'to invoice'
                     return
         self.invoice_status = 'no'
+
+    @api.one
+    def _compute_calendar_view(self):
+        self.calendar_view = self.production_type_id and self.production_type_id.media_id.date_start_needed and self.production_type_id.media_id.date_end_needed
 
     @api.one
     def action_create_project(self):

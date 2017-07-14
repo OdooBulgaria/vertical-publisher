@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record id="production_sale_order_line_action" model="ir.actions.act_window">
+            <field name="name">Production Calendar</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">calendar,tree,form</field>
+            <field name="domain">[('production_id', '=', context.get('production_id'))]</field>
+            <field name="view_id" ref="view_publisher_production_line_calendar" />
+        </record>
+
         <record id="view_publisher_production_tree" model="ir.ui.view">
             <field name="name">view_publisher_production_tree</field>
             <field name="model">publisher.production</field>
@@ -24,10 +33,12 @@
                 <form string="Production">
                     <header>
                         <field name="invoice_status" invisible="1" />
+                        <field name="calendar_view" invisible="1" />
                         <button string="Create invoices" class="btn-primary" type="object" name="create_invoices" attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}" />
                         <button string="Print Production" class="btn-primary" type="object" name="print_production" />
                         <button string="Print Invoice Status" class="btn-primary" type="object" name="print_production_invoice_status" />
                         <button string="Download Attachments" class="btn-primary" type="object" name="download_attachments" />
+                        <button string="Calendar" class="btn-primary" type="action" name="%(production_sale_order_line_action)d" context="{'production_id': id}" attrs="{'invisible': [('calendar_view', '=', False)]}" />
                         <button string="Cancel" />
                         <field name="state" widget="statusbar" clickable="True" />
                     </header>

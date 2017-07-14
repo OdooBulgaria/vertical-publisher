@@ -110,5 +110,20 @@
                 </form>
             </field>
         </record>
+
+        <record id="view_publisher_production_line_calendar" model="ir.ui.view"> 
+            <field name="name">view_publisher_production_line_calendar</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml"> 
+                <calendar date_start="date_start" date_stop="date_end" mode="month" color="location_id"> <!-- color="location_id" display="[name], Stage [stage_id]" --> 
+                    <field name="product_id" />
+                    <field name="order_partner_id" />
+                    <field name="full_equipment_received" />
+                    <field name="attachment_count" />
+                    <field name="location_id" />
+                    <field name="price_subtotal" />
+                </calendar> 
+            </field> 
+        </record> 
     </data>
 </odoo>
