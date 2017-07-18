@@ -51,6 +51,17 @@ class SaleOrderLine(models.Model):
                 self.production_id.message_post(subject=self.name, body=self.name + " : " + str(abs(delta)) + " " + (_(" attachment(s) added") if delta>0 else _(" attachment(s) deleted")))
         return super(SaleOrderLine, self).write(vals)
 
+    @api.onchange('product_id')
+    def _onchange_product_id(self):
+        if self.product_id:
+            self.format_id = self.product_id.format_id
+            self.location_id = self.product_id.location_id
+            self.color_id = self.product_id.color_id
+        else:
+            self.format_id = False
+            self.location_id = False
+            self.color_id = False
+
     @api.onchange('product_id', 'price_unit', 'product_uom', 'product_uom_qty', 'tax_id')
     def _onchange_discount(self):
         self.discount_base = 0.0

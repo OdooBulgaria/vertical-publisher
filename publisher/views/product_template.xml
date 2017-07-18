@@ -21,6 +21,20 @@
                             <field string="Production Lines" name="production_line_count" widget="statinfo" modifiers="{'readonly': true}"/>
                         </button>
                     </xpath>
+
+                    <xpath expr="//notebook" position="inside">
+                        <page string="Publisher">
+                            <group>
+                                <group>
+                                    <field name="format_id" />
+                                    <field name="location_id" />
+                                </group>
+                                <group>
+                                    <field name="color_id" />
+                                </group>
+                            </group>
+                        </page>
+                    </xpath>
                 </data>
             </field>
         </record>
