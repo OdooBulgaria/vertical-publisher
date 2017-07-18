@@ -153,8 +153,8 @@
             </xpath>
 
             <xpath expr="(//t[@t-call='report.external_layout'])" position="after">
-                <div class="header" />
-                <div class="page">
+                <div class="header" style="height:0;" />
+                <div class="page" style="margin-top:0;">
                     <span t-raw="user.company_id.sfc" />
                 </div>
                 <div class="footer" />
