@@ -357,15 +357,31 @@ class Production(models.Model):
                         'Price : '+str(quantity*line.price_unit)+self.currency_id.symbol+(' - '+str(line.discount_base)+' % customer discount' if line.discount_base>0 else '')+(' = '+str(quantity*line.price_unit*(1-line.discount_base/100))+self.currency_id.symbol if line.discount_base>0 and line.commission>0 else '')+(' - '+str(line.commission)+' % agency commission' if line.commission>0 else ''),
                     ]))
 
+                    account_line = line.product_id.property_account_income_id or line.product_id.categ_id.property_account_income_categ_id
+                    if not account_line:
+                        raise UserError(_('Please define income account for this product: "%s" (id:%d) - or for its category: "%s".') %
+                            (line.product_id.name, line.product_id.id, line.product_id.categ_id.name))
+
+                    fpos = sale_id.fiscal_position_id or sale_id.partner_id.property_account_position_id
+                    if fpos:
+                        account_line = fpos.map_account(account_line)
+
                     invoice_line_id = self.env['account.invoice.line'].create({
                         'invoice_id' : invoice_id.id,
-                        'product_id' : line.product_id.id,
+                        'product_id' : line.product_id.id or False,
                         'name' : description,
                         'quantity' : quantity,
                         'price_unit' : line.price_unit,
                         'discount' : line.discount,
                         'account_id' : partner_invoice_id.property_account_receivable_id.id,
-                        'sale_line_ids': [(4, [line.id])]
+                        'sale_line_ids': [(4, [line.id])],
+                        'origin' : sale_id.name,
+                        'account_id' : account_line.id,
+                        'uom_id': line.product_uom.id,
+                        'layout_category_id': line.layout_category_id and line.layout_category_id.id or False,
+                        'invoice_line_tax_ids': [(6, 0, line.tax_id.ids)],
+                        'account_analytic_id': sale_id.project_id.id,
+                        'analytic_tag_ids': [(6, 0, line.analytic_tag_ids.ids)],
                     })
 
         if not invoice_ids:
