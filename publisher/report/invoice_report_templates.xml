@@ -153,7 +153,6 @@
             </xpath>
 
             <xpath expr="(//t[@t-call='report.external_layout'])" position="after">
-                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
                 <div class="page">
                     <span t-raw="user.company_id.sfc" />
                 </div>
