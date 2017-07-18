@@ -32,6 +32,8 @@ class SaleOrderLine(models.Model):
     commission = fields.Float(string='Agency Commission (%)', digits=dp.get_precision('Discount'), default=0.0)
     discount = fields.Float(string='Total Discount (%)', digits=dp.get_precision('Discount'), default=0.0, compute='_compute_discount')
 
+    prod_state = fields.Selection(related='production_id.state', string="Production State")
+
 
     @api.one
     @api.depends('discount_base', 'commission')
