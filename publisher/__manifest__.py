@@ -50,7 +50,7 @@
         'report/sale_report.xml',
         'report/production_report_templates.xml',
         'report/production_report.xml',
-        #'report/invoice_report_templates.xml',
+        'report/invoice_report_templates.xml',
 
         'data/sale_order_sequence.xml',
 
