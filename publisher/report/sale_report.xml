@@ -8,6 +8,12 @@
             report_type="qweb-pdf"
             file="sale.report_saleorder_noprice"
             name="publisher.report_saleorder_noprice" 
-        />
+        >
+            <field name="paperformat_id" ref="publisher.paperformat_lowmargin" />
+        </report>
+
+        <report id="sale.report_sale_order">
+            <field name="paperformat_id" ref="publisher.paperformat_lowmargin" />
+        </report>
     </data>
 </odoo>

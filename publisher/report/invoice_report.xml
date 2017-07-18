@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report id="account.report_invoice">
+            <field name="paperformat_id" ref="publisher.paperformat_lowmargin" />
+        </report>
+    </data>
+</odoo>

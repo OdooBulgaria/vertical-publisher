@@ -8,7 +8,9 @@
             report_type="qweb-pdf"
             file="publisher.report_production"
             name="publisher.report_production_template" 
-        />
+        >
+            <field name="paperformat_id" ref="publisher.paperformat_lowmargin" />
+        </report>
 
         <report 
             id="report_production_invoice_status"
@@ -17,7 +19,9 @@
             report_type="qweb-pdf"
             file="publisher.report_production_invoice_status"
             name="publisher.report_production_invoice_status_template" 
-        />
+        >
+            <field name="paperformat_id" ref="publisher.paperformat_lowmargin" />
+        </report>
     </data>
 </odoo>
 
