@@ -69,7 +69,7 @@ class Production(models.Model):
     #     self.sale_lines_count = len(self.sale_line_ids)
 
 
-    @api.multi
+    @api.model
     def create(self, vals):
         if vals.get('seq_number', _('New')) == _('New'):
             vals['seq_number'] = self.env['publisher.production.type'].search([('id', '=', vals['production_type_id'])]).sequence_id.next_by_id() or _('New')
