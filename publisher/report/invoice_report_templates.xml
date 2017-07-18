@@ -153,9 +153,9 @@
             </xpath>
 
             <xpath expr="(//t[@t-call='report.external_layout'])" position="after">
-                <div class="page">
+                <!--<div class="page">-->
                     <span t-raw="user.company_id.sfc" />
-                </div>
+                <!--</div>-->
             </xpath>
         </template>
     </data>
