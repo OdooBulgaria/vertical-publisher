@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-    	<record id="paperformat_lowmargin" model="report.paperformat">
+        <record id="paperformat_lowmargin" model="report.paperformat">
             <field name="name">European A4 Low Margin</field>
             <field name="default" eval="False"/>
             <field name="format">A4</field>
