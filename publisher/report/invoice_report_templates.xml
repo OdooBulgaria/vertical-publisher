@@ -167,7 +167,7 @@
 
         <template id="report_invoice_document_publisher_duplicate" inherit_id="publisher.report_invoice_document_publisher" primary="True">
             <xpath expr="//h2" position="replace">
-                <h2>
+                <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
                     <span>Duplicate</span>
                     <span t-if="o.type == 'out_refund'">refund</span>
                     <span t-if="o.type == 'out_invoice'">invoice</span>
