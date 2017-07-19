@@ -10,7 +10,7 @@
                 <div class="page">
                     <div class="oe_structure" />
 
-                    <h2>
+                    <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2.5em;">
                         <span t-field="doc.name" />
                     </h2>
 

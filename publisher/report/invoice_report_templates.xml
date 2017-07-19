@@ -7,7 +7,7 @@
                     <div class="page">
                         <div class="oe_structure"/>
 
-                        <h2 style="font-size:2em; text-align:center; margin-bottom:7em;">
+                        <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2.5em;">
                             <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
