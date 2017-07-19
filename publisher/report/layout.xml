@@ -76,12 +76,12 @@
                         <li t-if="company.company_registry">Business Permit: <span t-field="company.company_registry"/></li>
                     </ul>
 
-                    <ul class="list-inline">
+                    <!--<ul class="list-inline">
                         <li>Page:</li>
                         <li><span class="page"/></li>
                         <li>/</li>
                         <li><span class="topage"/></li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div>      
         </template>
