@@ -18,11 +18,11 @@ class ProductionWizard(models.Model):
         vals =  self.env['report'].get_action(self, 'publisher.report_production_global_template')
 
         if not vals.get('datas'):
-            vals.datas = {}
+            vals['datas'] = {}
 
-        vals.datas.ids = report_obj
-        vals.datas.model = 'publisher.production'
-        vals.datas.form = report_obj
+        vals.datas['ids'] = report_obj
+        vals.datas['model'] = 'publisher.production'
+        vals.datas['form'] = report_obj
 
         return vals
 
