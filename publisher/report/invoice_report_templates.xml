@@ -24,7 +24,7 @@
                             </div>
 
                             <div class="col-xs-5 col-xs-offset-2">
-                                <div style="margin-bottom:2.5em;" t-if="o.date_invoice and user.company_id.partner_id.city"><span t-field="user.company_id.partner_id.city" />, on <span t-field="o.date_invoice" /></div>
+                                <!--<div style="margin-bottom:2.5em;" t-if="o.date_invoice and user.company_id.partner_id.city"><span t-field="user.company_id.partner_id.city" />, on <span t-field="o.date_invoice" /></div>-->
                                 <div><strong><span t-field="o.partner_id.name" /></strong></div>
                                 <address style="margin-bottom:1em;" t-field="o.partner_id"
                                     t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
