@@ -75,9 +75,9 @@
                             <strong>Blanco Date:</strong>
                             <p t-field="doc.date_blanco"/>
                         </div>
-                        <div t-if="doc.state" class="col-xs-3">
-                            <strong>State:</strong>
-                            <p t-field="doc.state"/>
+                        <div t-if="doc.note" class="col-xs-3">
+                            <strong>Comment:</strong>
+                            <p t-field="doc.note"/>
                         </div>
                         <div t-if="doc.themes" class="col-xs-3">
                             <strong>Themes:</strong>
@@ -221,9 +221,9 @@
                             <strong>Blanco Date:</strong>
                             <p t-field="doc.date_blanco"/>
                         </div>
-                        <div t-if="doc.state" class="col-xs-3">
-                            <strong>State:</strong>
-                            <p t-field="doc.state"/>
+                        <div t-if="doc.note" class="col-xs-3">
+                            <strong>Comment:</strong>
+                            <p t-field="doc.note"/>
                         </div>
                         <div t-if="doc.themes" class="col-xs-3">
                             <strong>Themes:</strong>
