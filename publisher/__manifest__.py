@@ -58,7 +58,9 @@
 
         'security/ir.model.access.csv',
 
-        'views/assets.xml'
+        'views/assets.xml',
+
+        'views/productions_wizard.xml',
     ],
 
     'application': True,

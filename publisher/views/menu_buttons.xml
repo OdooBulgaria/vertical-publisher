@@ -93,5 +93,24 @@
         <menuitem name="Invitations Settings"
             id="menu_sale_publisher_settings_partners_invitations" parent="menu_sale_publisher_settings_partners"
             sequence="1" action="menu_sale_publisher_settings_partners_invitations_action" />
+
+
+
+        <record id="production_wizard_action" model="ir.actions.act_window">
+            <field name="name">Productions Global Status</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">publisher.production.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Reporting"
+            id="menu_sale_publisher_reporting" parent="menu_sale_publisher"
+            sequence="2"/>
+
+        <menuitem name="Print Global Status"
+            id="menu_sale_publisher_reporting_global" parent="menu_sale_publisher_reporting"
+            sequence="1" action="production_wizard_action" />
     </data>
 </odoo>
