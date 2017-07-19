@@ -53,9 +53,14 @@ class SaleOrder(models.Model):
         })
 
     @api.multi
+    def print_quotation(self):
+        self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
+        return self.env['report'].get_action(self, 'publisher.report_saleorder_publisher')
+
+    @api.multi
     def print_quotation_noprice(self):
         self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
-        return self.env['report'].get_action(self, 'publisher.report_saleorder_noprice')
+        return self.env['report'].get_action(self, 'publisher.report_saleorder_publisher_noprice')
 
     @api.model
     def create(self, vals):
