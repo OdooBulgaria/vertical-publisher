@@ -157,11 +157,11 @@
                     </div>
                 </t>
 
-                <!--<div class="header" style="height:0;" />
+                <div class="header" style="height:0;" />
                 <div class="page" style="margin-top:0;">
                     <span t-raw="user.company_id.sfc" />
                 </div>
-                <div class="footer" />-->
+                <div class="footer" />
             </xpath>
         </template>
     </data>
