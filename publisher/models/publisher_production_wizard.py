@@ -24,6 +24,8 @@ class ProductionWizard(models.Model):
         vals['datas']['model'] = 'publisher.production'
         vals['datas']['form'] = report_obj
 
+        _logger.info('\n\n'+str(vals)+'\n\n')
+
         return vals
 
         # return {
