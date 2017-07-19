@@ -45,15 +45,15 @@
                             </div>
                             <div class="col-xs-3" t-if="o.origin">
                                 <strong>Source :</strong>
-                                <p t-field="doc.origin"/>
+                                <p t-field="o.origin"/>
                             </div>
                             <div class="col-xs-3" t-if="o.client_ref">
                                 <strong>Customer Reference :</strong>
-                                <p t-field="doc.client_ref"/>
+                                <p t-field="o.client_ref"/>
                             </div>
                             <div class="col-xs-3" t-if="o.reference">
                                 <strong>Internal Reference :</strong>
-                                <p t-field="doc.reference"/>
+                                <p t-field="o.reference"/>
                             </div>
                         </div>
                             <!-- <div class="col-xs-2" t-if="o.date_due and o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
