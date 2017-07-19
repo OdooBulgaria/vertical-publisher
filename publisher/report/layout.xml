@@ -69,7 +69,7 @@
                         <li t-if="company.iban and company.bank or company.iban and company.bic">&amp;bull;</li>
                         <li t-if="company.bank"><span t-field="company.bank"/>, </li>
 
-                        <li t-if="company.bic"><span t-field="company.bic"/></li>
+                        <li t-if="company.bic">BIC: <span t-field="company.bic"/></li>
                     </ul>
 
                     <ul class="list-inline">

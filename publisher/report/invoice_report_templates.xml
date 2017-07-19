@@ -7,7 +7,7 @@
                     <div class="page">
                         <div class="oe_structure"/>
 
-                        <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2.5em;">
+                        <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
                             <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
@@ -32,28 +32,29 @@
                             </div>
                         </div>
 
-                        <div t-if="o.number" class="row">
-                            <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
-                            <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
-                            <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
-                            <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
-                            <span t-if="o.type == 'out_refund'">Refund</span>
-                            <span t-if="o.type == 'in_refund'">Vendor Refund</span>
-                            <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
-                            <span t-field="o.number"/>
-                        </div>
-
-                        <div t-if="o.origin" class="row">
-                            <strong>Source :</strong>
-                            <span t-field="o.origin"/>
-                        </div>
-                        <div t-if="o.client_ref" class="row">
-                            <strong>Customer Reference :</strong>
-                            <span t-field="o.client_ref"/>
-                        </div>
-                        <div t-if="o.reference" class="row">
-                            <strong>Internal Reference :</strong>
-                            <span t-field="o.reference"/>
+                        <div class="row mt32 mb32" id="informations">
+                            <div class="col-xs-3" t-if="o.number">
+                                <strong t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice:</strong>
+                                <strong t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA:</strong>
+                                <strong t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice:</strong>
+                                <strong t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice:</strong>
+                                <strong t-if="o.type == 'out_refund'">Refund:</strong>
+                                <strong t-if="o.type == 'in_refund'">Vendor Refund:</strong>
+                                <strong t-if="o.type == 'in_invoice'">Vendor Bill:</strong>
+                                <p># <span t-field="o.number" /></p>
+                            </div>
+                            <div class="col-xs-3" t-if="o.origin">
+                                <strong>Source :</strong>
+                                <p t-field="doc.origin"/>
+                            </div>
+                            <div class="col-xs-3" t-if="o.client_ref">
+                                <strong>Customer Reference :</strong>
+                                <p t-field="doc.client_ref"/>
+                            </div>
+                            <div class="col-xs-3" t-if="o.reference">
+                                <strong>Internal Reference :</strong>
+                                <p t-field="doc.reference"/>
+                            </div>
                         </div>
                             <!-- <div class="col-xs-2" t-if="o.date_due and o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
                                 <strong>Due Date:</strong>
