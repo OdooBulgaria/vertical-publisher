@@ -7,7 +7,7 @@
                     <div class="page">
                         <div class="oe_structure"/>
 
-                        <!--<h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
+                        <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
                             <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
@@ -55,7 +55,7 @@
                                 <strong>Internal Reference :</strong>
                                 <p t-field="o.reference"/>
                             </div>
-                        </div>-->
+                        </div>
                             <!-- <div class="col-xs-2" t-if="o.date_due and o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
                                 <strong>Due Date:</strong>
                                 <p t-field="o.date_due"/>
@@ -67,7 +67,7 @@
                             <div name="reference" class="col-xs-2" t-if="o.reference">
                                 <strong>Reference:</strong>
                                 <p t-field="o.reference"/>
-                            </div> -->
+                            </div>-->
 
                         <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
 
@@ -157,11 +157,11 @@
                     </div>
                 </t>
 
-                <div class="header" style="height:0;" />
+                <!--<div class="header" style="height:0;" />
                 <div class="page" style="margin-top:0;">
                     <span t-raw="user.company_id.sfc" />
                 </div>
-                <div class="footer" />
+                <div class="footer" />-->
             </xpath>
         </template>
     </data>
