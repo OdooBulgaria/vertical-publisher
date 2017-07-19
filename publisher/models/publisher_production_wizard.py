@@ -15,15 +15,26 @@ class ProductionWizard(models.Model):
 
         report_obj = self.env['publisher.production'].search(['&', ('date_closing', '>=', self.date_from), ('date_closing', '<=', self.date_to)]).ids
 
-        return {
-            'type': 'ir.actions.report.xml',
-            'report_name': 'publisher.report_production_template', #'publisher.report_production_global_template',
-            'datas': {
-                'ids': report_obj,
-                'model': 'publisher.production',
-                'form': report_obj,
-            },
-        }
+        vals =  self.env['report'].get_action(self, 'publisher.report_production_global_template')
+
+        if not vals.datas:
+            vals.datas = {}
+
+        vals.datas.ids = report_obj
+        vals.datas.model = 'publisher.production'
+        vals.datas.form = report_obj
+
+        return vals
+
+        # return {
+        #     'type': 'ir.actions.report.xml',
+        #     'report_name': 'publisher.report_production_global_template',
+        #     'datas': {
+        #         'ids': report_obj,
+        #         'model': 'publisher.production',
+        #         'form': report_obj,
+        #     },
+        # }
 
         # _logger.info('\n\n'+str(self.env['report'].get_action(objects, 'publisher.report_production_global_template'))+'\n\n')
 
