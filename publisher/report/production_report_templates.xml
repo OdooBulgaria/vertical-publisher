@@ -332,5 +332,188 @@
                 </t>
             </t>
         </template>
+
+
+        <template id="report_production_global_template_document">
+            <t t-call="publisher.publisher_layout_internal">
+                <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
+                <!--<div style="background-color:#999999; text-align:right; padding:1.5em; margin-bottom:2.5em;">
+                    <img t-attf-src="data:image/*;base64,{{user.company_id.reports_logo}}" t-att-alt="user.company_id.name" style="height:6em;" />
+                </div>-->
+                <div class="page">
+                    <div class="oe_structure" />
+
+                    <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
+                        <span t-field="doc.name" />
+                    </h2>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div class="col-xs-3">
+                            <strong>Production Type:</strong>
+                            <p t-field="doc.production_type_id"/>
+                        </div>
+                        <div t-if="doc.project_id" class="col-xs-3">
+                            <strong>Project:</strong>
+                            <p t-field="doc.project_id"/>
+                        </div>
+                        <div class="col-xs-3">
+                            <strong>Confirmed Lines:</strong>
+                            <p t-field="doc.sale_lines_confirmed_count"/>
+                        </div>
+                        <div class="col-xs-3">
+                            <strong>Invoicing Mode:</strong>
+                            <p t-field="doc.invoicing_mode"/>
+                        </div>
+                        <div t-if="doc.expected_turnover" class="col-xs-3">
+                            <strong>Expected Turnover:</strong>
+                            <p t-field="doc.expected_turnover"/>
+                        </div>
+                        <div class="col-xs-3">
+                            <strong>Potential Turnover:</strong>
+                            <p t-field="doc.potential_turnover"/>
+                        </div>
+                        <div class="col-xs-3">
+                            <strong>Actual Turnover:</strong>
+                            <p t-field="doc.actual_turnover"/>
+                        </div>
+                        <div t-if="doc.expected_turnover" class="col-xs-3">
+                            <strong>Diff. Actual / Expected Turnover:</strong>
+                            <p t-field="doc.turnover_delta"/>
+                        </div>
+                        <div t-if="doc.date_full_equipment_limit" class="col-xs-3">
+                            <strong>Full Equipment Limit Date:</strong>
+                            <p t-field="doc.date_full_equipment_limit"/>
+                        </div>
+                        <div t-if="doc.date_start" class="col-xs-3">
+                            <strong>Publication Date / Event:</strong>
+                            <p t-field="doc.date_start"/>
+                        </div>
+                        <div t-if="doc.date_end" class="col-xs-3">
+                            <strong>End Date:</strong>
+                            <p t-field="doc.date_end"/>
+                        </div>
+                        <div t-if="doc.date_closing" class="col-xs-3">
+                            <strong>Closing Date:</strong>
+                            <p t-field="doc.date_closing"/>
+                        </div>
+                        <div t-if="doc.state" class="col-xs-3">
+                            <strong>State:</strong>
+                            <p t-field="doc.state"/>
+                        </div>
+                        <div t-if="doc.date_blanco" class="col-xs-3">
+                            <strong>Blanco Date:</strong>
+                            <p t-field="doc.date_blanco"/>
+                        </div>
+                        <div t-if="doc.note" class="col-xs-3">
+                            <strong>Comment:</strong>
+                            <p t-field="doc.note"/>
+                        </div>
+                        <div t-if="doc.themes" class="col-xs-3">
+                            <strong>Themes:</strong>
+                            <p t-field="doc.themes"/>
+                        </div>
+                    </div>
+
+                    <t t-foreach="doc.sale_ids" t-as="sale">
+                        <h3>
+                            <span t-field="sale.name" />
+                        </h3>
+                        <div style="font-style: italic;">
+                            <span t-field="sale.state" />
+                        </div>
+                        <h4>
+                            <t t-if="sale.agency_id">
+                                <div>Agency : <span t-field="sale.agency_id" /></div>
+                            </t>
+                            <div>Customer : <span t-field="sale.partner_id" /></div>
+                        </h4>
+
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th class="text-right">Unit Price</th>
+                                    <th class="text-right">Quantity</th>
+                                    <th>Invoices</th>
+                                    <th class="text-right">Subtotal</th>
+                                    <th class="text-right">Amount Invoiced</th>
+                                    <th class="text-right">Amount To Invoice</th>
+                                </tr>
+                            </thead>
+                            <tbody class="sale_tbody">
+
+                                <t t-foreach="sale.order_line" t-as="l">
+                                    <t t-if="l.production_id.id == doc.id">
+
+                                        <t t-set="amount_invoiced" t-value="l.price_unit * l.qty_invoiced"/>
+                                        <t t-set="amount_to_invoice" t-value="l.price_unit * l.qty_to_invoice"/>
+
+                                        <tr>
+                                            <td><span t-field="l.product_id"/></td>
+                                            <td class="text-right"><span t-field="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></td>
+                                            <td class="text-right"><span t-field="l.product_uom_qty"/></td>
+                                            <td>
+                                                <t t-set="invoices" t-value="[]"/>
+                                                <t t-foreach="l.invoice_lines" t-as="invoice_line">
+                                                    <t t-if="invoice_line.invoice_id.number and not invoice_line.invoice_id.number in invoices">
+                                                        <t t-set="invoice_date" t-value="invoice_line.invoice_id.date_invoice.split('-')"/>
+                                                        <t t-set="invoices" t-value="invoices + [invoice_line.invoice_id.number + ' (' + invoice_date[2] + '/' + invoice_date[1] + '/' + invoice_date[0] + ')']"/>
+                                                    </t>
+                                                </t>
+                                                <t t-set="invoices_str" t-value="', '.join(invoices)"/>
+                                                <span t-esc="invoices_str" />
+                                            </td>
+                                            <td class="text-right"><span t-field="l.price_subtotal"/></td>
+                                            <td class="text-right"><span t-esc="amount_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></td>
+                                            <td class="text-right"><span t-esc="amount_to_invoice" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
+
+                            </tbody>
+                        </table>
+                    </t>
+
+                    <div class="row" name="total">
+                        <div class="col-xs-4 pull-right">
+                            <table class="table table-condensed">
+                                <tr class="border-black">
+                                    <td><strong>Total Invoiced Without Taxes</strong></td>
+                                    <t t-set="total" t-value="sum((line.price_unit * line.qty_invoiced) for line in doc.sale_line_ids)"/>
+                                    <td class="text-right">
+                                        <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
+                                </tr>
+                                <tr class="border-black">
+                                    <td><strong>Total To Invoice Without Taxes</strong></td>
+                                    <t t-set="total" t-value="sum((line.price_unit * line.qty_to_invoice) for line in doc.sale_line_ids)"/>
+                                    <td class="text-right">
+                                        <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
+                                </tr>
+                                <tr class="border-black">
+                                    <td><strong>Total Without Taxes</strong></td>
+                                    <t t-set="total" t-value="sum(line.price_subtotal for line in doc.sale_line_ids)"/>
+                                    <td class="text-right">
+                                        <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </template>
+
+
+        <template id="report_production_global_template">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="publisher.report_production_global_template_document" t-lang="user.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
     </data>
 </odoo>
