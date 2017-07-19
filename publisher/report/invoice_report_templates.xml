@@ -4,7 +4,7 @@
         <template id="report_invoice_document_publisher" inherit_id="account.report_invoice_document">
             <xpath expr="(//t[@t-call='report.external_layout'])" position="replace">
                 <t t-call="publisher.publisher_layout">
-                    <div class="page">
+                    <div class="page" style="margin-top:10em;">
                         <h2 style="font-size:2em; text-align:center; margin-bottom:1.5em;">
                             <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
