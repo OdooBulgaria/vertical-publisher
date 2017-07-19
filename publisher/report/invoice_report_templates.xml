@@ -4,8 +4,10 @@
         <template id="report_invoice_document_publisher" inherit_id="account.report_invoice_document">
             <xpath expr="(//t[@t-call='report.external_layout'])" position="replace">
                 <t t-call="publisher.publisher_layout">
-                    <div class="page" style="padding-top:10em;">
-                        <h2 style="font-size:2em; text-align:center; margin-bottom:1.5em;">
+                    <div class="page">
+                        <div class="oe_structure"/>
+
+                        <h2 style="font-size:2em; text-align:center; margin-bottom:7em;">
                             <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
@@ -17,7 +19,6 @@
 
                         <div class="row">
                             <div class="col-xs-5">
-                                <div style="margin-bottom:1em;">L2F Logo</div>
                                 <address style="margin-bottom:1em;" t-field="user.company_id.partner_id"
                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax", "email", "website"], "no_marker": True, "phone_icons": True}' />
                             </div>
@@ -31,7 +32,7 @@
                             </div>
                         </div>
 
-                        <div t-if="o.number">
+                        <div t-if="o.number" class="row">
                             <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
@@ -42,15 +43,15 @@
                             <span t-field="o.number"/>
                         </div>
 
-                        <div t-if="o.origin">
+                        <div t-if="o.origin" class="row">
                             <strong>Source :</strong>
                             <span t-field="o.origin"/>
                         </div>
-                        <div t-if="o.client_ref">
+                        <div t-if="o.client_ref" class="row">
                             <strong>Customer Reference :</strong>
                             <span t-field="o.client_ref"/>
                         </div>
-                        <div t-if="o.reference">
+                        <div t-if="o.reference" class="row">
                             <strong>Internal Reference :</strong>
                             <span t-field="o.reference"/>
                         </div>
@@ -150,6 +151,8 @@
                             <strong>Fiscal Position Remark:</strong>
                             <span t-field="o.fiscal_position_id.note"/>
                         </p>
+
+                        <div class="oe_structure"/>
                     </div>
                 </t>
 

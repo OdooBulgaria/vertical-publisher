@@ -6,9 +6,14 @@
             <div class="page">
                 <div class="oe_structure"/>
 
+                <h2 style="font-size:2em; text-align:center; margin-bottom:7em;">
+                    <span t-if="doc.state not in ['draft','sent']">Order # </span>
+                    <span t-if="doc.state in ['draft','sent']">Quotation # </span>
+                    <span t-field="doc.name"/>
+                </h2>
+
                 <div class="row">
                     <div class="col-xs-5">
-                        <div style="margin-bottom:1em;">L2F Logo</div>
                         <address style="margin-bottom:1em;" t-field="user.company_id.partner_id"
                             t-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax", "email", "website"], "no_marker": True, "phone_icons": True}' />
                     </div>
@@ -20,12 +25,6 @@
                         <span t-if="doc.partner_invoice_id.vat">VAT: <span t-field="doc.partner_invoice_id.vat"/></span>
                     </div>
                 </div>
-
-                <h2>
-                    <span t-if="doc.state not in ['draft','sent']">Order # </span>
-                    <span t-if="doc.state in ['draft','sent']">Quotation # </span>
-                    <span t-field="doc.name"/>
-                </h2>
 
                 <div class="row mt32 mb32" id="informations">
                     <div t-if="doc.client_order_ref" class="col-xs-3">
@@ -159,6 +158,7 @@
                     <strong>Fiscal Position Remark:</strong>
                     <span t-field="doc.fiscal_position_id.note"/>
                 </p>
+
                 <div class="oe_structure"/>
             </div>
         </t>
