@@ -20,9 +20,9 @@ class ProductionWizard(models.Model):
         if not vals.get('datas'):
             vals['datas'] = {}
 
-        vals.datas['ids'] = report_obj
-        vals.datas['model'] = 'publisher.production'
-        vals.datas['form'] = report_obj
+        vals['datas']['ids'] = report_obj
+        vals['datas']['model'] = 'publisher.production'
+        vals['datas']['form'] = report_obj
 
         return vals
 
