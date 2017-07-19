@@ -33,7 +33,7 @@
         </template>
 
         <template id="publisher_layout_header">
-            <div class="header" style="margin-bottom:1.5em;">
+            <div class="header" style="margin-bottom:10em;">
                 <div class="row">
                     <div class="col-xs-3">
                         <img t-if="company.reports_logo" t-att-src="'data:image/png;base64,%s' % company.reports_logo" style="height: 5em;"/>
