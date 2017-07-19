@@ -53,9 +53,14 @@ class SaleOrder(models.Model):
         })
 
     @api.multi
+    def print_quotation(self):
+        self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
+        return self.env['report'].get_action(self, 'publisher.report_saleorder_publisher')
+
+    @api.multi
     def print_quotation_noprice(self):
         self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
-        return self.env['report'].get_action(self, 'publisher.report_saleorder_noprice')
+        return self.env['report'].get_action(self, 'publisher.report_saleorder_publisher_noprice')
 
     @api.model
     def create(self, vals):
@@ -70,7 +75,7 @@ class SaleOrder(models.Model):
 
 
 class SaleOrderReport(models.AbstractModel):
-    _name = 'report.publisher.report_saleorder_noprice'
+    _name = 'report.publisher.report_saleorder_publisher_noprice'
 
     @api.model
     def render_html(self, docids, data=None):
@@ -78,11 +83,11 @@ class SaleOrderReport(models.AbstractModel):
         # return self.env['report.sale.report_saleorder'].render_html(docids, data)
 
         report_obj = self.env['report']
-        report = report_obj._get_report_from_name('sale.report_saleorder')
+        report = report_obj._get_report_from_name('publisher.report_saleorder_publisher')
         docargs = {
             'doc_ids': docids,
             'doc_model': report.model,
             'docs': self.env['sale.order'].search([('id', 'in', docids)]),
             'no_price': True
         }
-        return report_obj.render('sale.report_saleorder', docargs)
+        return report_obj.render('publisher.report_saleorder_publisher', docargs)

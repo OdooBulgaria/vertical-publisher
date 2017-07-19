@@ -46,11 +46,13 @@
 
         'views/company_config.xml',
 
+        'report/layout.xml',
         'report/sale_report_templates.xml',
         'report/sale_report.xml',
         'report/production_report_templates.xml',
         'report/production_report.xml',
         'report/invoice_report_templates.xml',
+        'report/invoice_report.xml',
 
         'data/sale_order_sequence.xml',
 

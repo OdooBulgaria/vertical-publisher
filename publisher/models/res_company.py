@@ -10,3 +10,6 @@ class ResCompany(models.Model):
 
     reports_logo = fields.Binary(string="Reports Logo")
     sfc = fields.Html(string="Standard Form Contract")
+    bank = fields.Char(string="BANK")
+    iban = fields.Char(string="IBAN")
+    bic = fields.Char(string="BIC")

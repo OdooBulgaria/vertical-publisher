@@ -7,7 +7,8 @@
             model="publisher.production" 
             report_type="qweb-pdf"
             file="publisher.report_production"
-            name="publisher.report_production_template" 
+            name="publisher.report_production_template"
+            paperformat="publisher.paperformat_lowmargin"
         />
 
         <report 
@@ -16,7 +17,8 @@
             model="publisher.production" 
             report_type="qweb-pdf"
             file="publisher.report_production_invoice_status"
-            name="publisher.report_production_invoice_status_template" 
+            name="publisher.report_production_invoice_status_template"
+            paperformat="publisher.paperformat_lowmargin"
         />
     </data>
 </odoo>

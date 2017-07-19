@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <template id="report_production_template_document">
-            <t t-call="report.external_layout">
+            <t t-call="publisher.publisher_layout_internal">
                 <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
                 <!--<div style="background-color:#999999; text-align:right; padding:1.5em; margin-bottom:2.5em;">
                     <img t-attf-src="data:image/*;base64,{{user.company_id.reports_logo}}" t-att-alt="user.company_id.name" style="height:6em;" />
@@ -10,7 +10,7 @@
                 <div class="page">
                     <div class="oe_structure" />
 
-                    <h2>
+                    <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
                         <span t-field="doc.name" />
                     </h2>
 
@@ -70,6 +70,18 @@
                         <div t-if="doc.state" class="col-xs-3">
                             <strong>State:</strong>
                             <p t-field="doc.state"/>
+                        </div>
+                        <div t-if="doc.date_blanco" class="col-xs-3">
+                            <strong>Blanco Date:</strong>
+                            <p t-field="doc.date_blanco"/>
+                        </div>
+                        <div t-if="doc.note" class="col-xs-3">
+                            <strong>Comment:</strong>
+                            <p t-field="doc.note"/>
+                        </div>
+                        <div t-if="doc.themes" class="col-xs-3">
+                            <strong>Themes:</strong>
+                            <p t-field="doc.themes"/>
                         </div>
                     </div>
 
@@ -140,7 +152,7 @@
 
 
         <template id="report_production_invoice_status_template_document">
-            <t t-call="report.external_layout">
+            <t t-call="publisher.publisher_layout_internal">
                 <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
                 <!--<div style="background-color:#999999; text-align:right; padding:1.5em; margin-bottom:2.5em;">
                     <img t-attf-src="data:image/*;base64,{{user.company_id.reports_logo}}" t-att-alt="user.company_id.name" style="height:6em;" />
@@ -148,7 +160,7 @@
                 <div class="page">
                     <div class="oe_structure" />
 
-                    <h2>
+                    <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
                         <span t-field="doc.name" />
                     </h2>
 
@@ -204,6 +216,18 @@
                         <div t-if="doc.state" class="col-xs-3">
                             <strong>State:</strong>
                             <p t-field="doc.state"/>
+                        </div>
+                        <div t-if="doc.date_blanco" class="col-xs-3">
+                            <strong>Blanco Date:</strong>
+                            <p t-field="doc.date_blanco"/>
+                        </div>
+                        <div t-if="doc.note" class="col-xs-3">
+                            <strong>Comment:</strong>
+                            <p t-field="doc.note"/>
+                        </div>
+                        <div t-if="doc.themes" class="col-xs-3">
+                            <strong>Themes:</strong>
+                            <p t-field="doc.themes"/>
                         </div>
                     </div>
 

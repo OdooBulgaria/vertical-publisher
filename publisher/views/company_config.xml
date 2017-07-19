@@ -10,10 +10,17 @@
                     <xpath expr="//notebook" position="inside">
                         <page string="Reports">
                             <group>
-                                <label for="reports_logo" />
-                                <div>
-                                    <field name="reports_logo" widget="image" />
-                                </div>
+                                <group>
+                                    <label for="reports_logo" />
+                                    <div>
+                                        <field name="reports_logo" widget="image" />
+                                    </div>
+                                </group>
+                                <group>
+                                    <field name="bank" />
+                                    <field name="iban" />
+                                    <field name="bic" />
+                                </group>
                             </group>
                             <group>
                                 <field name="sfc" widget="html"/>
