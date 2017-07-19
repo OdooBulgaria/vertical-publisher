@@ -6,8 +6,8 @@
             string="Quotation / Order"
             model="sale.order" 
             report_type="qweb-pdf"
-            file="sale.report_saleorder" 
-            name="sale.report_saleorder"
+            file="publisher.report_saleorder_publisher" 
+            name="publisher.report_saleorder_publisher"
             paperformat="publisher.paperformat_lowmargin"
         />
 
@@ -16,8 +16,8 @@
             string="Quotation / Order (No Price Displayed)"
             model="sale.order" 
             report_type="qweb-pdf"
-            file="sale.report_saleorder_noprice"
-            name="publisher.report_saleorder_noprice"
+            file="publisher.report_saleorder_publisher_noprice"
+            name="publisher.report_saleorder_publisher_noprice"
             paperformat="publisher.paperformat_lowmargin"
         />
 
