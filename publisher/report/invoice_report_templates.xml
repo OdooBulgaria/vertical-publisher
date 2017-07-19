@@ -164,5 +164,23 @@
                 <div class="footer" />
             </xpath>
         </template>
+
+        <template id="report_invoice_document_publisher_duplicate" inherit_id="publisher.report_invoice_document_publisher" primary="True">
+            <xpath expr="//h2" position="replace">
+                <h2>
+                    <span>Duplicate</span>
+                    <span t-if="o.type == 'out_refund'">refund</span>
+                    <span t-if="o.type == 'out_invoice'">invoice</span>
+                </h2>
+            </xpath>
+        </template>
+
+        <template id="report_invoice_publisher_duplicate">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="publisher.report_invoice_document_publisher_duplicate" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
     </data>
 </odoo>

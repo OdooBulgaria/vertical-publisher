@@ -12,5 +12,16 @@
             attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
             paperformat="publisher.paperformat_lowmargin"
         />
+
+        <report 
+            id="account_invoice_action_report_duplicate"
+            model="account.invoice"
+            string="Duplicates"
+            report_type="qweb-pdf"
+            name="publisher.report_invoice_publisher_duplicate"
+            file="publisher.report_invoice_publisher_duplicate"
+            attachment_use="False"
+            paperformat="publisher.paperformat_lowmargin"
+        />
     </data>
 </odoo>
