@@ -5,7 +5,7 @@
             <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
             <div class="page">
                 <div class="oe_structure"/>
-                
+
                 <div class="row">
                     <div class="col-xs-5">
                         <div style="margin-bottom:1em;">L2F Logo</div>
@@ -162,6 +162,12 @@
                 <div class="oe_structure"/>
             </div>
         </t>
+
+        <div class="header" style="height:0;" />
+        <div class="page" style="margin-top:0;">
+            <span t-raw="user.company_id.sfc" />
+        </div>
+        <div class="footer" />
     </template>
 
 
