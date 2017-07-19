@@ -32,7 +32,7 @@
             <t t-call="publisher.publisher_layout_footer" />
         </template>
 
-        <template id="publisher_nofooter_layout">
+        <template id="publisher_layout_internal">
             <!-- Multicompany -->
             <t t-if="not o and doc">
                 <t t-set="o" t-value="doc"/>
@@ -46,7 +46,7 @@
 
             <t t-call="publisher.publisher_layout_header" />
             <t t-raw="0" />
-            <div class="footer" />
+            <t t-call="publisher.publisher_layout_internal_footer" />
         </template>
 
         <template id="publisher_layout_header">
@@ -86,7 +86,22 @@
                         <li t-if="company.company_registry">Business Permit: <span t-field="company.company_registry"/></li>
                     </ul>
                 </div>
-            </div>      
+            </div>
+        </template>
+
+        <template id="publisher_layout_internal_footer">
+            <div class="footer">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <t t-set="company" t-value="company.sudo()"/>
+
+                    <ul class="list-inline">
+                        <li>Page:</li>
+                        <li><span class="page"/></li>
+                        <li>/</li>
+                        <li><span class="topage"/></li>
+                    </ul>
+                </div>
+            </div>
         </template>
     </data>
 </odoo>
