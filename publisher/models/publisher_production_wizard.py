@@ -17,7 +17,7 @@ class ProductionWizard(models.Model):
 
         return {
             'type': 'ir.actions.report.xml',
-            'report_name': 'publisher.report_production_global_template',
+            'report_name': 'publisher.report_production_template', #'publisher.report_production_global_template',
             'datas': {
                 'ids': report_obj,
                 'model': 'publisher.production',
