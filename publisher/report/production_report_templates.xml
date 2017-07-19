@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <template id="report_production_template_document">
-            <t t-call="publisher.publisher_layout">
+            <t t-call="publisher.publisher_nofooter_layout">
                 <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
                 <!--<div style="background-color:#999999; text-align:right; padding:1.5em; margin-bottom:2.5em;">
                     <img t-attf-src="data:image/*;base64,{{user.company_id.reports_logo}}" t-att-alt="user.company_id.name" style="height:6em;" />
@@ -140,7 +140,7 @@
 
 
         <template id="report_production_invoice_status_template_document">
-            <t t-call="publisher.publisher_layout">
+            <t t-call="publisher.publisher_nofooter_layout">
                 <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
                 <!--<div style="background-color:#999999; text-align:right; padding:1.5em; margin-bottom:2.5em;">
                     <img t-attf-src="data:image/*;base64,{{user.company_id.reports_logo}}" t-att-alt="user.company_id.name" style="height:6em;" />
