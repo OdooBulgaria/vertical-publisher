@@ -249,12 +249,8 @@
                             <thead>
                                 <tr>
                                     <th>Product</th>
-                                    <th class="text-right">Unit Price</th>
-                                    <th class="text-right">Quantity</th>
                                     <th>Invoices</th>
-                                    <th class="text-right">Subtotal</th>
-                                    <th class="text-right">Amount Invoiced</th>
-                                    <th class="text-right">Amount To Invoice</th>
+                                    <th colspan="2" style="width:33.33333333%;">Pricing</th>
                                 </tr>
                             </thead>
                             <tbody class="sale_tbody">
@@ -262,27 +258,39 @@
                                 <t t-foreach="sale.order_line" t-as="l">
                                     <t t-if="l.production_id.id == doc.id">
 
-                                        <t t-set="amount_invoiced" t-value="l.price_unit * l.qty_invoiced"/>
-                                        <t t-set="amount_to_invoice" t-value="l.price_unit * l.qty_to_invoice"/>
+                                        <t t-set="amount_invoiced" t-value="l.price_subtotal * l.qty_invoiced / l.product_uom_qty"/>
+                                        <t t-set="amount_to_invoice" t-value="l.price_subtotal * l.qty_to_invoice / l.product_uom_qty"/>
 
                                         <tr>
-                                            <td><span t-field="l.product_id"/></td>
-                                            <td class="text-right"><span t-field="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></td>
-                                            <td class="text-right"><span t-field="l.product_uom_qty"/></td>
+                                            <td>
+                                                <div><span t-field="l.product_id"/></div>
+                                                <div><strong>Unit Price : </strong><span t-field="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></div>
+                                                <div><strong>Quantity : </strong><span  t-field="l.product_uom_qty"/></div>
+                                            </td>
                                             <td>
                                                 <t t-set="invoices" t-value="[]"/>
                                                 <t t-foreach="l.invoice_lines" t-as="invoice_line">
                                                     <t t-if="invoice_line.invoice_id.number and not invoice_line.invoice_id.number in invoices">
+                                                        <t t-set="invoices" t-value="invoices + [invoice_line.invoice_id.id]"/>
                                                         <t t-set="invoice_date" t-value="invoice_line.invoice_id.date_invoice.split('-')"/>
-                                                        <t t-set="invoices" t-value="invoices + [invoice_line.invoice_id.number + ' (' + invoice_date[2] + '/' + invoice_date[1] + '/' + invoice_date[0] + ')']"/>
+
+                                                        <div>
+                                                            <strong t-esc="invoice_line.invoice_id.number" />
+                                                            (<span t-esc="invoice_date[2] + '/' + invoice_date[1] + '/' + invoice_date[0]" />)
+                                                        </div>
                                                     </t>
                                                 </t>
-                                                <t t-set="invoices_str" t-value="', '.join(invoices)"/>
-                                                <span t-esc="invoices_str" />
                                             </td>
-                                            <td class="text-right"><span t-field="l.price_subtotal"/></td>
-                                            <td class="text-right"><span t-esc="amount_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></td>
-                                            <td class="text-right"><span t-esc="amount_to_invoice" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></td>
+                                            <td>
+                                                <div><strong>Amount Invoiced</strong></div>
+                                                <div><strong>Amount To Invoice</strong></div>
+                                                <div><strong>Subtotal</strong></div>
+                                            </td>
+                                            <td class="text-right">
+                                                <div t-esc="amount_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                                <div t-esc="amount_to_invoice" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                                <div t-field="l.price_subtotal"/>
+                                            </td>
                                         </tr>
                                     </t>
                                 </t>
@@ -292,25 +300,25 @@
                     </t>
 
                     <div class="row" name="total">
-                        <div class="col-xs-4 pull-right">
+                        <div class="col-xs-4 pull-right" style="padding-left:0;">
                             <table class="table table-condensed">
                                 <tr class="border-black">
                                     <td><strong>Total Invoiced Without Taxes</strong></td>
-                                    <t t-set="total" t-value="sum((line.price_unit * line.qty_invoiced) for line in doc.sale_line_ids)"/>
+                                    <t t-set="total" t-value="sum((l.price_subtotal * l.qty_invoiced / l.product_uom_qty) for l in doc.sale_line_ids)"/>
                                     <td class="text-right">
                                         <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
                                     </td>
                                 </tr>
                                 <tr class="border-black">
                                     <td><strong>Total To Invoice Without Taxes</strong></td>
-                                    <t t-set="total" t-value="sum((line.price_unit * line.qty_to_invoice) for line in doc.sale_line_ids)"/>
+                                    <t t-set="total" t-value="sum((l.price_subtotal * l.qty_to_invoice / l.product_uom_qty) for l in doc.sale_line_ids)"/>
                                     <td class="text-right">
                                         <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
                                     </td>
                                 </tr>
                                 <tr class="border-black">
                                     <td><strong>Total Without Taxes</strong></td>
-                                    <t t-set="total" t-value="sum(line.price_subtotal for line in doc.sale_line_ids)"/>
+                                    <t t-set="total" t-value="sum(l.price_subtotal for l in doc.sale_line_ids)"/>
                                     <td class="text-right">
                                         <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
                                     </td>
@@ -375,7 +383,7 @@
                                     <t t-set="total_actual" t-value="total_actual + prod_type_actual"/>
                                     <t t-set="total_delta" t-value="total_delta + prod_type_delta"/>
 
-                                    <tr style="font-weight:bold;">
+                                    <tr class="border-black" style="font-weight:bold;">
                                         <td colspan="2" style="font-size:1.2em;"><span t-esc="prod_type.name"/></td>
                                         <td class="text-right"><span t-esc="prod_type_expected"/></td>
                                         <td class="text-right"><span t-esc="prod_type_actual"/></td>
@@ -397,7 +405,7 @@
                                     </t>
                                 </t>
 
-                                <tr style="font-weight:bold;">
+                                <tr class="border-black" style="font-weight:bold;">
                                     <td colspan="2" style="font-size:1.4em;">Total</td>
                                     <td class="text-right"><span t-esc="total_expected"/></td>
                                     <td class="text-right"><span t-esc="total_actual"/></td>
