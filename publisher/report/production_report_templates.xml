@@ -4,9 +4,6 @@
         <template id="report_production_template_document">
             <t t-call="publisher.publisher_layout_internal">
                 <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
-                <!--<div style="background-color:#999999; text-align:right; padding:1.5em; margin-bottom:2.5em;">
-                    <img t-attf-src="data:image/*;base64,{{user.company_id.reports_logo}}" t-att-alt="user.company_id.name" style="height:6em;" />
-                </div>-->
                 <div class="page">
                     <div class="oe_structure" />
 
@@ -26,10 +23,6 @@
                         <div class="col-xs-3">
                             <strong>Confirmed Lines:</strong>
                             <p t-field="doc.sale_lines_confirmed_count"/>
-                        </div>
-                        <div class="col-xs-3">
-                            <strong>Equip. Received Lines:</strong>
-                            <p t-field="doc.sale_lines_full_equipment_count"/>
                         </div>
                         <div class="col-xs-3">
                             <strong>Invoicing Mode:</strong>
@@ -85,55 +78,55 @@
                         </div>
                     </div>
 
-                    <t t-foreach="doc.order_lines_layouted()" t-as="page">
+                    <t t-foreach="doc.sale_ids" t-as="sale">
+                        <h3>
+                            <span t-field="sale.name" />
+                        </h3>
+                        <div style="font-style: italic;">
+                            <span t-field="sale.state" />
+                        </div>
+                        <h4>
+                            <t t-if="sale.agency_id">
+                                <div>Agency : <span t-field="sale.agency_id" /></div>
+                            </t>
+                            <div>Customer : <span t-field="sale.partner_id" /></div>
+                        </h4>
+
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
                                     <th>Product</th>
-                                    <th>Description</th>
-                                    <th>Customer</th>
-                                    <th>Full Equipment</th>
-                                    <th>Format</th>
-                                    <th>Color</th>
-                                    <th>Location</th>
-                                    <th>Publication Date</th>
-                                    <th>End Date</th>
-                                    <th class="text-right">Quantity</th>
+                                    <th>Media</th>
+                                    <th>Publication</th>
                                 </tr>
                             </thead>
                             <tbody class="sale_tbody">
-                                <t t-foreach="page" t-as="layout_category">
 
-                                    <t t-if="layout_category_size > 1 or page_size > 1" groups="sale.group_sale_layout">
-                                        <tr class="active">
-                                            <td colspan="7" style="font-weight: bold; border-bottom: 1px solid black;">&amp;bull;
-                                                <t t-esc="layout_category['name']"/>
+                                <t t-foreach="sale.order_line" t-as="l">
+                                    <t t-if="l.production_id.id == doc.id">
+
+                                        <tr>
+                                            <td>
+                                                <div><strong><span t-field="l.product_id"/></strong></div>
+                                                <div><strong>Quantity : </strong><span t-field="l.product_uom_qty"/></div>
+                                                <div><span t-field="l.name"/></div>
+                                            </td>
+                                            <td>
+                                                <div><strong>Format : </strong><span t-field="l.format_id"/></div>
+                                                <div><strong>Location : </strong><span t-field="l.location_id"/></div>
+                                                <div><strong>Color : </strong><span t-field="l.color_id"/></div>
+                                            </td>
+                                            <td>
+                                                <div><strong>Publication Date : </strong><span t-field="l.date_start"/></div>
+                                                <div><strong>End Date : </strong><span t-field="l.date_end"/></div>
+                                                <div><strong>Full Equipment : </strong><input type="checkbox" t-if="not l.full_equipment_received" /><input type="checkbox" checked="checked" t-if="l.full_equipment_received" /></div>
                                             </td>
                                         </tr>
                                     </t>
-
-                                    <t t-foreach="layout_category['lines']" t-as="l">
-                                        <tr>
-                                            <td><span t-field="l.product_id"/></td>
-                                            <td><span t-field="l.name"/></td>
-                                            <td><span t-field="l.order_partner_id"/></td>
-                                            <td><span t-field="l.full_equipment_received"/></td>
-                                            <td><span t-field="l.format_id"/></td>
-                                            <td><span t-field="l.color_id"/></td>
-                                            <td><span t-field="l.location_id"/></td>
-                                            <td><span t-field="l.date_start"/></td>
-                                            <td><span t-field="l.date_end"/></td>
-                                            <th class="text-right"><span t-field="l.product_uom_qty"/></th>
-                                        </tr>
-                                    </t>
-
                                 </t>
+
                             </tbody>
                         </table>
-
-                        <t t-if="page_index &lt; page_size - 1" groups="sale.group_sale_layout">
-                            <p style="page-break-before:always;"> </p>
-                        </t>
                     </t>
 
                     <div class="oe_structure"/>
@@ -151,12 +144,11 @@
         </template>
 
 
+
+
         <template id="report_production_invoice_status_template_document">
             <t t-call="publisher.publisher_layout_internal">
                 <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
-                <!--<div style="background-color:#999999; text-align:right; padding:1.5em; margin-bottom:2.5em;">
-                    <img t-attf-src="data:image/*;base64,{{user.company_id.reports_logo}}" t-att-alt="user.company_id.name" style="height:6em;" />
-                </div>-->
                 <div class="page">
                     <div class="oe_structure" />
 
@@ -340,6 +332,8 @@
                 </t>
             </t>
         </template>
+
+
 
 
         <template id="report_production_global_template">
