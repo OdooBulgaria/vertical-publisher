@@ -340,7 +340,7 @@
                     <div class="page">
                         <div class="oe_structure" />
 
-                        <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
+                        <h2 style="font-size:2em; text-align:center; padding-top:2.5em; padding-bottom:2em;">
                             Productions global state to be closed from <span t-esc="date_from" /> to <span t-esc="date_to" />
                         </h2>
 
