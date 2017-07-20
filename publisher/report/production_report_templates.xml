@@ -387,7 +387,7 @@
                                         <td colspan="2" style="font-size:1.2em;"><span t-esc="prod_type.name"/></td>
                                         <td class="text-right"><span t-esc="prod_type_expected"/></td>
                                         <td class="text-right"><span t-esc="prod_type_actual"/></td>
-                                        <td class="text-right"><span t-esc="prod_type_actual / prod_type_expected if prod_type_expected > 0 else 0"/></td>
+                                        <td class="text-right"><span t-esc="round(prod_type_actual / prod_type_expected * 100 if prod_type_expected > 0 else 0, 2)"/>%</td>
                                         <td class="text-right"><span t-esc="'+' if prod_type_delta > 0 else ''"/><span t-esc="prod_type_delta"/></td>
                                         <td> </td>
                                     </tr>
@@ -398,7 +398,7 @@
                                             <td><span t-esc="prod.name"/></td>
                                             <td class="text-right"><span t-esc="prod.expected_turnover"/></td>
                                             <td class="text-right"><span t-esc="prod.actual_turnover"/></td>
-                                            <td class="text-right"><span t-esc="prod.actual_turnover / prod.expected_turnover if prod.expected_turnover > 0 else 0"/></td>
+                                            <td class="text-right"><span t-esc="round(prod.actual_turnover / prod.expected_turnover * 100 if prod.expected_turnover > 0 else 0, 2)"/>%</td>
                                             <td class="text-right"><span t-esc="prod.turnover_delta_sign"/><span t-esc="prod.turnover_delta"/></td>
                                             <td><span t-esc="prod.date_closing"/></td>
                                         </tr>
@@ -409,7 +409,7 @@
                                     <td colspan="2" style="font-size:1.4em;">Total</td>
                                     <td class="text-right"><span t-esc="total_expected"/></td>
                                     <td class="text-right"><span t-esc="total_actual"/></td>
-                                    <td class="text-right"><span t-esc="total_actual / total_expected if total_expected > 0 else 0"/></td>
+                                    <td class="text-right"><span t-esc="round(total_actual / total_expected * 100 if total_expected > 0 else 0, 2)"/>%</td>
                                     <td class="text-right"><span t-esc="'+' if total_delta > 0 else ''"/><span t-esc="total_delta"/></td>
                                     <td> </td>
                                 </tr>
