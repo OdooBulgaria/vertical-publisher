@@ -122,7 +122,7 @@ class Production(models.Model):
     @api.depends('expected_turnover')
     @api.one
     def _compute_turnover_delta_sign(self):
-        self.turnover_delta_sign = '+' if self.turnover_delta >= 0 else ''
+        self.turnover_delta_sign = '+' if self.turnover_delta > 0 else ''
 
     @api.one
     def _compute_sale_ids(self):
