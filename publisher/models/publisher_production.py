@@ -209,7 +209,6 @@ class Production(models.Model):
 
     @api.multi
     def print_production(self):
-        _logger.info('\n\n'+str(self.env['report'].get_action(self, 'publisher.report_production_template'))+'\n\n')
         return self.env['report'].get_action(self, 'publisher.report_production_template')
 
     @api.multi
