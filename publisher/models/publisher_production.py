@@ -43,11 +43,11 @@ class Production(models.Model):
         ('after', 'After Publication'),
         ('both', 'Before & After Publication')
         ], string='Invoicing Mode', default='before', required=True, readonly=True, states={'draft': [('readonly', False)]})
-    down_payment = fields.Float(string='Down Payment', default=0, states={'draft': [('readonly', False)]})
+    down_payment = fields.Float(string='Down Payment', default=0, readonly=True, states={'draft': [('readonly', False)]})
     seq_number = fields.Char(string="Sequence Number", required=True, readonly=True, copy=False, states={'draft': [('readonly', False)]}, index=True, default=lambda self: _('New'))
-    date_blanco = fields.Date(string='Blanco Date')
+    date_blanco = fields.Date(string='Blanco Date', readonly=True, states={'draft': [('readonly', False)]})
     note = fields.Text(string="Notes")
-    themes = fields.Char(string="Production Themes")
+    themes = fields.Char(string="Production Themes", readonly=True, states={'draft': [('readonly', False)]})
 
     # sale_lines_count = fields.Integer(string="Production Lines Count", compute=_compute_sale_lines_count)
     sale_lines_confirmed_count = fields.Char(string="Confirmed Lines", compute='_compute_sale_lines_confirmed_count')
