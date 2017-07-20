@@ -16,37 +16,37 @@
                             <strong>Production Type:</strong>
                             <p t-field="doc.production_type_id"/>
                         </div>
+                        <div t-if="doc.state" class="col-xs-3">
+                            <strong>State:</strong>
+                            <p t-field="doc.state"/>
+                        </div>
                         <div t-if="doc.project_id" class="col-xs-3">
                             <strong>Project:</strong>
                             <p t-field="doc.project_id"/>
+                        </div>
+                        <div t-if="doc.note" class="col-xs-3">
+                            <strong>Comment:</strong>
+                            <p t-field="doc.note"/>
+                        </div>
+                        <div t-if="doc.themes" class="col-xs-3">
+                            <strong>Themes:</strong>
+                            <p t-field="doc.themes"/>
                         </div>
                         <div class="col-xs-3">
                             <strong>Confirmed Lines:</strong>
                             <p t-field="doc.sale_lines_confirmed_count"/>
                         </div>
                         <div class="col-xs-3">
-                            <strong>Invoicing Mode:</strong>
-                            <p t-field="doc.invoicing_mode"/>
-                        </div>
-                        <div t-if="doc.expected_turnover" class="col-xs-3">
-                            <strong>Expected Turnover:</strong>
-                            <p t-field="doc.expected_turnover"/>
-                        </div>
-                        <div class="col-xs-3">
-                            <strong>Potential Turnover:</strong>
-                            <p t-field="doc.potential_turnover"/>
-                        </div>
-                        <div class="col-xs-3">
-                            <strong>Actual Turnover:</strong>
-                            <p t-field="doc.actual_turnover"/>
-                        </div>
-                        <div t-if="doc.expected_turnover" class="col-xs-3">
-                            <strong>Diff. Actual / Expected Turnover:</strong>
-                            <p t-field="doc.turnover_delta"/>
+                            <strong>Equipment Received Lines:</strong>
+                            <p t-field="doc.sale_lines_full_equipment_count"/>
                         </div>
                         <div t-if="doc.date_full_equipment_limit" class="col-xs-3">
                             <strong>Full Equipment Limit Date:</strong>
                             <p t-field="doc.date_full_equipment_limit"/>
+                        </div>
+                        <div t-if="doc.date_blanco" class="col-xs-3">
+                            <strong>Blanco Date:</strong>
+                            <p t-field="doc.date_blanco"/>
                         </div>
                         <div t-if="doc.date_start" class="col-xs-3">
                             <strong>Publication Date / Event:</strong>
@@ -59,22 +59,6 @@
                         <div t-if="doc.date_closing" class="col-xs-3">
                             <strong>Closing Date:</strong>
                             <p t-field="doc.date_closing"/>
-                        </div>
-                        <div t-if="doc.state" class="col-xs-3">
-                            <strong>State:</strong>
-                            <p t-field="doc.state"/>
-                        </div>
-                        <div t-if="doc.date_blanco" class="col-xs-3">
-                            <strong>Blanco Date:</strong>
-                            <p t-field="doc.date_blanco"/>
-                        </div>
-                        <div t-if="doc.note" class="col-xs-3">
-                            <strong>Comment:</strong>
-                            <p t-field="doc.note"/>
-                        </div>
-                        <div t-if="doc.themes" class="col-xs-3">
-                            <strong>Themes:</strong>
-                            <p t-field="doc.themes"/>
                         </div>
                     </div>
 
@@ -161,9 +145,17 @@
                             <strong>Production Type:</strong>
                             <p t-field="doc.production_type_id"/>
                         </div>
+                        <div t-if="doc.state" class="col-xs-3">
+                            <strong>State:</strong>
+                            <p t-field="doc.state"/>
+                        </div>
                         <div t-if="doc.project_id" class="col-xs-3">
                             <strong>Project:</strong>
                             <p t-field="doc.project_id"/>
+                        </div>
+                        <div t-if="doc.note" class="col-xs-3">
+                            <strong>Comment:</strong>
+                            <p t-field="doc.note"/>
                         </div>
                         <div class="col-xs-3">
                             <strong>Confirmed Lines:</strong>
@@ -188,38 +180,6 @@
                         <div t-if="doc.expected_turnover" class="col-xs-3">
                             <strong>Diff. Actual / Expected Turnover:</strong>
                             <p t-field="doc.turnover_delta"/>
-                        </div>
-                        <div t-if="doc.date_full_equipment_limit" class="col-xs-3">
-                            <strong>Full Equipment Limit Date:</strong>
-                            <p t-field="doc.date_full_equipment_limit"/>
-                        </div>
-                        <div t-if="doc.date_start" class="col-xs-3">
-                            <strong>Publication Date / Event:</strong>
-                            <p t-field="doc.date_start"/>
-                        </div>
-                        <div t-if="doc.date_end" class="col-xs-3">
-                            <strong>End Date:</strong>
-                            <p t-field="doc.date_end"/>
-                        </div>
-                        <div t-if="doc.date_closing" class="col-xs-3">
-                            <strong>Closing Date:</strong>
-                            <p t-field="doc.date_closing"/>
-                        </div>
-                        <div t-if="doc.state" class="col-xs-3">
-                            <strong>State:</strong>
-                            <p t-field="doc.state"/>
-                        </div>
-                        <div t-if="doc.date_blanco" class="col-xs-3">
-                            <strong>Blanco Date:</strong>
-                            <p t-field="doc.date_blanco"/>
-                        </div>
-                        <div t-if="doc.note" class="col-xs-3">
-                            <strong>Comment:</strong>
-                            <p t-field="doc.note"/>
-                        </div>
-                        <div t-if="doc.themes" class="col-xs-3">
-                            <strong>Themes:</strong>
-                            <p t-field="doc.themes"/>
                         </div>
                     </div>
 
