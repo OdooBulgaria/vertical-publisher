@@ -280,7 +280,7 @@ class Production(models.Model):
                 else:
                     sale_map[line.order_id.id].append(line)
 
-        company_id = self.env.user.company_id
+        company_id = self.company_id
         account_journal_id = self.env['account.invoice'].default_get(['journal_id'])['journal_id']
         now = datetime.datetime.now()
 
