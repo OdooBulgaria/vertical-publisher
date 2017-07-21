@@ -20,6 +20,7 @@ class ProductionType(models.Model):
     down_payment = fields.Float(string='Down Payment', default=0, required=True)
     sequence_id = fields.Many2one('ir.sequence', string="Sequence", required=True)
     production_count = fields.Integer(string="Production Count", compute='_compute_production_count')
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('publisher.production.type'))
     
     @api.one
     def _compute_production_count(self):

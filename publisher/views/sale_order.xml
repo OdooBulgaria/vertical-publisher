@@ -78,7 +78,7 @@
 
                     <!-- Add production_id field -->
                     <xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="after">
-                        <field name="production_id" />
+                        <field name="production_id" domain="[('company_id','=',parent.company_id)]"/>
                     </xpath>
 
                     <!-- Replace Total discount by line discount field -->

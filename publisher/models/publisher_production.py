@@ -66,6 +66,7 @@ class Production(models.Model):
         ('to invoice', 'To Invoice')
     ], string="Invoice Status", compute='_compute_invoice_status')
     calendar_view = fields.Boolean(string="Allow Calendar View", compute='_compute_calendar_view')
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('publisher.production'))
 
     # @api.one
     # def _compute_sale_lines_count(self):

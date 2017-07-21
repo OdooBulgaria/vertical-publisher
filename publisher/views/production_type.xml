@@ -40,6 +40,7 @@
                                 <field name="sequence_id" />
                             </group>
                             <group>
+                                <field name="company_id" />
                                 <field name="media_id" />
                                 <field name="invoicing_mode" />
                                 <label for="down_payment" attrs="{'invisible': [('invoicing_mode', '!=', 'both')]}" />
