@@ -55,6 +55,7 @@
         'report/invoice_report.xml',
 
         'data/sale_order_sequence.xml',
+        'data/ir_rule.xml',
 
         'security/ir.model.access.csv',
 
