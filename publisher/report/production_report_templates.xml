@@ -218,6 +218,12 @@
                                                 <div><span t-field="l.product_id"/></div>
                                                 <div><strong>Unit Price : </strong><span t-field="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></div>
                                                 <div><strong>Quantity : </strong><span  t-field="l.product_uom_qty"/></div>
+                                                <t t-if="l.discount_base > 0">
+                                                    <div><strong>Discount : </strong><span  t-field="l.discount_base"/></div>
+                                                </t>
+                                                <t t-if="l.commission > 0">
+                                                    <div><strong>Commission : </strong><span  t-field="l.commission"/></div>
+                                                </t>
                                             </td>
                                             <td>
                                                 <t t-set="invoices" t-value="[]"/>
