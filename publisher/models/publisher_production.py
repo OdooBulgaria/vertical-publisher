@@ -332,7 +332,7 @@ class Production(models.Model):
                     # if invoice does not exist yet
                     if not invoice_id:
                         invoice_id = self.env['account.invoice'].create({
-                            #'origin' : sale_id.name,
+                            'origin' : sale_id.name,
                             'type': 'out_invoice',
                             'company_id' : company_id.id,
                             'currency_id' : self.currency_id.id,
@@ -355,6 +355,9 @@ class Production(models.Model):
                     description = '\n'.join(filter(None, [
                         line.name,
                         self.name,
+                        'Unit Price : '+str(line.price_unit)+self.currency_id.symbol if line.product_uom_qty != 1 else '',
+                        'Quantity : '+str(line.product_uom_qty) if line.product_uom_qty != 1 else '',
+                        'Invoiced Percentage : '+str(round(quantity / line.product_uom_qty * 100, 2))+'%' if quantity != line.product_uom_qty else '',
                         'Format : '+line.format_id.name if line.format_id else '',
                         'Your Customer : '+sale_id.partner_id.name if sale_id.partner_invoice_id else '',
                         'Price : '+str(quantity*line.price_unit)+self.currency_id.symbol+(' - '+str(line.discount_base)+' % customer discount' if line.discount_base>0 else '')+(' = '+str(quantity*line.price_unit*(1-line.discount_base/100))+self.currency_id.symbol if line.discount_base>0 and line.commission>0 else '')+(' - '+str(line.commission)+' % agency commission' if line.commission>0 else ''),
@@ -386,6 +389,9 @@ class Production(models.Model):
                         'account_analytic_id': sale_id.project_id.id,
                         'analytic_tag_ids': [(6, 0, line.analytic_tag_ids.ids)],
                     })
+
+            if invoice_id:
+                invoice_id.compute_taxes()
 
         if not invoice_ids:
             raise exceptions.ValidationError('Not any line to invoice, make sure the sale orders are confirmed and the production publication date / invoicing mode are ok.')
