@@ -355,10 +355,14 @@ class Production(models.Model):
                     description = '\n'.join(filter(None, [
                         line.name,
                         self.name,
-                        'Unit Price : '+str(line.price_unit)+self.currency_id.symbol if line.product_uom_qty != 1 else '',
+                        'Unit Price : '+str(line.price_unit)+self.currency_id.symbol if line.product_uom_qty != 1 or quantity != line.product_uom_qty else '',
                         'Quantity : '+str(line.product_uom_qty) if line.product_uom_qty != 1 else '',
-                        'Invoiced Percentage : '+str(round(quantity / line.product_uom_qty * 100, 2))+'%' if quantity != line.product_uom_qty else '',
-                        'Format : '+line.format_id.name if line.format_id else '',
+                        'Invoiced Percentage : '+str(round(quantity / line.product_uom_qty * 100, 2))+' %' if quantity != line.product_uom_qty else '',
+                        ', '.join(filter(None, [
+                            'Format : '+line.format_id.name if line.format_id else '',
+                            'Location : '+line.location_id.name if line.location_id else '',
+                            'Color : '+line.color_id.name if line.color_id else '',
+                        ])),
                         'Your Customer : '+sale_id.partner_id.name if sale_id.partner_invoice_id else '',
                         'Price : '+str(quantity*line.price_unit)+self.currency_id.symbol+(' - '+str(line.discount_base)+' % customer discount' if line.discount_base>0 else '')+(' = '+str(quantity*line.price_unit*(1-line.discount_base/100))+self.currency_id.symbol if line.discount_base>0 and line.commission>0 else '')+(' - '+str(line.commission)+' % agency commission' if line.commission>0 else ''),
                     ]))
