@@ -103,7 +103,7 @@
                                             <td>
                                                 <div><strong>Publication Date : </strong><span t-field="l.date_start"/></div>
                                                 <div><strong>End Date : </strong><span t-field="l.date_end"/></div>
-                                                <div><strong>Full Equipment : </strong><input type="checkbox" t-if="not l.full_equipment_received" /><input type="checkbox" checked="checked" t-if="l.full_equipment_received" /></div>
+                                                <div><strong>Full Equipment : </strong><i class="fa fa-times" aria-hidden="true" t-if="not l.full_equipment_received" /><i class="fa fa-check" aria-hidden="true" t-if="l.full_equipment_received" /><!--<input type="checkbox" t-if="not l.full_equipment_received" /><input type="checkbox" checked="checked" t-if="l.full_equipment_received" />--></div>
                                             </td>
                                         </tr>
                                     </t>
