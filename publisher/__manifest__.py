@@ -41,6 +41,7 @@
         'views/project_project.xml',
         'views/invitation.xml',
         'views/account_invoice.xml',
+        'views/sale_subscription.xml',
 
         'views/menu_buttons.xml',
 

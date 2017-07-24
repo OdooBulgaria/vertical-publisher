@@ -9,9 +9,12 @@ from . import publisher_production
 from . import publisher_production_type
 from . import publisher_invitation
 from . import publisher_production_wizard
+from . import publisher_language
 from . import res_partner
 from . import product_template
 from . import sale_order
 from . import sale_order_line
 from . import account_invoice
+from . import sale_subscription
+from . import sale_subscription_line
 from . import res_company
