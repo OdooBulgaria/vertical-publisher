@@ -269,11 +269,11 @@
                                     </div>
                                     <div t-esc="line.price_subtotal" style="float:right;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
 
-                                    <div t-field="line.price_subtotal" style="padding-top:0.5em; float:left; clear:both;" />
+                                    <div t-field="line.price_subtotal" style="padding-top:0.5em; float:right; clear:both;" />
 
-                                    <div t-esc="line.price_subtotal * line.qty_invoiced / line.product_uom_qty if line.product_uom_qty != 0 else 0" style="float:left; clear:both;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
+                                    <div t-esc="line.price_subtotal * line.qty_invoiced / line.product_uom_qty if line.product_uom_qty != 0 else 0" style="float:right;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
 
-                                    <div t-esc="line.price_subtotal * line.qty_to_invoice / line.product_uom_qty if line.product_uom_qty != 0 else 0" style="float:left; clear:both;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
+                                    <div t-esc="line.price_subtotal * line.qty_to_invoice / line.product_uom_qty if line.product_uom_qty != 0 else 0" style="float:right;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
                                 </td>
                             </tr>
 
