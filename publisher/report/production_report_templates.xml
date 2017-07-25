@@ -257,7 +257,7 @@
                                     <div t-field="line.price_unit" style="text-align:right;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
 
                                     <div>
-                                        <table><tr>
+                                        <table style="width:100%; font-weight:bold;"><tr>
                                             <td><span t-field="line.product_uom_qty" /></td>
                                             <td style="text-align:right;"><span t-esc="line.price_unit * line.product_uom_qty" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                         </tr></table>
