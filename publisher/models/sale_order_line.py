@@ -102,7 +102,7 @@ class SaleOrderLine(models.Model):
     def _prepare_invoice_line(self, qty):
         vals = super(SaleOrderLine, self)._prepare_invoice_line(qty)
 
-        description = '\n'.join(filter(None, [
+        vals['name'] = '\n'.join(filter(None, [
             self.name,
             'Unit Price : '+str(self.price_unit)+self.currency_id.symbol if self.product_uom_qty != 1 or qty != self.product_uom_qty else '',
             'Quantity : '+str(self.product_uom_qty) if self.product_uom_qty != 1 else '',
@@ -111,7 +111,6 @@ class SaleOrderLine(models.Model):
             'Price : '+str(qty*self.price_unit)+self.currency_id.symbol+(' - '+str(self.discount_base)+' % customer discount' if self.discount_base>0 else '')+(' = '+str(qty*self.price_unit*(1-self.discount_base/100))+self.currency_id.symbol if self.discount_base>0 and self.commission>0 else '')+(' - '+str(self.commission)+' % agency commission' if self.commission>0 else ''),
         ]))
 
-        vals['name'] = description
         return vals
 
     # @api.one
