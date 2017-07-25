@@ -198,9 +198,9 @@
                                     <div t-if="sale.note">Comments</div>
                                 </td>
                                 <td style="padding:0.5em; width:18.333333%; border-right:1px solid grey; font-weight:bold;">
-                                    <div t-if="sale.name" t-field="doc.name" />
-                                    <div t-if="sale.agency_id" t-field="doc.agency_id" />
-                                    <div t-if="sale.partner_id" t-field="doc.partner_id" />
+                                    <div t-if="sale.name" t-field="sale.name" />
+                                    <div t-if="sale.agency_id" t-field="sale.agency_id" />
+                                    <div t-if="sale.partner_id" t-field="sale.partner_id" />
                                     <div t-if="sale.note" t-field="sale.note" />
                                 </td>
                                 <td style="padding:0.5em; width:15%;">
@@ -224,10 +224,10 @@
                                     <div t-if="sale.amount_total">Taxed Amount</div>
                                 </td>
                                 <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
-                                    <div t-if="sale.fiscal_position_id" t-field="doc.fiscal_position_id" />
-                                    <div t-if="sale.amount_untaxed" t-field="doc.amount_untaxed" />
-                                    <div t-if="sale.amount_tax" t-field="doc.amount_tax" />
-                                    <div t-if="sale.amount_total" t-field="doc.amount_total" />
+                                    <div t-if="sale.fiscal_position_id" t-field="sale.fiscal_position_id" />
+                                    <div t-if="sale.amount_untaxed" t-field="sale.amount_untaxed" />
+                                    <div t-if="sale.amount_tax" t-field="sale.amount_tax" />
+                                    <div t-if="sale.amount_total" t-field="sale.amount_total" />
                                 </td>
                             </tr>
                         </table>
