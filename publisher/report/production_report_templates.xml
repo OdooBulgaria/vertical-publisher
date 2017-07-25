@@ -143,13 +143,43 @@
                         Invoice Status
                     </div>
 
-                    <table style="width:100%; border:1px solid black;">
+                    <table style="width:100%;">
                         <tr>
-                            <td style="border:1px solid black; padding:1em;">
-                                Coucou
+                            <td style="padding:0.5em; width:15%;">
+                                <div t-if="doc.name">Production</div>
+                                <div t-if="doc.production_type_id">Production Type</div>
+                                <div t-if="doc.project_id">Project</div>
+                                <div t-if="doc.note">Comment</div>
                             </td>
-                            <td style="border:1px solid black; padding:1em;">
-                                Coucou
+                            <td style="padding:0.5em; width:18.333333%; border-right:1px solid grey; font-weight:bold;">
+                                <div t-if="doc.name" t-field="doc.name" />
+                                <div t-if="doc.production_type_id" t-field="doc.production_type_id" />
+                                <div t-if="doc.project_id" t-field="doc.project_id" />
+                                <div t-if="doc.note" t-field="doc.note" />
+                            </td>
+                            <td style="padding:0.5em; width:15%;">
+                                <div t-if="doc.state">State</div>
+                                <div t-if="doc.date_start">Publication Date</div>
+                                <div t-if="doc.sale_lines_confirmed_count">Confirmed Lines</div>
+                                <div t-if="doc.invoicing_mode">Invoice Mode</div>
+                            </td>
+                            <td style="padding:0.5em; width:18.333333%; border-right:1px solid grey; font-weight:bold;">
+                                <div t-if="doc.state" t-field="doc.state" />
+                                <div t-if="doc.date_start" t-field="doc.date_start" />
+                                <div t-if="doc.sale_lines_confirmed_count" t-field="doc.sale_lines_confirmed_count" />
+                                <div t-if="doc.invoicing_mode" t-field="doc.invoicing_mode" />
+                            </td>
+                            <td style="padding:0.5em; width:15%;">
+                                <div t-if="doc.expected_turnover">Expected Turnover</div>
+                                <div t-if="doc.potential_turnover">Potential Turnover</div>
+                                <div t-if="doc.actual_turnover">Actual Turnover</div>
+                                <div t-if="doc.turnover_delta">Turnover Result</div>
+                            </td>
+                            <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
+                                <div t-if="doc.expected_turnover" t-field="doc.expected_turnover" />
+                                <div t-if="doc.potential_turnover" t-field="doc.potential_turnover" />
+                                <div t-if="doc.actual_turnover" t-field="doc.actual_turnover" />
+                                <div t-if="doc.turnover_delta" t-field="doc.turnover_delta" />
                             </td>
                         </tr>
                     </table>
@@ -195,6 +225,8 @@
                             <strong>Diff. Actual / Expected Turnover:</strong>
                             <p t-field="doc.turnover_delta"/>
                         </div>
+                        Date sortie
+                        prod name
                     </div>
 
                     <t t-foreach="doc.sale_ids" t-as="sale">
