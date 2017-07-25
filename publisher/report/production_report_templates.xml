@@ -170,16 +170,16 @@
                                 <div t-if="doc.invoicing_mode" t-field="doc.invoicing_mode" />
                             </td>
                             <td style="padding:0.5em; width:15%;">
-                                <div t-if="doc.expected_turnover">Expected Turnover</div>
-                                <div t-if="doc.potential_turnover">Potential Turnover</div>
-                                <div t-if="doc.actual_turnover">Actual Turnover</div>
-                                <div t-if="doc.turnover_delta">Turnover Result</div>
+                                <div>Expected Turnover</div>
+                                <div>Potential Turnover</div>
+                                <div>Actual Turnover</div>
+                                <div>Turnover Result</div>
                             </td>
                             <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
-                                <div t-if="doc.expected_turnover" t-field="doc.expected_turnover" />
-                                <div t-if="doc.potential_turnover" t-field="doc.potential_turnover" />
-                                <div t-if="doc.actual_turnover" t-field="doc.actual_turnover" />
-                                <div t-if="doc.turnover_delta">
+                                <div t-field="doc.expected_turnover" />
+                                <div t-field="doc.potential_turnover" />
+                                <div t-field="doc.actual_turnover" />
+                                <div>
                                     <span t-field="doc.turnover_delta_sign" />
                                     <span t-field="doc.turnover_delta" />
                                 </div>
@@ -220,26 +220,52 @@
                                     
                                 </td>
                                 <td style="padding:0.5em; width:15%;">
+                                    <div>Total</div>
                                     <div>Invoiced</div>
                                     <div>To Invoice</div>
-                                    <div>Total</div>
                                     <div>Invoiced Proportion</div>
                                 </td>
                                 <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
+                                    <t t-set="total" t-value="sum((l.price_subtotal) for l in sale.order_line)"/>
+                                    <div t-esc="total" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
+                                    
                                     <t t-set="total_invoiced" t-value="sum((l.price_subtotal * l.qty_invoiced / l.product_uom_qty) for l in sale.order_line)"/>
                                     <div t-esc="total_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
 
                                     <t t-set="total_to_invoice" t-value="sum((l.price_subtotal * l.qty_to_invoice / l.product_uom_qty) for l in sale.order_line)"/>
                                     <div t-esc="total_to_invoice" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
 
-                                    <t t-set="total" t-value="sum((l.price_subtotal) for l in sale.order_line)"/>
-                                    <div t-esc="total" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
-
                                     <div>
                                         <span t-esc="round(total_invoiced / total * 100 if total != 0 else 0, 2)" />%
                                     </div>
                                 </td>
                             </tr>
+
+                            <t t-foreach="sale.order_line" t-as="line"><t t-if="line.production_id.id == doc.id">
+
+                            <tr>
+                                <td style="padding:0.5em; width:15%;">
+                                    <div>Unit Price</div>
+                                    <div>Quantity</div>
+                                    <div>Discount</div>
+                                    <div>Commission</div>
+                                    <div>Total</div>
+                                    <div>Invoiced</div>
+                                    <div>To Invoice</div>
+                                </td>
+                                <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
+                                    <div t-field="line.price_unit" />
+                                    <div t-field="line.product_uom_qty" />
+                                    <div t-field="line.discount_base" />
+                                    <div t-field="line.commission" />
+                                    <div t-esc="line.price_subtotal * line.qty_invoiced / line.product_uom_qty if line.product_uom_qty != 0 else 0" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
+                                    <div t-esc="line.price_subtotal * line.qty_to_invoice / line.product_uom_qty if line.product_uom_qty != 0 else 0" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
+                                    <div t-field="line.price_subtotal" />
+                                </td>
+                            </tr>
+
+                            </t></t>
+
                         </table>
 
 
