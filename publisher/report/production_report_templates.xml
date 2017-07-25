@@ -235,7 +235,7 @@
                                     <t t-set="total" t-value="sum((l.price_subtotal) for l in sale.order_line)"/>
                                     <div t-esc="total" />
 
-                                    <div t-esc="total_invoiced / total it total != 0 else 0" />
+                                    <div t-esc="total_invoiced / total if total != 0 else 0" />
                                 </td>
                             </tr>
                         </table>
