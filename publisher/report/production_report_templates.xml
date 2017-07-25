@@ -227,15 +227,17 @@
                                 </td>
                                 <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
                                     <t t-set="total_invoiced" t-value="sum((l.price_subtotal * l.qty_invoiced / l.product_uom_qty) for l in sale.order_line)"/>
-                                    <div t-esc="total_invoiced" />
+                                    <div t-esc="total_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
 
                                     <t t-set="total_to_invoice" t-value="sum((l.price_subtotal * l.qty_to_invoice / l.product_uom_qty) for l in sale.order_line)"/>
-                                    <div t-esc="total_to_invoice" />
+                                    <div t-esc="total_to_invoice" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
 
                                     <t t-set="total" t-value="sum((l.price_subtotal) for l in sale.order_line)"/>
-                                    <div t-esc="total" />
+                                    <div t-esc="total" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
 
-                                    <div t-esc="total_invoiced / total if total != 0 else 0" />
+                                    <div>
+                                        <span t-esc="round(total_invoiced / total * 100 if total != 0 else 0, 2)" />
+                                    </div>
                                 </td>
                             </tr>
                         </table>
