@@ -143,7 +143,7 @@
                         Invoice Status
                     </div>
 
-                    <table style="width:100%;">
+                    <table style="width:100%; font-size:0.5em;">
                         <tr>
                             <td style="padding:0.5em; width:15%;">
                                 <div t-if="doc.name">Production</div>
