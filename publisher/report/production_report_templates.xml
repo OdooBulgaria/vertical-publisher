@@ -255,8 +255,8 @@
                                 </td>
                                 <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
                                     <div t-field="line.price_unit" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
-                                    <div t-field="line.product_uom_qty" style="float:left;" /><div t-esc="line.price_unit * line.product_uom_qty" style="float:right; clear:both;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
-                                    <div>
+                                    <div t-field="line.product_uom_qty" style="float:left;" /><div t-esc="line.price_unit * line.product_uom_qty" style="float:right;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
+                                    <div style="clear:both;">
                                         <span t-esc="round(line.discount_base, 2)" />%
                                     </div>
                                     <div>
