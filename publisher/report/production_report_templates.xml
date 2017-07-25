@@ -249,22 +249,31 @@
                                     <div>Quantity</div>
                                     <div>Discount</div>
                                     <div>Commission</div>
-                                    <div>Total</div>
+                                    <div style="padding-top:0.5em;">Total</div>
                                     <div>Invoiced</div>
                                     <div>To Invoice</div>
                                 </td>
                                 <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
-                                    <div t-field="line.price_unit" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
-                                    <div t-field="line.product_uom_qty" style="float:left;" /><div t-esc="line.price_unit * line.product_uom_qty" style="float:right;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
-                                    <div style="clear:both;">
+                                    <div t-field="line.price_unit" style="float:right;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
+
+                                    <div t-field="line.product_uom_qty" style="float:left; clear:both;" />
+                                    <div t-esc="line.price_unit * line.product_uom_qty" style="float:right;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
+                                    
+                                    <div style="float:left; clear:both;">
                                         <span t-esc="round(line.discount_base, 2)" />%
                                     </div>
-                                    <div>
+                                    <div t-esc="line.price_unit * line.product_uom_qty * (1-line.discount_base)" style="float:right;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
+
+                                    <div style="float:left; clear:both;">
                                         <span t-esc="round(line.commission, 2)" />%
                                     </div>
-                                    <div t-esc="line.price_subtotal * line.qty_invoiced / line.product_uom_qty if line.product_uom_qty != 0 else 0" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
-                                    <div t-esc="line.price_subtotal * line.qty_to_invoice / line.product_uom_qty if line.product_uom_qty != 0 else 0" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
-                                    <div t-field="line.price_subtotal" />
+                                    <div t-esc="line.price_subtotal" style="float:right;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
+
+                                    <div t-field="line.price_subtotal" style="padding-top:0.5em; float:left; clear:both;" />
+
+                                    <div t-esc="line.price_subtotal * line.qty_invoiced / line.product_uom_qty if line.product_uom_qty != 0 else 0" style="float:left; clear:both;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
+
+                                    <div t-esc="line.price_subtotal * line.qty_to_invoice / line.product_uom_qty if line.product_uom_qty != 0 else 0" style="float:left; clear:both;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
                                 </td>
                             </tr>
 
