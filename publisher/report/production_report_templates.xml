@@ -244,7 +244,7 @@
                             <t t-foreach="sale.order_line" t-as="line"><t t-if="line.production_id.id == doc.id">
 
                             <tr>
-                                <td style="padding:0.5em; width:15%; border-bottom:2px solid black;">
+                                <td style="padding:0.5em; width:15%; border-bottom:1px solid black;">
                                     <div t-if="line.product_id">Product</div>
                                     <div t-if="line.name">Description</div>
                                     <div t-if="doc.production_type_id.media_id">Media</div>
