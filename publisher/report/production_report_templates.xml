@@ -179,57 +179,60 @@
                                 <div t-if="doc.expected_turnover" t-field="doc.expected_turnover" />
                                 <div t-if="doc.potential_turnover" t-field="doc.potential_turnover" />
                                 <div t-if="doc.actual_turnover" t-field="doc.actual_turnover" />
-                                <div t-if="doc.turnover_delta" t-field="doc.turnover_delta" />
+                                <div t-if="doc.turnover_delta">
+                                    <span t-field="doc.turnover_delta_sign" />
+                                    <span t-field="doc.turnover_delta" />
+                                </div>
                             </td>
                         </tr>
                     </table>
 
-                    <div class="row mt32 mb32" id="informations">
-                        <div class="col-xs-3">
-                            <strong>Production Type:</strong>
-                            <p t-field="doc.production_type_id"/>
-                        </div>
-                        <div t-if="doc.state" class="col-xs-3">
-                            <strong>State:</strong>
-                            <p t-field="doc.state"/>
-                        </div>
-                        <div t-if="doc.project_id" class="col-xs-3">
-                            <strong>Project:</strong>
-                            <p t-field="doc.project_id"/>
-                        </div>
-                        <div t-if="doc.note" class="col-xs-3">
-                            <strong>Comment:</strong>
-                            <p t-field="doc.note"/>
-                        </div>
-                        <div class="col-xs-3">
-                            <strong>Confirmed Lines:</strong>
-                            <p t-field="doc.sale_lines_confirmed_count"/>
-                        </div>
-                        <div class="col-xs-3">
-                            <strong>Invoicing Mode:</strong>
-                            <p t-field="doc.invoicing_mode"/>
-                        </div>
-                        <div t-if="doc.expected_turnover" class="col-xs-3">
-                            <strong>Expected Turnover:</strong>
-                            <p t-field="doc.expected_turnover"/>
-                        </div>
-                        <div class="col-xs-3">
-                            <strong>Potential Turnover:</strong>
-                            <p t-field="doc.potential_turnover"/>
-                        </div>
-                        <div class="col-xs-3">
-                            <strong>Actual Turnover:</strong>
-                            <p t-field="doc.actual_turnover"/>
-                        </div>
-                        <div t-if="doc.expected_turnover" class="col-xs-3">
-                            <strong>Diff. Actual / Expected Turnover:</strong>
-                            <p t-field="doc.turnover_delta"/>
-                        </div>
-                        Date sortie
-                        prod name
-                    </div>
-
                     <t t-foreach="doc.sale_ids" t-as="sale">
+
+                        <table style="width:100%; font-size:0.8em; border:2px solid black;">
+                            <tr>
+                                <td style="padding:0.5em; width:15%;">
+                                    <div t-if="sale.name">Sale</div>
+                                    <div t-if="sale.agency_id">Agency</div>
+                                    <div t-if="sale.partner_id">Customer</div>
+                                    <div t-if="sale.note">Comments</div>
+                                </td>
+                                <td style="padding:0.5em; width:18.333333%; border-right:1px solid grey; font-weight:bold;">
+                                    <div t-if="sale.name" t-field="doc.name" />
+                                    <div t-if="sale.agency_id" t-field="doc.agency_id" />
+                                    <div t-if="sale.partner_id" t-field="doc.partner_id" />
+                                    <div t-if="sale.note" t-field="sale.note" />
+                                </td>
+                                <td style="padding:0.5em; width:15%;">
+                                    <div t-if="sale.user_id">Salesperson</div>
+                                    <div t-if="sale.confirmation_date">Confirmation Date</div>
+                                    <div t-if="sale.client_order_ref">Customer Reference</div>
+                                    <div t-if="sale.reference">Internal Reference</div>
+
+                                </td>
+                                <td style="padding:0.5em; width:18.333333%; border-right:1px solid grey; font-weight:bold;">
+                                    <div t-if="sale.user_id" t-field="sale.user_id" />
+                                    <div t-if="sale.confirmation_date" t-field="sale.confirmation_date" />
+                                    <div t-if="sale.client_order_ref" t-field="sale.client_order_ref" />
+                                    <div t-if="sale.reference" t-field="sale.reference" />
+                                    
+                                </td>
+                                <td style="padding:0.5em; width:15%;">
+                                    <div t-if="sale.fiscal_position_id">Fiscal Position</div>
+                                    <div t-if="sale.amount_untaxed">Untaxed Amount</div>
+                                    <div t-if="sale.amount_tax">Taxes</div>
+                                    <div t-if="sale.amount_total">Taxed Amount</div>
+                                </td>
+                                <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
+                                    <div t-if="sale.fiscal_position_id" t-field="doc.fiscal_position_id" />
+                                    <div t-if="sale.amount_untaxed" t-field="doc.amount_untaxed" />
+                                    <div t-if="sale.amount_tax" t-field="doc.amount_tax" />
+                                    <div t-if="sale.amount_total" t-field="doc.amount_total" />
+                                </td>
+                            </tr>
+                        </table>
+
+
                         <h3>
                             <span t-field="sale.name" />
                         </h3>
