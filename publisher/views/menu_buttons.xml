@@ -94,6 +94,21 @@
             id="menu_sale_publisher_settings_partners_invitations" parent="menu_sale_publisher_settings_partners"
             sequence="1" action="menu_sale_publisher_settings_partners_invitations_action" />
 
+        <menuitem name="Subscriptions Management"
+            id="menu_sale_publisher_settings_subscriptions" parent="menu_sale_publisher_settings"
+            sequence="14"/>
+
+        <record id="menu_sale_publisher_settings_subscriptions_languages_action" model="ir.actions.act_window">
+            <field name="name">Languages Settings</field>
+            <field name="res_model">publisher.language</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Invitations Settings"
+            id="menu_sale_publisher_settings_subscriptions_languages" parent="menu_sale_publisher_settings_subscriptions"
+            sequence="1" action="menu_sale_publisher_settings_subscriptions_languages_action" />
+
 
 
         <record id="production_wizard_action" model="ir.actions.act_window">

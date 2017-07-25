@@ -36,8 +36,8 @@
                         <field name="calendar_view" invisible="1" />
                         <button string="Create invoices" class="btn-primary" type="object" name="create_invoices" attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}" />
                         <button string="Print Production" class="btn-primary" type="object" name="print_production" />
-                        <button string="Print Invoice Status" class="btn-primary" type="object" name="print_production_invoice_status" />
-                        <button string="Download Attachments" class="btn-primary" type="object" name="download_attachments" />
+                        <button string="Print Invoice Status" class="btn-primary" type="object" name="print_production_invoice_status" attrs="{'invisible': [('state', '=', 'draft')]}" />
+                        <button string="Download Attachments" class="btn-primary" type="object" name="download_attachments"  attrs="{'invisible': [('state', '=', 'draft')]}"/>
                         <button string="Calendar" class="btn-primary" type="action" name="%(production_sale_order_line_action)d" context="{'production_id': id}" attrs="{'invisible': [('calendar_view', '=', False)]}" />
                         <button string="Cancel" />
                         <field name="state" widget="statusbar" clickable="True" />
@@ -60,6 +60,7 @@
                         <group>
                             <group>
                                 <field name="seq_number" required="1" />
+                                <field name="company_id" />
                                 <field name="date_blanco" />
                                 <field name="date_start" required="1" />
                                 <field name="date_end" />
@@ -70,7 +71,7 @@
                                 <field name="sale_lines_full_equipment_count" />
                             </group>
                             <group>
-                                <field name="production_type_id" />
+                                <field name="production_type_id" domain="[('company_id','=',company_id)]"/>
                                 <label for="project_id" attrs="{'invisible': [('project_id', '!=', False)]}" />
                                 <button name="action_create_project" type="object" string="Create" class="oe_edit_only" attrs="{'invisible': [('project_id', '!=', False)]}" />
                                 <field name="project_id" readonly="1" attrs="{'invisible': [('project_id', '=', False)]}" />

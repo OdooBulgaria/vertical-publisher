@@ -43,11 +43,11 @@ class Production(models.Model):
         ('after', 'After Publication'),
         ('both', 'Before & After Publication')
         ], string='Invoicing Mode', default='before', required=True, readonly=True, states={'draft': [('readonly', False)]})
-    down_payment = fields.Float(string='Down Payment', default=0, states={'draft': [('readonly', False)]})
+    down_payment = fields.Float(string='Down Payment', default=0, readonly=True, states={'draft': [('readonly', False)]})
     seq_number = fields.Char(string="Sequence Number", required=True, readonly=True, copy=False, states={'draft': [('readonly', False)]}, index=True, default=lambda self: _('New'))
-    date_blanco = fields.Date(string='Blanco Date')
+    date_blanco = fields.Date(string='Blanco Date', readonly=True, states={'draft': [('readonly', False)]})
     note = fields.Text(string="Notes")
-    themes = fields.Char(string="Production Themes")
+    themes = fields.Char(string="Production Themes", readonly=True, states={'draft': [('readonly', False)]})
 
     # sale_lines_count = fields.Integer(string="Production Lines Count", compute=_compute_sale_lines_count)
     sale_lines_confirmed_count = fields.Char(string="Confirmed Lines", compute='_compute_sale_lines_confirmed_count')
@@ -66,6 +66,7 @@ class Production(models.Model):
         ('to invoice', 'To Invoice')
     ], string="Invoice Status", compute='_compute_invoice_status')
     calendar_view = fields.Boolean(string="Allow Calendar View", compute='_compute_calendar_view')
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('publisher.production'))
 
     # @api.one
     # def _compute_sale_lines_count(self):
@@ -209,7 +210,6 @@ class Production(models.Model):
 
     @api.multi
     def print_production(self):
-        _logger.info('\n\n'+str(self.env['report'].get_action(self, 'publisher.report_production_template'))+'\n\n')
         return self.env['report'].get_action(self, 'publisher.report_production_template')
 
     @api.multi
@@ -280,7 +280,7 @@ class Production(models.Model):
                 else:
                     sale_map[line.order_id.id].append(line)
 
-        company_id = self.env.user.company_id
+        company_id = self.company_id
         account_journal_id = self.env['account.invoice'].default_get(['journal_id'])['journal_id']
         now = datetime.datetime.now()
 
@@ -333,7 +333,7 @@ class Production(models.Model):
                     # if invoice does not exist yet
                     if not invoice_id:
                         invoice_id = self.env['account.invoice'].create({
-                            #'origin' : sale_id.name,
+                            'origin' : sale_id.name,
                             'type': 'out_invoice',
                             'company_id' : company_id.id,
                             'currency_id' : self.currency_id.id,
@@ -356,7 +356,14 @@ class Production(models.Model):
                     description = '\n'.join(filter(None, [
                         line.name,
                         self.name,
-                        'Format : '+line.format_id.name if line.format_id else '',
+                        'Unit Price : '+str(line.price_unit)+self.currency_id.symbol if line.product_uom_qty != 1 or quantity != line.product_uom_qty else '',
+                        'Quantity : '+str(line.product_uom_qty) if line.product_uom_qty != 1 else '',
+                        'Invoiced Percentage : '+str(round(quantity / line.product_uom_qty * 100, 2))+' %' if quantity != line.product_uom_qty else '',
+                        ', '.join(filter(None, [
+                            'Format : '+line.format_id.name if line.format_id else '',
+                            'Location : '+line.location_id.name if line.location_id else '',
+                            'Color : '+line.color_id.name if line.color_id else '',
+                        ])),
                         'Your Customer : '+sale_id.partner_id.name if sale_id.partner_invoice_id else '',
                         'Price : '+str(quantity*line.price_unit)+self.currency_id.symbol+(' - '+str(line.discount_base)+' % customer discount' if line.discount_base>0 else '')+(' = '+str(quantity*line.price_unit*(1-line.discount_base/100))+self.currency_id.symbol if line.discount_base>0 and line.commission>0 else '')+(' - '+str(line.commission)+' % agency commission' if line.commission>0 else ''),
                     ]))
@@ -387,6 +394,9 @@ class Production(models.Model):
                         'account_analytic_id': sale_id.project_id.id,
                         'analytic_tag_ids': [(6, 0, line.analytic_tag_ids.ids)],
                     })
+
+            if invoice_id:
+                invoice_id.compute_taxes()
 
         if not invoice_ids:
             raise exceptions.ValidationError('Not any line to invoice, make sure the sale orders are confirmed and the production publication date / invoicing mode are ok.')

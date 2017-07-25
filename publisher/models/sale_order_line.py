@@ -98,6 +98,21 @@ class SaleOrderLine(models.Model):
     def _compute_attachment_count(self):
         self.attachment_count = len(self.attachment_ids)
 
+    @api.multi
+    def _prepare_invoice_line(self, qty):
+        vals = super(SaleOrderLine, self)._prepare_invoice_line(qty)
+
+        vals['name'] = '\n'.join(filter(None, [
+            self.name,
+            'Unit Price : '+str(self.price_unit)+self.currency_id.symbol if self.product_uom_qty != 1 or qty != self.product_uom_qty else '',
+            'Quantity : '+str(self.product_uom_qty) if self.product_uom_qty != 1 else '',
+            'Invoiced Percentage : '+str(round(qty / self.product_uom_qty * 100, 2))+' %' if qty != self.product_uom_qty else '',
+            'Your Customer : '+self.order_id.partner_id.name if self.order_id.partner_invoice_id else '',
+            'Price : '+str(qty*self.price_unit)+self.currency_id.symbol+(' - '+str(self.discount_base)+' % customer discount' if self.discount_base>0 else '')+(' = '+str(qty*self.price_unit*(1-self.discount_base/100))+self.currency_id.symbol if self.discount_base>0 and self.commission>0 else '')+(' - '+str(self.commission)+' % agency commission' if self.commission>0 else ''),
+        ]))
+
+        return vals
+
     # @api.one
     # def toggle_full_equipment_received(self):
     #     self.full_equipment_received = not self.full_equipment_received

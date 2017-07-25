@@ -41,6 +41,7 @@
         'views/project_project.xml',
         'views/invitation.xml',
         'views/account_invoice.xml',
+        'views/sale_subscription.xml',
 
         'views/menu_buttons.xml',
 
@@ -55,6 +56,7 @@
         'report/invoice_report.xml',
 
         'data/sale_order_sequence.xml',
+        'data/ir_rule.xml',
 
         'security/ir.model.access.csv',
 

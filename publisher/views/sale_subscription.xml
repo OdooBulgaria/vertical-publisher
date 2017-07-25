@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_subscription_view_form_publisher" model="ir.ui.view">
+            <field name="name">sale_subscription_view_form_publisher</field>
+            <field name="model">sale.subscription</field>
+            <field name="inherit_id" ref="sale_contract.sale_subscription_view_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!-- SUBSCRIPITION -->
+
+                    <!-- Add Customer -->
+                    <xpath expr="/form/sheet//field[@name='partner_id']" position="after">
+                        <field name="partner_customer_id" />
+                    </xpath>
+
+
+                    <!-- SUBSCRIPITION LINE -->
+
+                    <!-- Make Tree view non-editable (to allow the form to open) -->
+                    <xpath expr="//field[@name='recurring_invoice_line_ids']/tree" position="attributes">
+                        <attribute name="editable" />
+                    </xpath>
+
+                    <!-- Declare form -->
+                    <xpath expr="//field[@name='recurring_invoice_line_ids']/tree" position="after">
+                        <form>
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="analytic_account_id" />
+                                        <field name="partner_shipping_id" />
+                                        <field name="name" />
+                                        <field name="uom_id" />
+                                        <field name="product_id" />
+                                        <field name="language_id" />
+                                    </group>
+                                    <group>
+                                        <field name="actual_quantity" />
+                                        <field name="price_unit" />
+                                        <field name="discount" />
+                                        <field name="quantity" />
+                                        <field name="sold_quantity" />
+                                        <field name="price_subtotal" />
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

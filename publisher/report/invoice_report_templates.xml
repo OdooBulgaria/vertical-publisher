@@ -19,12 +19,12 @@
 
                         <div class="row">
                             <div class="col-xs-5">
-                                <address style="margin-bottom:1em;" t-field="user.company_id.partner_id"
+                                <address style="margin-bottom:1em;" t-field="o.company_id.partner_id"
                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax", "email", "website"], "no_marker": True, "phone_icons": True}' />
                             </div>
 
                             <div class="col-xs-5 col-xs-offset-2">
-                                <div style="margin-bottom:2.5em;" t-if="o.date_invoice and user.company_id.partner_id.city"><span t-field="user.company_id.partner_id.city" />, on <span t-field="o.date_invoice" /></div>
+                                <div style="margin-bottom:2.5em;" t-if="o.date_invoice and o.company_id.partner_id.city"><span t-field="o.company_id.partner_id.city" />, on <span t-field="o.date_invoice" /></div>
                                 <div><strong><span t-field="o.partner_id.name" /></strong></div>
                                 <address style="margin-bottom:1em;" t-field="o.partner_id"
                                     t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
@@ -159,7 +159,7 @@
 
                 <div class="header" style="height:0;" />
                 <div class="page" style="margin-top:0;">
-                    <span t-raw="user.company_id.sfc" />
+                    <span t-raw="o.company_id.sfc" />
                 </div>
                 <div class="footer" />
             </xpath>

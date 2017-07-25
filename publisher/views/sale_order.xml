@@ -10,21 +10,43 @@
                     <!-- SALE ORDER -->
 
                     <!-- Hide client_order_ref field -->
-                    <xpath expr="//field[@name='client_order_ref']" position="replace" />
+                    <xpath expr="/form/sheet//field[@name='client_order_ref']" position="replace" />
+
+                    <!-- Hide Create Invoice Header Button when a production is selected -->
+                    <xpath expr="/form//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="before">
+                        <field name="has_production" invisible="1" />
+                    </xpath>
+                    <xpath expr="/form//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|', ('has_production', '=', True), ('invoice_status', '!=', 'to invoice')]}</attribute>
+                    </xpath>
 
                     <!-- Hide Lock Header Button -->
-                    <xpath expr="//button[@name='action_done']" position="replace" />
+                    <xpath expr="/form//button[@name='action_done']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
 
                     <!-- Add Print (No Price) Button -->
-                    <xpath expr="//button[@name='print_quotation' and @states='draft']" position="after">
+                    <xpath expr="/form//button[@name='print_quotation' and @states='draft']" position="after">
                         <button name="print_quotation_noprice" string="Print (No Price)" class="btn-primary" type="object" states="draft" attrs="{'invisible': [('state', 'not in', ['draft'])]}" />
                     </xpath>
-                    <xpath expr="//button[@name='print_quotation' and @states='sent,option,sale']" position="after">
+                    <xpath expr="/form//button[@name='print_quotation' and @states='sent,option,sale']" position="after">
                         <button name="print_quotation_noprice" string="Print (No Price)" type="object" states="sent,option,sale" attrs="{'invisible': [('state', 'not in', ['sent', 'option', 'sale'])]}" />
                     </xpath>
 
-                    <!-- Reorganize form & add agency_id, reference & client_order_refs fields & commission -->
-                    <xpath expr="/form/sheet/group" position="replace">
+                    <!-- Reorganize form & add agency_id, reference & client_order_refs fields -->
+                    
+                    <xpath expr="/form/sheet//field[@name='partner_id']" position="replace" />
+                    <xpath expr="/form/sheet//field[@name='partner_invoice_id']" position="replace" />
+                    <xpath expr="/form/sheet//field[@name='partner_shipping_id']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+
+                    <xpath expr="/form/sheet//field[@name='partner_shipping_id']" position="after">
+                        <field name="client_order_ref" />
+                        <field name="reference" />
+                    </xpath>
+
+                    <xpath expr="/form/sheet/group" position="before">
                         <group col="3">
                             <group>
                                 <field name="agency_id" domain="[('agency','=',True)]" attrs="{'readonly': [('state', 'not in', ['draft', 'sent'])]}" context="{'show_address': 1, 'default_agency': True}" options="{'always_reload': True}" />
@@ -36,21 +58,8 @@
                                 <field name="partner_invoice_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice', 'show_address': 1}" options="{'always_reload': True}" />
                             </group>
                         </group>
-                        <group>
-                            <group>
-                                <field name="date_order" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])]}"/>
-                                <field name="validity_date" attrs="{'invisible': [('state', 'in', ['sale', 'done'])]}" />
-                                <field name="confirmation_date" attrs="{'invisible': [('state', 'in', ['draft', 'sent', 'cancel'])]}"/>
-                                <field name="pricelist_id" groups="product.group_sale_pricelist" />
-                                <field name="currency_id" invisible="1" />
-                                <field name="payment_term_id" options="{'no_create': True}" />
-                            </group>
-                            <group>
-                                <field name="client_order_ref" />
-                                <field name="reference" />
-                            </group>
-                        </group>
                     </xpath>
+
 
                     <!-- SALE ORDER LINE -->
 
@@ -77,7 +86,7 @@
 
                     <!-- Add production_id field -->
                     <xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="after">
-                        <field name="production_id" />
+                        <field name="production_id" domain="[('company_id','=',parent.company_id)]"/>
                     </xpath>
 
                     <!-- Replace Total discount by line discount field -->

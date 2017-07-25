@@ -14,7 +14,7 @@
 
                 <div class="row">
                     <div class="col-xs-5">
-                        <address style="margin-bottom:1em;" t-field="user.company_id.partner_id"
+                        <address style="margin-bottom:1em;" t-field="doc.company_id.partner_id"
                             t-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax", "email", "website"], "no_marker": True, "phone_icons": True}' />
                     </div>
 
@@ -165,7 +165,7 @@
 
         <div class="header" style="height:0;" />
         <div class="page" style="margin-top:0;">
-            <span t-raw="user.company_id.sfc" />
+            <span t-raw="doc.company_id.sfc" />
         </div>
         <div class="footer" />
     </template>
