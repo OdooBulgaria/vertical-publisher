@@ -151,7 +151,7 @@
                                 <div t-if="doc.project_id">Project</div>
                                 <div t-if="doc.note">Comment</div>
                             </td>
-                            <td style="padding:0.5em; width:18.333333%; border-right:1px solid grey; font-weight:bold;">
+                            <td style="padding:0.5em; width:18.333333%; border-right:0.5px solid grey; font-weight:bold;">
                                 <div t-if="doc.name" t-field="doc.name" />
                                 <div t-if="doc.production_type_id" t-field="doc.production_type_id" />
                                 <div t-if="doc.project_id" t-field="doc.project_id" />
@@ -163,7 +163,7 @@
                                 <div t-if="doc.sale_lines_confirmed_count">Confirmed Lines</div>
                                 <div t-if="doc.invoicing_mode">Invoice Mode</div>
                             </td>
-                            <td style="padding:0.5em; width:18.333333%; border-right:1px solid grey; font-weight:bold;">
+                            <td style="padding:0.5em; width:18.333333%; border-right:0.5px solid grey; font-weight:bold;">
                                 <div t-if="doc.state" t-field="doc.state" />
                                 <div t-if="doc.date_start" t-field="doc.date_start" />
                                 <div t-if="doc.sale_lines_confirmed_count" t-field="doc.sale_lines_confirmed_count" />
@@ -198,7 +198,7 @@
                                     <div t-if="sale.partner_id">Customer</div>
                                     <div t-if="sale.note">Comments</div>
                                 </td>
-                                <td style="padding:0.5em; width:18.333333%; border-right:1px solid grey; font-weight:bold;">
+                                <td style="padding:0.5em; width:18.333333%; border-right:0.5px solid grey; font-weight:bold;">
                                     <div t-if="sale.name" t-field="sale.name" />
                                     <div t-if="sale.state" t-field="sale.state" />
                                     <div t-if="sale.agency_id" t-field="sale.agency_id" />
@@ -212,7 +212,7 @@
                                     <div t-if="sale.reference">Internal Reference</div>
 
                                 </td>
-                                <td style="padding:0.5em; width:18.333333%; border-right:1px solid grey; font-weight:bold;">
+                                <td style="padding:0.5em; width:18.333333%; border-right:0.5px solid grey; font-weight:bold;">
                                     <div t-if="sale.user_id" t-field="sale.user_id" />
                                     <div t-if="sale.confirmation_date" t-field="sale.confirmation_date" />
                                     <div t-if="sale.client_order_ref" t-field="sale.client_order_ref" />
@@ -223,7 +223,7 @@
                                     <div>Invoiced</div>
                                     <div>To Invoice</div>
                                     <div>Total</div>
-                                    <div>Invoiced Part</div>
+                                    <div>Invoiced Proportion</div>
                                 </td>
                                 <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
                                     <t t-set="total_invoiced" t-value="sum((l.price_subtotal * l.qty_invoiced / l.product_uom_qty) for l in sale.order_line)"/>
@@ -236,7 +236,7 @@
                                     <div t-esc="total" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
 
                                     <div>
-                                        <span t-esc="round(total_invoiced / total * 100 if total != 0 else 0, 2)" />
+                                        <span t-esc="round(total_invoiced / total * 100 if total != 0 else 0, 2)" />%
                                     </div>
                                 </td>
                             </tr>
