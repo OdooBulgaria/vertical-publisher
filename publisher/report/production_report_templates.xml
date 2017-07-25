@@ -191,41 +191,41 @@
 
                         <table style="width:100%; font-size:0.8em; border:2px solid black; margin-top:0.8em;">
                             <tr>
-                                <td style="padding:0.5em; width:15%;">
+                                <td style="padding:0.5em; width:15%; border-bottom:2px solid black;">
                                     <div t-if="sale.name">Sale</div>
                                     <div t-if="sale.state">State</div>
                                     <div t-if="sale.agency_id">Agency</div>
                                     <div t-if="sale.partner_id">Customer</div>
                                     <div t-if="sale.note">Comments</div>
                                 </td>
-                                <td style="padding:0.5em; width:18.333333%; border-right:0.5px solid grey; font-weight:bold;">
+                                <td style="padding:0.5em; width:18.333333%; border-right:0.5px solid grey; font-weight:bold; border-bottom:2px solid black;">
                                     <div t-if="sale.name" t-field="sale.name" />
                                     <div t-if="sale.state" t-field="sale.state" />
                                     <div t-if="sale.agency_id" t-field="sale.agency_id" />
                                     <div t-if="sale.partner_id" t-field="sale.partner_id" />
                                     <div t-if="sale.note" t-field="sale.note" />
                                 </td>
-                                <td style="padding:0.5em; width:15%;">
+                                <td style="padding:0.5em; width:15%; border-bottom:2px solid black;">
                                     <div t-if="sale.user_id">Salesperson</div>
                                     <div t-if="sale.confirmation_date">Confirmation Date</div>
                                     <div t-if="sale.client_order_ref">Customer Reference</div>
                                     <div t-if="sale.reference">Internal Reference</div>
 
                                 </td>
-                                <td style="padding:0.5em; width:18.333333%; border-right:0.5px solid grey; font-weight:bold;">
+                                <td style="padding:0.5em; width:18.333333%; border-right:0.5px solid grey; font-weight:bold; border-bottom:2px solid black;">
                                     <div t-if="sale.user_id" t-field="sale.user_id" />
                                     <div t-if="sale.confirmation_date" t-field="sale.confirmation_date" />
                                     <div t-if="sale.client_order_ref" t-field="sale.client_order_ref" />
                                     <div t-if="sale.reference" t-field="sale.reference" />
                                     
                                 </td>
-                                <td style="padding:0.5em; width:15%;">
+                                <td style="padding:0.5em; width:15%; border-bottom:2px solid black;">
                                     <div>Total</div>
                                     <div>Invoiced</div>
                                     <div>To Invoice</div>
                                     <div>Invoiced Proportion</div>
                                 </td>
-                                <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
+                                <td style="padding:0.5em; width:18.333333%; font-weight:bold; border-bottom:2px solid black;">
                                     <t t-set="total" t-value="sum((l.price_subtotal) for l in sale.order_line)"/>
                                     <div t-esc="total" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
                                     
@@ -244,7 +244,7 @@
                             <t t-foreach="sale.order_line" t-as="line"><t t-if="line.production_id.id == doc.id">
 
                             <tr>
-                                <td style="padding:0.5em; width:15%;">
+                                <td style="padding:0.5em; width:15%; border-bottom:1px solid black;">
                                     <div>Unit Price</div>
                                     <div>Quantity</div>
                                     <div>Discount</div>
@@ -253,7 +253,7 @@
                                     <div>Invoiced</div>
                                     <div>To Invoice</div>
                                 </td>
-                                <td style="padding:0.5em; width:18.333333%; font-weight:bold;">
+                                <td style="padding:0.5em; width:18.333333%; font-weight:bold; border-bottom:1px solid black;">
                                     <div t-field="line.price_unit" style="text-align:right;" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" />
 
                                     <div>
@@ -264,14 +264,14 @@
                                     </div>
 
                                     <div>
-                                        <table><tr>
+                                        <table style="width:100%; font-weight:bold;"><tr>
                                             <td><span t-esc="round(line.discount_base, 2)" />%</td>
                                             <td style="text-align:right;"><span t-esc="line.price_unit * line.product_uom_qty * (1-line.discount_base)" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                         </tr></table>
                                     </div>
 
                                     <div>
-                                        <table><tr>
+                                        <table style="width:100%; font-weight:bold;"><tr>
                                             <td><span t-esc="round(line.commission, 2)" />%</td>
                                             <td style="text-align:right;"><span t-esc="line.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                         </tr></table>
