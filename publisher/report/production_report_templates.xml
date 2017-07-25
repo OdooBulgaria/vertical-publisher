@@ -246,9 +246,9 @@
                             <tr>
                                 <td colspan="2" style="padding:0.5em; width:33.333333%; border-bottom:1px solid black; border-right:0.5px solid grey;">
                                     <div style="font-weight:bold; padding-bottom:0.5em; text-decoration:underline;">Invoices</div>
-                                    
+
                                     <t t-set="invoices" t-value="[]"/>
-                                    <t t-foreach="l.invoice_lines" t-as="invoice_line">
+                                    <t t-foreach="line.invoice_lines" t-as="invoice_line">
                                         <t t-if="not invoice_line.invoice_id.id in invoices">
                                             <t t-set="invoices" t-value="invoices + [invoice_line.invoice_id.id]"/>
 
