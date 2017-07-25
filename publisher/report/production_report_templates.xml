@@ -136,8 +136,11 @@
                 <div class="page">
                     <div class="oe_structure" />
 
-                    <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
-                        <span t-field="doc.name" /> Invoice Status
+                    <h2 style="font-size:1.7em; text-align:center; padding:0;">
+                        <span t-field="doc.name" />
+                    </h2>
+                    <h2 style="font-size:1.4em; text-align:center; padding-top:0em; padding-bottom:1.5em;">
+                        Invoice Status
                     </h2>
 
                     <table style="width:100%; border:1px solid black;">
