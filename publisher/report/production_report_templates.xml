@@ -137,8 +137,19 @@
                     <div class="oe_structure" />
 
                     <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
-                        <span t-field="doc.name" />
+                        <span t-field="doc.name" /> Invoice Status
                     </h2>
+
+                    <table style="width:100%; border:1px solid black;">
+                        <tr>
+                            <td style="border:1px solid black; padding:1em;">
+                                Coucou
+                            </td>
+                            <td style="border:1px solid black; padding:1em;">
+                                Coucou
+                            </td>
+                        </tr>
+                    </table>
 
                     <div class="row mt32 mb32" id="informations">
                         <div class="col-xs-3">
@@ -228,14 +239,25 @@
                                             <td>
                                                 <t t-set="invoices" t-value="[]"/>
                                                 <t t-foreach="l.invoice_lines" t-as="invoice_line">
-                                                    <t t-if="invoice_line.invoice_id.number and not invoice_line.invoice_id.number in invoices">
+                                                    <t t-if="not invoice_line.invoice_id.id in invoices">
                                                         <t t-set="invoices" t-value="invoices + [invoice_line.invoice_id.id]"/>
-                                                        <t t-set="invoice_date" t-value="invoice_line.invoice_id.date_invoice.split('-')"/>
 
                                                         <div>
-                                                            <strong t-esc="invoice_line.invoice_id.number" />
-                                                            (<span t-esc="invoice_date[2] + '/' + invoice_date[1] + '/' + invoice_date[0]" />)
+                                                            #<span t-esc="len(invoices)" />
+
+                                                            <t t-if="invoice_line.invoice_id.number">
+                                                                
+                                                                <t t-set="invoice_date" t-value="invoice_line.invoice_id.date_invoice.split('-')"/>
+
+                                                                <strong t-esc="invoice_line.invoice_id.number" />
+                                                                (<span t-esc="invoice_date[2] + '/' + invoice_date[1] + '/' + invoice_date[0]" />)
+                                                            </t>
+                                                            <t t-if="not invoice_line.invoice_id.number">
+                                                                <em>Draft Invoice</em>
+                                                            </t>
+
                                                         </div>
+
                                                     </t>
                                                 </t>
                                             </td>
