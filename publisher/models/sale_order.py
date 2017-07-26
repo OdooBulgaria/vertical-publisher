@@ -100,4 +100,9 @@ class SaleOrderReport(models.AbstractModel):
             'docs': self.env['sale.order'].search([('id', 'in', docids)]),
             'no_price': True
         }
-        return report_obj.render('publisher.report_saleorder_publisher', docargs)
+
+        ret = report_obj.render('publisher.report_saleorder_publisher', docargs)
+
+        _logger.info('\n\n'+str(ret)+'\n\n')
+
+        return ret
