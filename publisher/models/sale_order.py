@@ -90,6 +90,8 @@ class SaleOrderReport(models.AbstractModel):
     @api.model
     def render_html(self, docids, data=None):
 
+        _logger.info('\n\nTest\n\n')
+
         # return self.env['report.sale.report_saleorder'].render_html(docids, data)
 
         report_obj = self.env['report']
