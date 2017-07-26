@@ -36,25 +36,25 @@
                                     <tr>
                                         <td style="width:40%;">Draft</td>
                                         <td style="font-weight:bold; width:60%;">
-                                            <span t-esc="len(line for line in lines if line.state in ['draft', 'sent'])" />/<span t-esc="len(lines)" />
+                                            <span t-esc="len([line for line in lines if line.state in ['draft', 'sent']])" />/<span t-esc="len(lines)" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="width:40%;">Option</td>
                                         <td style="font-weight:bold; width:60%;">
-                                            <span t-esc="len(line for line in lines if line.state in ['option'])" />/<span t-esc="len(lines)" />
+                                            <span t-esc="len([line for line in lines if line.state in ['option']])" />/<span t-esc="len(lines)" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="width:40%;">Sale</td>
                                         <td style="font-weight:bold; width:60%;">
-                                            <span t-esc="len(line for line in lines if line.state in ['sale'])" />/<span t-esc="len(lines)" />
+                                            <span t-esc="len([line for line in lines if line.state in ['sale']])" />/<span t-esc="len(lines)" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="width:40%;">Archived</td>
                                         <td style="font-weight:bold; width:60%;">
-                                            <span t-esc="len(line for line in lines if line.state in ['done'])" />/<span t-esc="len(lines)" />
+                                            <span t-esc="len([line for line in lines if line.state in ['done']])" />/<span t-esc="len(lines)" />
                                         </td>
                                     </tr>
                                     <tr t-if="doc.note">
