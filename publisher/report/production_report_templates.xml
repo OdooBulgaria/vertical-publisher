@@ -132,7 +132,7 @@
 
         <template id="report_production_invoice_status_template_document">
 
-            <!--<t t-set="header_title1" t-value="doc.name" />-->
+            <t t-set="header_title1" t-value="doc.name" />
 
             <t t-call="publisher.publisher_layout_internal">
                 <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
