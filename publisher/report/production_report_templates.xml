@@ -18,7 +18,7 @@
 
                                     <t t-set="lines" t-value="[]" />
                                     <t t-foreach="doc.sale_ids" t-as="sale">
-                                        <t t-set="lines" t-value="lines + [sale.order_line]" />
+                                        <t t-set="lines" t-value="lines + [line for line in sale.order_line]" />
                                     </t>
 
                                     <tr t-if="doc.name">
