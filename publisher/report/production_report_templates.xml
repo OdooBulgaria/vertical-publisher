@@ -189,19 +189,19 @@
                                 <table style="width:100%;">
                                     <tr>
                                         <td style="width:40%;">Expected Turnover</td>
-                                        <td style="font-weight:bold; width:60%;"><span t-field="doc.expected_turnover" /></td>
+                                        <td style="font-weight:bold; width:60%; text-align:right;"><span t-field="doc.expected_turnover" /></td>
                                     </tr>
                                     <tr>
                                         <td style="width:40%;">Potential Turnover</td>
-                                        <td style="font-weight:bold; width:60%;"><span t-field="doc.potential_turnover" /></td>
+                                        <td style="font-weight:bold; width:60%; text-align:right;"><span t-field="doc.potential_turnover" /></td>
                                     </tr>
                                     <tr>
                                         <td style="width:40%;">Actual Turnover</td>
-                                        <td style="font-weight:bold; width:60%;"><span t-field="doc.actual_turnover" /></td>
+                                        <td style="font-weight:bold; width:60%; text-align:right;"><span t-field="doc.actual_turnover" /></td>
                                     </tr>
                                     <tr>
                                         <td style="width:40%;">Turnover Result</td>
-                                        <td style="font-weight:bold; width:60%;"><span t-field="doc.turnover_delta_sign" /><span t-field="doc.turnover_delta" /></td>
+                                        <td style="font-weight:bold; width:60%; text-align:right;"><span t-field="doc.turnover_delta_sign" /><span t-field="doc.turnover_delta" /></td>
                                     </tr>
                                 </table>
                             </td>
@@ -261,17 +261,17 @@
                                         <tr>
                                             <t t-set="total" t-value="sum((l.price_subtotal) for l in sale.order_line)"/>
                                             <td style="width:40%;">Total</td>
-                                            <td style="font-weight:bold; width:60%;"><span t-esc="total" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
+                                            <td style="font-weight:bold; width:60%; text-align:right;"><span t-esc="total" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                         </tr>
                                         <tr>
                                             <t t-set="total_invoiced" t-value="sum((l.price_subtotal * l.qty_invoiced / l.product_uom_qty) for l in sale.order_line)"/>
                                             <td style="width:40%;">Invoiced</td>
-                                            <td style="font-weight:bold; width:60%;"><span t-esc="total_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
+                                            <td style="font-weight:bold; width:60%; text-align:right;"><span t-esc="total_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                         </tr>
                                         <tr>
                                             <t t-set="total_to_invoice" t-value="sum((l.price_subtotal * l.qty_to_invoice / l.product_uom_qty) for l in sale.order_line)"/>
                                             <td style="width:40%;">To Invoice</td>
-                                            <td style="font-weight:bold; width:60%;"><span t-esc="total_to_invoice" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
+                                            <td style="font-weight:bold; width:60%; text-align:right;"><span t-esc="total_to_invoice" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                         </tr>
                                         <tr>
                                             <td style="width:40%;">Invoiced Proportion</td>
