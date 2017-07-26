@@ -57,6 +57,11 @@
                     </div>
                     <div t-if="company.rml_header1" class="col-xs-9 text-right" style="margin-top:2em;" t-field="company.rml_header1"/>
                 </div>
+                <div class="row zero_min_height" t-if="header_title1">
+                    <div class="col-xs-4 offset-xs-4">
+                        <span t-raw="header_title1" />
+                    </div>
+                </div>
                 <div class="row zero_min_height">
                     <div class="col-xs-12">
                         <div style="border-bottom: 1px solid black;"></div>
