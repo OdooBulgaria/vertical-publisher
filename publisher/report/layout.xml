@@ -131,7 +131,7 @@
                 <div class="text-center" style="border-top: 1px solid black;">
                     <t t-set="company" t-value="company.sudo()"/>
 
-                    <ul class="list-inline">
+                    <ul class="list-inline" style="padding-top:1.5em;">
                         <li>Page:</li>
                         <li><span class="page"/></li>
                         <li>/</li>

@@ -205,8 +205,6 @@
                         </tr>
                     </table>
 
-                    <t t-foreach="range(10)" t-as="counter">
-
                     <t t-foreach="doc.sale_ids" t-as="sale">
 
                         <table style="width:100%; font-size:0.8em; border:2px solid black; margin-top:0.8em;">
@@ -396,8 +394,6 @@
                             </t></t>
 
                         </table>
-                    </t>
-
                     </t>
 
                     <div class="oe_structure"/>
