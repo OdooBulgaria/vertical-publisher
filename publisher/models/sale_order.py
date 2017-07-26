@@ -103,8 +103,11 @@ class SaleOrderReport(models.AbstractModel):
             'no_price': True
         }
 
-        ret = report_obj.render('publisher.report_saleorder_publisher', docargs)
+        _logger.info('\n\na\n\n')
 
-        _logger.info('\n\n'+str(ret)+'\n\n')
+        t = report_obj.render('publisher.report_saleorder_publisher', docargs)
 
-        return ret
+        _logger.info('\n\nb\n\n')
+        _logger.info('\n\n'+str(t)+'\n\n')
+
+        return t
