@@ -208,6 +208,8 @@
                         </tr>
                     </table>
 
+                    <t t-foreach="range(10)" t-as="counter">
+
                     <t t-foreach="doc.sale_ids" t-as="sale">
 
                         <table style="width:100%; font-size:0.8em; border:2px solid black; margin-top:0.8em;">
@@ -284,7 +286,7 @@
                             <t t-foreach="sale.order_line" t-as="line"><t t-if="line.production_id.id == doc.id">
 
                                 <tr>
-                                    <td style="padding:0.5em; width:33.333333%; border-right:0.5px solid grey; border-bottom:1px solid black;">
+                                    <td style="padding:0.5em; width:33.333333%; border-right:0.5px solid grey; border-bottom:0.5px solid black;">
                                         <table style="width:100%;">
                                             <tr t-if="line.product_id">
                                                 <td style="width:40%;">Product</td>
@@ -320,7 +322,7 @@
                                             </tr>
                                         </table>
                                     </td>
-                                    <td style="padding:0.5em; width:33.333333%; border-right:0.5px solid grey; border-bottom:1px solid black;">
+                                    <td style="padding:0.5em; width:33.333333%; border-right:0.5px solid grey; border-bottom:0.5px solid black;">
                                         <div style="font-weight:bold; padding-bottom:0.5em; text-decoration:underline;">Invoices</div>
 
                                         <t t-set="invoices" t-value="[]"/>
@@ -345,7 +347,7 @@
                                             </t>
                                         </t>
                                     </td>
-                                    <td style="padding:0.5em; width:33.333333%; border-bottom:1px solid black;">
+                                    <td style="padding:0.5em; width:33.333333%; border-bottom:0.5px solid black;">
                                         <table style="width:100%;">
                                             <tr>
                                                 <td style="width:40%;">Unit Price</td>
@@ -397,6 +399,8 @@
                             </t></t>
 
                         </table>
+                    </t>
+
                     </t>
 
                     <div class="oe_structure"/>
