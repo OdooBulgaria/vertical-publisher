@@ -90,6 +90,8 @@ class SaleOrderReport(models.AbstractModel):
     @api.model
     def render_html(self, docids, data=None):
 
+        _logger.info('\n\nTest\n\n')
+
         # return self.env['report.sale.report_saleorder'].render_html(docids, data)
 
         report_obj = self.env['report']
@@ -100,4 +102,7 @@ class SaleOrderReport(models.AbstractModel):
             'docs': self.env['sale.order'].search([('id', 'in', docids)]),
             'no_price': True
         }
+
+        _logger.info('\n\na\n\n')
+
         return report_obj.render('publisher.report_saleorder_publisher', docargs)

@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_saleorder_publisher_document">
+
+        <t t-set="header_title1" t-value="'Order # '+doc.name" t-if="doc.state not in ['draft','sent']" />
+        <t t-set="header_title1" t-value="'Quotation # '+doc.name" t-if="doc.state in ['draft','sent']" />
+
         <t t-call="publisher.publisher_layout">
             <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
             <div class="page">
                 <div class="oe_structure"/>
-
-                <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
-                    <span t-if="doc.state not in ['draft','sent']">Order # </span>
-                    <span t-if="doc.state in ['draft','sent']">Quotation # </span>
-                    <span t-field="doc.name"/>
-                </h2>
 
                 <div class="row">
                     <div class="col-xs-5">
@@ -163,11 +161,7 @@
             </div>
         </t>
 
-        <div class="header" style="height:0;" />
-        <div class="page" style="margin-top:0;">
-            <span t-raw="doc.company_id.sfc" />
-        </div>
-        <div class="footer" />
+        <t t-call="publisher.publisher_layout_sfc" />
     </template>
 
 

@@ -23,6 +23,7 @@
                                 </group>
                             </group>
                             <group>
+                                <field name="sfc_header" widget="html"/>
                                 <field name="sfc" widget="html"/>
                             </group>
                         </page>
