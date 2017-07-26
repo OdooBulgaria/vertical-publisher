@@ -2,14 +2,14 @@
 <odoo>
     <data>
         <template id="report_production_template_document">
+
+            <t t-set="header_title1" t-value="doc.name" />
+            <t t-set="header_title2" t-value="'Global Status'" />
+
             <t t-call="publisher.publisher_layout_internal">
                 <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
                 <div class="page">
                     <div class="oe_structure" />
-
-                    <h2 style="font-size:2em; text-align:center; padding-top:0.5em; padding-bottom:2em;">
-                        <span t-field="doc.name" />
-                    </h2>
 
                     <div class="row mt32 mb32" id="informations">
                         <div class="col-xs-3">
@@ -139,13 +139,6 @@
                 <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
                 <div class="page">
                     <div class="oe_structure" />
-
-                    <div style="font-size:1.7em; text-align:center;">
-                        <span t-field="doc.name" />
-                    </div>
-                    <div style="font-size:1.2em; text-align:center; padding-bottom:1.5em;">
-                        Invoice Status
-                    </div>
 
                     <table style="width:100%; font-size:0.8em;">
                         <tr>
@@ -426,13 +419,13 @@
 
         <template id="report_production_global_template">
             <t t-call="report.html_container">
+
+                <t t-set="header_title1" t-value="'Productions Global Status'" />
+                <t t-set="header_title2" t-value="'To be closed from '+date_from+' to '+date_to" />
+
                 <t t-call="publisher.publisher_layout_internal">
                     <div class="page">
                         <div class="oe_structure" />
-
-                        <h2 style="font-size:2em; text-align:center; padding-top:3.5em; padding-bottom:1em;">
-                            Productions global state to be closed from <span t-esc="date_from" /> to <span t-esc="date_to" />
-                        </h2>
 
                         <table class="table table-condensed">
                             <thead>
