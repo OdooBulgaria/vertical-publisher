@@ -103,7 +103,7 @@
                                             <td>
                                                 <div><strong>Publication Date : </strong><span t-field="l.date_start"/></div>
                                                 <div><strong>End Date : </strong><span t-field="l.date_end"/></div>
-                                                <div><strong>Full Equipment : </strong><i class="fa fa-times" aria-hidden="true" t-if="not l.full_equipment_received" /><i class="fa fa-check" aria-hidden="true" t-if="l.full_equipment_received" /><!--<input type="checkbox" t-if="not l.full_equipment_received" /><input type="checkbox" checked="checked" t-if="l.full_equipment_received" />--></div>
+                                                <div><strong>Full Equipment : </strong><i class="fa fa-times" aria-hidden="true" t-if="not l.full_equipment_received" /><i class="fa fa-check" aria-hidden="true" t-if="l.full_equipment_received" /></div>
                                             </td>
                                         </tr>
                                     </t>
@@ -185,7 +185,7 @@
                                     </tr>
                                 </table>
                             </td>
-                            <td style="padding:0.5em; width:33.333333%; border-right:0.5px solid grey;">
+                            <td style="padding:0.5em; width:33.333333%;">
                                 <table style="width:100%;">
                                     <tr>
                                         <td style="width:40%;">Expected Turnover</td>
@@ -341,9 +341,7 @@
                                                     <t t-if="not invoice_line.invoice_id.number">
                                                         <em>Draft Invoice</em>
                                                     </t>
-
                                                 </div>
-
                                             </t>
                                         </t>
                                     </td>
@@ -399,119 +397,7 @@
                             </t></t>
 
                         </table>
-
-
-                        <h3>
-                            <span t-field="sale.name" />
-                        </h3>
-                        <div style="font-style: italic;">
-                            <span t-field="sale.state" />
-                        </div>
-                        <h4>
-                            <t t-if="sale.agency_id">
-                                <div>Agency : <span t-field="sale.agency_id" /></div>
-                            </t>
-                            <div>Customer : <span t-field="sale.partner_id" /></div>
-                        </h4>
-
-                        <table class="table table-condensed">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Invoices</th>
-                                    <th colspan="2" style="width:33.33333333%;">Pricing</th>
-                                </tr>
-                            </thead>
-                            <tbody class="sale_tbody">
-
-                                <t t-foreach="sale.order_line" t-as="l">
-                                    <t t-if="l.production_id.id == doc.id">
-
-                                        <t t-set="amount_invoiced" t-value="l.price_subtotal * l.qty_invoiced / l.product_uom_qty"/>
-                                        <t t-set="amount_to_invoice" t-value="l.price_subtotal * l.qty_to_invoice / l.product_uom_qty"/>
-
-                                        <tr>
-                                            <td>
-                                                <div><span t-field="l.product_id"/></div>
-                                                <div><strong>Unit Price : </strong><span t-field="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/></div>
-                                                <div><strong>Quantity : </strong><span  t-field="l.product_uom_qty"/></div>
-                                                <t t-if="l.discount_base > 0">
-                                                    <div><strong>Discount : </strong><span  t-field="l.discount_base"/></div>
-                                                </t>
-                                                <t t-if="l.commission > 0">
-                                                    <div><strong>Commission : </strong><span  t-field="l.commission"/></div>
-                                                </t>
-                                            </td>
-                                            <td>
-                                                <t t-set="invoices" t-value="[]"/>
-                                                <t t-foreach="l.invoice_lines" t-as="invoice_line">
-                                                    <t t-if="not invoice_line.invoice_id.id in invoices">
-                                                        <t t-set="invoices" t-value="invoices + [invoice_line.invoice_id.id]"/>
-
-                                                        <div>
-                                                            #<span t-esc="len(invoices)" />
-
-                                                            <t t-if="invoice_line.invoice_id.number">
-                                                                
-                                                                <t t-set="invoice_date" t-value="invoice_line.invoice_id.date_invoice.split('-')"/>
-
-                                                                <strong t-esc="invoice_line.invoice_id.number" />
-                                                                (<span t-esc="invoice_date[2] + '/' + invoice_date[1] + '/' + invoice_date[0]" />)
-                                                            </t>
-                                                            <t t-if="not invoice_line.invoice_id.number">
-                                                                <em>Draft Invoice</em>
-                                                            </t>
-
-                                                        </div>
-
-                                                    </t>
-                                                </t>
-                                            </td>
-                                            <td>
-                                                <div><strong>Amount Invoiced</strong></div>
-                                                <div><strong>Amount To Invoice</strong></div>
-                                                <div><strong>Subtotal</strong></div>
-                                            </td>
-                                            <td class="text-right">
-                                                <div t-esc="amount_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
-                                                <div t-esc="amount_to_invoice" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
-                                                <div t-field="l.price_subtotal"/>
-                                            </td>
-                                        </tr>
-                                    </t>
-                                </t>
-
-                            </tbody>
-                        </table>
                     </t>
-
-                    <div class="row" name="total">
-                        <div class="col-xs-4 pull-right" style="padding-left:0;">
-                            <table class="table table-condensed">
-                                <tr class="border-black">
-                                    <td><strong>Total Invoiced Without Taxes</strong></td>
-                                    <t t-set="total" t-value="sum((l.price_subtotal * l.qty_invoiced / l.product_uom_qty) for l in doc.sale_line_ids)"/>
-                                    <td class="text-right">
-                                        <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
-                                    </td>
-                                </tr>
-                                <tr class="border-black">
-                                    <td><strong>Total To Invoice Without Taxes</strong></td>
-                                    <t t-set="total" t-value="sum((l.price_subtotal * l.qty_to_invoice / l.product_uom_qty) for l in doc.sale_line_ids)"/>
-                                    <td class="text-right">
-                                        <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
-                                    </td>
-                                </tr>
-                                <tr class="border-black">
-                                    <td><strong>Total Without Taxes</strong></td>
-                                    <t t-set="total" t-value="sum(l.price_subtotal for l in doc.sale_line_ids)"/>
-                                    <td class="text-right">
-                                        <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
 
                     <div class="oe_structure"/>
                 </div>
@@ -604,34 +490,6 @@
 
                             </tbody>
                         </table>
-
-                        <!-- <div class="row" name="total">
-                            <div class="col-xs-4 pull-right">
-                                <table class="table table-condensed">
-                                    <tr class="border-black">
-                                        <td><strong>Total Invoiced Without Taxes</strong></td>
-                                        <t t-set="total" t-value="sum((line.price_unit * line.qty_invoiced) for line in doc.sale_line_ids)"/>
-                                        <td class="text-right">
-                                            <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-black">
-                                        <td><strong>Total To Invoice Without Taxes</strong></td>
-                                        <t t-set="total" t-value="sum((line.price_unit * line.qty_to_invoice) for line in doc.sale_line_ids)"/>
-                                        <td class="text-right">
-                                            <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-black">
-                                        <td><strong>Total Without Taxes</strong></td>
-                                        <t t-set="total" t-value="sum(line.price_subtotal for line in doc.sale_line_ids)"/>
-                                        <td class="text-right">
-                                            <span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div> -->
 
                         <div class="oe_structure"/>
                     </div>
