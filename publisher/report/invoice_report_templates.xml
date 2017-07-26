@@ -156,9 +156,11 @@
                     </div>
                 </t>
 
-                <div class="header" style="height:0;" />
-                <div class="page" style="margin-top:0;">
-                    <span t-raw="o.company_id.sfc" />
+                <div class="header" style="display:none;" />
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <span t-raw="doc.company_id.sfc" />
+                    <div class="oe_structure"/>
                 </div>
                 <div class="footer" />
             </xpath>

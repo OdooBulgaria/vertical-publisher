@@ -105,9 +105,4 @@ class SaleOrderReport(models.AbstractModel):
 
         _logger.info('\n\na\n\n')
 
-        t = report_obj.render('publisher.report_saleorder_publisher', docargs)
-
-        _logger.info('\n\nb\n\n')
-        # _logger.info('\n\n'+str(t)+'\n\n')
-
-        return False
+        return report_obj.render('publisher.report_saleorder_publisher', docargs)
