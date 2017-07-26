@@ -9,6 +9,7 @@ class ResCompany(models.Model):
     _inherit = 'res.company'
 
     reports_logo = fields.Binary(string="Reports Logo")
+    sfc_header = fields.Html(string="Standard Form Contract Header")
     sfc = fields.Html(string="Standard Form Contract")
     bank = fields.Char(string="BANK")
     iban = fields.Char(string="IBAN")

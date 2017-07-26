@@ -161,13 +161,7 @@
             </div>
         </t>
 
-        <div class="header" style="display:none;" />
-        <div class="page">
-            <div class="oe_structure"/>
-            <span t-raw="doc.company_id.sfc" />
-            <div class="oe_structure"/>
-        </div>
-        <div class="footer" />
+        <t t-call="publisher.publisher_layout_sfc" />
     </template>
 
 
