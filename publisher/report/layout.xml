@@ -11,7 +11,7 @@
             <field name="margin_left">7</field>
             <field name="margin_right">7</field>
             <field name="header_line" eval="False"/>
-            <field name="header_spacing">35</field>
+            <field name="header_spacing">100</field> <!-- 35 -->
             <field name="dpi">90</field>
         </record>
 
@@ -55,7 +55,8 @@
                     <div class="col-xs-4">
                         <img t-if="company.reports_logo" t-att-src="'data:image/png;base64,%s' % company.reports_logo" style="height: 5em;"/>
                     </div>
-                    <div class="col-xs-4 text-center" style="margin-top:0.5em;">
+                    <div class="col-xs-4 text-center">
+                        <div t-if="not header_title2" style="height:0.5em;" />
                         <div t-if="header_title1" t-esc="header_title1" style="font-size:1.7em;" />
                         <div t-if="header_title2" t-esc="header_title2" style="font-size:1.2em;" />
                     </div>
