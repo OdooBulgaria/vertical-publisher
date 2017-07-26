@@ -159,13 +159,16 @@
 
                 <div class="oe_structure"/>
             </div>
-        </t>
 
-        <div class="header" style="display:none;" />
-        <div class="page" style="margin-top:-8em;">
-            <span t-raw="doc.company_id.sfc" />
-        </div>
-        <div class="footer" />
+            <div class="header" style="display:none;" />
+            <div class="page" style="margin-top:-8em;z-index:1000;">
+                <div class="oe_structure"/>
+                <span t-raw="doc.company_id.sfc" />
+                <div class="oe_structure"/>
+            </div>
+            <div class="footer" />
+
+        </t>
     </template>
 
 
