@@ -2,11 +2,12 @@
 <odoo>
     <template id="report_saleorder_publisher_document">
 
-        <t t-set="header_title1" t-value="'Order # '+doc.name" t-if="doc.state not in ['draft','sent']" />
-        <t t-set="header_title1" t-value="'Quotation # '+doc.name" t-if="doc.state in ['draft','sent']" />
+        <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
+
+        <t t-set="header_title1" t-value="header_title1_1+' # '+doc.name" t-if="doc.state not in ['draft','sent']" />
+        <t t-set="header_title1" t-value="header_title1_2+' # '+doc.name" t-if="doc.state in ['draft','sent']" />
 
         <t t-call="publisher.publisher_layout">
-            <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
             <div class="page">
                 <div class="oe_structure"/>
 

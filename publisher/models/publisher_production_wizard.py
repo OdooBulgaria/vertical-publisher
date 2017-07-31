@@ -40,6 +40,8 @@ class ProductionGlobalReport(models.AbstractModel):
             return date[2] + '/' + date[1] + '/' + date[0]
 
         return report_obj.render('publisher.report_production_global_template', {
+            'header_title1': _("Productions Global Status"),
+            'header_title2': _("To be closed from") + " " + date_from + " " + _("to") + " " + date_to,
             'doc_ids': None,
             'doc_model': report.model,
             'docs': None,

@@ -411,3 +411,39 @@ class Production(models.Model):
             action['res_id'] = invoice_ids[0]
 
         return action
+
+
+
+class ProductionReport(models.AbstractModel):
+    _name = 'report.publisher.report_production_template'
+
+    @api.model
+    def render_html(self, docids, data=None):
+
+        report_obj = self.env['report']
+        report = report_obj._get_report_from_name('publisher.report_production_template')
+        docargs = {
+            'header_title2': _("Global Status"),
+            'doc_ids': docids,
+            'doc_model': report.model,
+            'docs': self.env['publisher.production'].search([('id', 'in', docids)])
+        }
+
+        return report_obj.render('publisher.report_production_template', docargs)
+
+class ProductionInvoiceStatusReport(models.AbstractModel):
+    _name = 'report.publisher.report_production_invoice_status_template'
+
+    @api.model
+    def render_html(self, docids, data=None):
+
+        report_obj = self.env['report']
+        report = report_obj._get_report_from_name('publisher.report_production_invoice_status_template')
+        docargs = {
+            'header_title2': _("Invoice Status"),
+            'doc_ids': docids,
+            'doc_model': report.model,
+            'docs': self.env['publisher.production'].search([('id', 'in', docids)])
+        }
+
+        return report_obj.render('publisher.report_production_invoice_status_template', docargs)
