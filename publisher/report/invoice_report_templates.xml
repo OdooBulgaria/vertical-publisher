@@ -4,6 +4,8 @@
         <template id="report_invoice_document_publisher" inherit_id="account.report_invoice_document">
             <xpath expr="(//t[@t-call='report.external_layout'])" position="replace">
 
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+
                 <t t-set="header_title1" t-value="'Invoice'" t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')" />
                 <t t-set="header_title1" t-value="'PRO-FORMA'" t-if="o.type == 'out_invoice' and o.state == 'proforma2'" />
                 <t t-set="header_title1" t-value="'Draft Invoice'" t-if="o.type == 'out_invoice' and o.state == 'draft'" />
