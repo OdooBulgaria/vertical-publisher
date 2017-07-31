@@ -164,8 +164,8 @@
 
         <template id="report_invoice_document_publisher_duplicate" inherit_id="publisher.report_invoice_document_publisher" primary="True">
             <xpath expr="//t[@t-call='publisher.publisher_layout']" position="before">
-                <t t-set="header_title1" t-value="'Duplicate refund'" t-if="o.type == 'out_refund'" />
-                <t t-set="header_title1" t-value="'Duplicate invoice'" t-if="o.type == 'out_invoice'" />
+                <t t-set="header_title1" t-value="header_title1_1" t-if="o.type == 'out_refund'" />
+                <t t-set="header_title1" t-value="header_title1_2" t-if="o.type == 'out_invoice'" />
             </xpath>
         </template>
 

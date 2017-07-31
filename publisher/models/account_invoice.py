@@ -44,13 +44,8 @@ class AccountInvoiceDuplicateReport(models.AbstractModel):
         report_obj = self.env['report']
         report = report_obj._get_report_from_name('publisher.report_invoice_publisher_duplicate')
         docargs = {
-            'header_title1_1': _("Invoice"),
-            'header_title1_2': _("PRO-FORMA"),
-            'header_title1_3': _("Draft Invoice"),
-            'header_title1_4': _("Cancelled Invoice"),
-            'header_title1_5': _("Refund"),
-            'header_title1_6': _("Vendor Refund"),
-            'header_title1_7': _("Vendor Bill"),
+            'header_title1_1': _("Duplicate refund"),
+            'header_title1_2': _("Duplicate invoice"),
             'doc_ids': docids,
             'doc_model': report.model,
             'docs': self.env['account.invoice'].search([('id', 'in', docids)])
