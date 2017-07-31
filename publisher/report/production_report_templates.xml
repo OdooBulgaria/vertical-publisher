@@ -6,7 +6,6 @@
             <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
 
             <t t-set="header_title1" t-value="doc.name" />
-            <t t-set="header_title2" t-value="'Global Status'" />
 
             <t t-call="publisher.publisher_layout_internal">
                 <div class="page">
@@ -299,7 +298,6 @@
             <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
 
             <t t-set="header_title1" t-value="doc.name" />
-            <t t-set="header_title2" t-value="'Invoice Status'" />
 
             <t t-call="publisher.publisher_layout_internal">
                 <div class="page">
@@ -580,9 +578,6 @@
 
         <template id="report_production_global_template">
             <t t-call="report.html_container">
-
-                <t t-set="header_title1" t-value="'Productions Global Status'" />
-                <t t-set="header_title2" t-value="'To be closed from '+date_from+' to '+date_to" />
 
                 <t t-call="publisher.publisher_layout_internal">
                     <div class="page">

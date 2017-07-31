@@ -6,13 +6,13 @@
 
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
 
-                <t t-set="header_title1" t-value="'Invoice'" t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')" />
-                <t t-set="header_title1" t-value="'PRO-FORMA'" t-if="o.type == 'out_invoice' and o.state == 'proforma2'" />
-                <t t-set="header_title1" t-value="'Draft Invoice'" t-if="o.type == 'out_invoice' and o.state == 'draft'" />
-                <t t-set="header_title1" t-value="'Cancelled Invoice'" t-if="o.type == 'out_invoice' and o.state == 'cancel'" />
-                <t t-set="header_title1" t-value="'Refund'" t-if="o.type == 'out_refund'" />
-                <t t-set="header_title1" t-value="'Vendor Refund'" t-if="o.type == 'in_refund'" />
-                <t t-set="header_title1" t-value="'Vendor Bill'" t-if="o.type == 'in_invoice'" />
+                <t t-set="header_title1" t-value="header_title1_1" t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')" />
+                <t t-set="header_title1" t-value="header_title1_2" t-if="o.type == 'out_invoice' and o.state == 'proforma2'" />
+                <t t-set="header_title1" t-value="header_title1_1" t-if="o.type == 'out_invoice' and o.state == 'draft'" />
+                <t t-set="header_title1" t-value="header_title1_4" t-if="o.type == 'out_invoice' and o.state == 'cancel'" />
+                <t t-set="header_title1" t-value="header_title1_5" t-if="o.type == 'out_refund'" />
+                <t t-set="header_title1" t-value="header_title1_6" t-if="o.type == 'in_refund'" />
+                <t t-set="header_title1" t-value="header_title1_7" t-if="o.type == 'in_invoice'" />
 
                 <t t-call="publisher.publisher_layout">
                     <div class="page">

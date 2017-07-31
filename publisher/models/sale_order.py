@@ -85,6 +85,24 @@ class SaleOrder(models.Model):
 
 
 class SaleOrderReport(models.AbstractModel):
+    _name = 'report.publisher.report_saleorder_publisher'
+
+    @api.model
+    def render_html(self, docids, data=None):
+
+        report_obj = self.env['report']
+        report = report_obj._get_report_from_name('publisher.report_saleorder_publisher')
+        docargs = {
+            'header_title1_1': _("Order"),
+            'header_title1_2': _("Quotation"),
+            'doc_ids': docids,
+            'doc_model': report.model,
+            'docs': self.env['sale.order'].search([('id', 'in', docids)])
+        }
+
+        return report_obj.render('publisher.report_saleorder_publisher', docargs)
+
+class SaleOrderReportNoPrice(models.AbstractModel):
     _name = 'report.publisher.report_saleorder_publisher_noprice'
 
     @api.model
@@ -93,8 +111,8 @@ class SaleOrderReport(models.AbstractModel):
         report_obj = self.env['report']
         report = report_obj._get_report_from_name('publisher.report_saleorder_publisher')
         docargs = {
-            'header_title1_1': "Order", # _("Order"),
-            'header_title1_2': "Quotation", # _("Quotation"),
+            'header_title1_1': _("Order"),
+            'header_title1_2': _("Quotation"),
             'doc_ids': docids,
             'doc_model': report.model,
             'docs': self.env['sale.order'].search([('id', 'in', docids)]),
