@@ -22,6 +22,14 @@
                         <attribute name="editable" />
                     </xpath>
 
+                    <xpath expr="//field[@name='recurring_invoice_line_ids']/tree//field[@name='actual_quantity']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+
+                    <xpath expr="//field[@name='recurring_invoice_line_ids']/tree//field[@name='sold_quantity']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+
                     <!-- Declare form -->
                     <xpath expr="//field[@name='recurring_invoice_line_ids']/tree" position="after">
                         <form>
@@ -36,11 +44,9 @@
                                         <field name="language_id" />
                                     </group>
                                     <group>
-                                        <field name="actual_quantity" />
                                         <field name="price_unit" />
                                         <field name="discount" />
                                         <field name="quantity" />
-                                        <field name="sold_quantity" />
                                         <field name="price_subtotal" />
                                     </group>
                                 </group>
