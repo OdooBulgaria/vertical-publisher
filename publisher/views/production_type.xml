@@ -29,7 +29,7 @@
                 <form string="Production Type">
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button class="oe_stat_button" name="%(production_type_production_action)d" type="action" icon="fa-industry" context="{'production_type_id': id}">
+                            <button class="oe_stat_button" name="%(production_type_production_action)d" type="action" icon="fa-industry" context="{'production_type_id': id, 'default_production_type_id': id}">
                                 <field string="Productions" name="production_count" widget="statinfo" modifiers="{'readonly': true}"/>
                             </button>
                         </div>
