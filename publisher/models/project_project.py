@@ -12,7 +12,7 @@ class Project(models.Model):
 
     def project_project_production_action(self):
         return {
-            'name': ('Production'),
+            'name': _('Production'),
             'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'publisher.production',

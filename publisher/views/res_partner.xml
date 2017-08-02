@@ -57,7 +57,7 @@
                                 <field name="agency" />
                             </group>
                             <group>
-                                <field name="invitations" />
+                                <field name="invitation_ids" />
                             </group>
                         </page>
                     </xpath>

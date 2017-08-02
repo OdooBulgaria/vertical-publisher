@@ -17,9 +17,9 @@ class SaleSubscription(models.Model):
 
         vals['name'] = '\n'.join(filter(None, [
             line.name,
-            'Unit Price : '+str(line.price_unit)+line.analytic_account_id.currency_id.symbol if line.quantity != 1 else '',
-            'Quantity : '+str(line.quantity) if line.quantity != 1 else '',
-            'Price : '+str(line.quantity*line.price_unit)+line.analytic_account_id.currency_id.symbol+(' - '+str(line.discount)+' % customer discount' if line.discount>0 else ''),
+            _('Unit Price : ')+str(line.price_unit)+line.analytic_account_id.currency_id.symbol if line.quantity != 1 else '',
+            _('Quantity : ')+str(line.quantity) if line.quantity != 1 else '',
+            _('Price : ')+str(line.quantity*line.price_unit)+line.analytic_account_id.currency_id.symbol+(' - '+str(line.discount)+_(' % customer discount') if line.discount>0 else ''),
         ]))
 
         return vals

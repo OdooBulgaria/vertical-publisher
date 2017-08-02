@@ -104,11 +104,11 @@ class SaleOrderLine(models.Model):
 
         vals['name'] = '\n'.join(filter(None, [
             self.name,
-            'Unit Price : '+str(self.price_unit)+self.currency_id.symbol if self.product_uom_qty != 1 or qty != self.product_uom_qty else '',
-            'Quantity : '+str(self.product_uom_qty) if self.product_uom_qty != 1 else '',
-            'Invoiced Percentage : '+str(round(qty / self.product_uom_qty * 100, 2))+' %' if qty != self.product_uom_qty else '',
-            'Your Customer : '+self.order_id.partner_id.name if self.order_id.partner_invoice_id else '',
-            'Price : '+str(qty*self.price_unit)+self.currency_id.symbol+(' - '+str(self.discount_base)+' % customer discount' if self.discount_base>0 else '')+(' = '+str(qty*self.price_unit*(1-self.discount_base/100))+self.currency_id.symbol if self.discount_base>0 and self.commission>0 else '')+(' - '+str(self.commission)+' % agency commission' if self.commission>0 else ''),
+            _('Unit Price : ')+str(self.price_unit)+self.currency_id.symbol if self.product_uom_qty != 1 or qty != self.product_uom_qty else '',
+            _('Quantity : ')+str(self.product_uom_qty) if self.product_uom_qty != 1 else '',
+            _('Invoiced Percentage : ')+str(round(qty / self.product_uom_qty * 100, 2))+' %' if qty != self.product_uom_qty else '',
+            _('Your Customer : ')+self.order_id.partner_id.name if self.order_id.partner_invoice_id else '',
+            _('Price : ')+str(qty*self.price_unit)+self.currency_id.symbol+(' - '+str(self.discount_base)+_(' % customer discount') if self.discount_base>0 else '')+(' = '+str(qty*self.price_unit*(1-self.discount_base/100))+self.currency_id.symbol if self.discount_base>0 and self.commission>0 else '')+(' - '+str(self.commission)+_(' % agency commission') if self.commission>0 else ''),
         ]))
 
         return vals

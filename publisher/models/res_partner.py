@@ -10,7 +10,7 @@ class ResPartner(models.Model):
 
     agency = fields.Boolean(string="Is an Agency")
 
-    invitations = fields.Many2many('publisher.invitation', string="Invitations")
+    invitation_ids = fields.Many2many('publisher.invitation', string="Invitations")
 
     production_line_count = fields.Integer(string="Production Line Count", compute='_compute_production_line_count')
     subscription_shipped_count = fields.Integer(string="Shipped Subscription Count", compute='_compute_subscription_shipped_count')

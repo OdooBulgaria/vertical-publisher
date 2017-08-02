@@ -10,6 +10,9 @@
                     <!-- SUBSCRIPITION -->
 
                     <!-- Add Customer -->
+                    <xpath expr="/form/sheet//field[@name='partner_id']" position="attributes">
+                        <attribute name="string">Invoice Address</attribute>
+                    </xpath>
                     <xpath expr="/form/sheet//field[@name='partner_id']" position="after">
                         <field name="partner_customer_id" />
                     </xpath>
@@ -28,6 +31,11 @@
 
                     <xpath expr="//field[@name='recurring_invoice_line_ids']/tree//field[@name='sold_quantity']" position="attributes">
                         <attribute name="invisible">1</attribute>
+                    </xpath>
+
+                    <xpath expr="//field[@name='recurring_invoice_line_ids']/tree//field[@name='name']" position="after">
+                        <field name="partner_shipping_id" />
+                        <field name="language_id" />
                     </xpath>
 
                     <!-- Declare form -->

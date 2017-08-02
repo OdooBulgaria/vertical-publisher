@@ -19,7 +19,7 @@ class Production(models.Model):
     _sql_constraints = [(
         'seq_number_unique', 
         'unique(seq_number)',
-        'This sequence number is already taken'
+        _('This sequence number is already taken')
     )]
 
     name = fields.Char(string='Name', index=True, required=True, readonly=True, states={'draft': [('readonly', False)]})
@@ -200,7 +200,7 @@ class Production(models.Model):
                 report_pages.append([])
             # Append category to current report page
             report_pages[-1].append({
-                'name': category and category.name or 'Uncategorized',
+                'name': category and category.name or _('Uncategorized'),
                 'subtotal': category and category.subtotal,
                 'pagebreak': category and category.pagebreak,
                 'lines': list(lines)
@@ -260,7 +260,7 @@ class Production(models.Model):
                 'model': 'publisher.production',
                 'field': 'export_file',
                 'id': self.id,
-                'filename': get_valid_filename(self.name) + " (Attachments).zip"
+                'filename': get_valid_filename(self.name) + _(" (Attachments).zip")
             }),
             'target': 'blank',
         }
@@ -356,16 +356,16 @@ class Production(models.Model):
                     description = '\n'.join(filter(None, [
                         line.name,
                         self.name,
-                        'Unit Price : '+str(line.price_unit)+self.currency_id.symbol if line.product_uom_qty != 1 or quantity != line.product_uom_qty else '',
-                        'Quantity : '+str(line.product_uom_qty) if line.product_uom_qty != 1 else '',
-                        'Invoiced Percentage : '+str(round(quantity / line.product_uom_qty * 100, 2))+' %' if quantity != line.product_uom_qty else '',
+                        _('Unit Price : ')+str(line.price_unit)+self.currency_id.symbol if line.product_uom_qty != 1 or quantity != line.product_uom_qty else '',
+                        _('Quantity : ')+str(line.product_uom_qty) if line.product_uom_qty != 1 else '',
+                        _('Invoiced Percentage : ')+str(round(quantity / line.product_uom_qty * 100, 2))+' %' if quantity != line.product_uom_qty else '',
                         ', '.join(filter(None, [
-                            'Format : '+line.format_id.name if line.format_id else '',
-                            'Location : '+line.location_id.name if line.location_id else '',
-                            'Color : '+line.color_id.name if line.color_id else '',
+                            _('Format : ')+line.format_id.name if line.format_id else '',
+                            _('Location : ')+line.location_id.name if line.location_id else '',
+                            _('Color : ')+line.color_id.name if line.color_id else '',
                         ])),
-                        'Your Customer : '+sale_id.partner_id.name if sale_id.partner_invoice_id else '',
-                        'Price : '+str(quantity*line.price_unit)+self.currency_id.symbol+(' - '+str(line.discount_base)+' % customer discount' if line.discount_base>0 else '')+(' = '+str(quantity*line.price_unit*(1-line.discount_base/100))+self.currency_id.symbol if line.discount_base>0 and line.commission>0 else '')+(' - '+str(line.commission)+' % agency commission' if line.commission>0 else ''),
+                        _('Your Customer : ')+sale_id.partner_id.name if sale_id.partner_invoice_id else '',
+                        _('Price : ')+str(quantity*line.price_unit)+self.currency_id.symbol+(' - '+str(line.discount_base)+_(' % customer discount') if line.discount_base>0 else '')+(' = '+str(quantity*line.price_unit*(1-line.discount_base/100))+self.currency_id.symbol if line.discount_base>0 and line.commission>0 else '')+(' - '+str(line.commission)+_(' % agency commission') if line.commission>0 else ''),
                     ]))
 
                     account_line = line.product_id.property_account_income_id or line.product_id.categ_id.property_account_income_categ_id
@@ -399,7 +399,7 @@ class Production(models.Model):
                 invoice_id.compute_taxes()
 
         if not invoice_ids:
-            raise exceptions.ValidationError('Not any line to invoice, make sure the sale orders are confirmed and the production publication date / invoicing mode are ok.')
+            raise exceptions.ValidationError(_('Not any line to invoice, make sure the sale orders are confirmed and the production publication date / invoicing mode are ok.'))
             return False
 
         action = self.env.ref('account.action_invoice_tree1').read()[0]
