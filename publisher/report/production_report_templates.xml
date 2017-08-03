@@ -116,6 +116,8 @@
 
                     <t t-foreach="doc.sale_ids" t-as="sale">
 
+                        <t t-set="sale" t-value="sale.with_context({'lang':user.partner_id.lang})" />
+
                         <table style="width:100%; font-size:0.8em; border:2px solid black; margin-top:0.8em;">
                             <tr>
                                 <td style="padding:0.5em; width:33.333333%; border-right:0.5px solid grey; border-bottom:2px solid black;">
@@ -181,6 +183,8 @@
                             </tr>
 
                             <t t-foreach="sale.order_line" t-as="line"><t t-if="line.production_id.id == doc.id">
+
+                                <t t-set="line" t-value="line.with_context({'lang':user.partner_id.lang})" />
 
                                 <tr>
                                     <td style="padding:0.5em; width:33.333333%; border-right:0.5px solid grey; border-bottom:0.5px solid black;">
@@ -370,6 +374,8 @@
 
                     <t t-foreach="doc.sale_ids" t-as="sale">
 
+                        <t t-set="sale" t-value="sale.with_context({'lang':user.partner_id.lang})" />
+
                         <table style="width:100%; font-size:0.8em; border:2px solid black; margin-top:0.8em;">
                             <tr>
                                 <td style="padding:0.5em; width:33.333333%; border-right:0.5px solid grey; border-bottom:2px solid black;">
@@ -442,6 +448,8 @@
                             </tr>
 
                             <t t-foreach="sale.order_line" t-as="line"><t t-if="line.production_id.id == doc.id">
+
+                                <t t-set="line" t-value="line.with_context({'lang':user.partner_id.lang})" />
 
                                 <tr>
                                     <td style="padding:0.5em; width:33.333333%; border-right:0.5px solid grey; border-bottom:0.5px solid black;">
@@ -605,6 +613,8 @@
 
                                     <t t-set="prod_type" t-value="data[prod_type_id]['obj']"/>
                                     <t t-set="prods" t-value="data[prod_type_id]['prods']"/>
+
+                                    <t t-set="prod_type" t-value="prod_type.with_context({'lang':user.partner_id.lang})" />
                                     
                                     <t t-set="prod_type_expected" t-value="sum(prod.expected_turnover for prod in prods)"/>
                                     <t t-set="prod_type_actual" t-value="sum(prod.actual_turnover for prod in prods)"/>
@@ -624,6 +634,9 @@
                                     </tr>
 
                                     <t t-foreach="prods" t-as="prod">
+
+                                        <t t-set="prod" t-value="prod.with_context({'lang':user.partner_id.lang})" />
+
                                         <tr>
                                             <td><span t-esc="prod.seq_number"/></td>
                                             <td><span t-esc="prod.name"/></td>

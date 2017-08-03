@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e-20170719\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-03 06:36+0000\n"
-"PO-Revision-Date: 2017-08-03 06:36+0000\n"
+"POT-Creation-Date: 2017-08-03 14:35+0000\n"
+"PO-Revision-Date: 2017-08-03 14:35+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -156,19 +156,14 @@ msgid "Attachments"
 msgstr "Pièces jointes"
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_res_company_bic
-msgid "BIC"
-msgstr "BIC"
-
-#. module: publisher
 #: model:ir.ui.view,arch_db:publisher.publisher_layout_footer
 msgid "BIC:"
 msgstr "BIC :"
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_res_company_bank
-msgid "Bank"
-msgstr "Banque"
+#: model:ir.model.fields,field_description:publisher.field_res_company_bank_acc
+msgid "Bank Account"
+msgstr "Compte bancaire"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_invoice_document_publisher
@@ -307,7 +302,6 @@ msgstr "Créer factures"
 #: model:ir.model.fields,field_description:publisher.field_publisher_color_create_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_create_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_create_uid
-#: model:ir.model.fields,field_description:publisher.field_publisher_language_create_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_create_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_media_create_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_create_uid
@@ -320,7 +314,6 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:publisher.field_publisher_color_create_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_create_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_create_date
-#: model:ir.model.fields,field_description:publisher.field_publisher_language_create_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_create_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_media_create_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_create_date
@@ -391,7 +384,6 @@ msgstr "Remise (%)"
 #: model:ir.model.fields,field_description:publisher.field_publisher_color_display_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_display_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_display_name
-#: model:ir.model.fields,field_description:publisher.field_publisher_language_display_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_display_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_media_display_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_display_name
@@ -461,7 +453,7 @@ msgstr "Lignes Matériel Reçu"
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_production_template_document
 msgid "Equipment Received"
-msgstr "Equipment Received"
+msgstr "Matériel reçu"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_production_global_template
@@ -529,11 +521,6 @@ msgid "Has Production"
 msgstr "A une Production"
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_res_company_iban
-msgid "IBAN"
-msgstr "IBAN"
-
-#. module: publisher
 #: model:ir.ui.view,arch_db:publisher.publisher_layout_footer
 msgid "IBAN:"
 msgstr "IBAN:"
@@ -542,7 +529,6 @@ msgstr "IBAN:"
 #: model:ir.model.fields,field_description:publisher.field_publisher_color_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_id
-#: model:ir.model.fields,field_description:publisher.field_publisher_language_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_media_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_id
@@ -574,7 +560,6 @@ msgstr "Invitations"
 #. module: publisher
 #: model:ir.actions.act_window,name:publisher.menu_sale_publisher_settings_partners_invitations_action
 #: model:ir.ui.menu,name:publisher.menu_sale_publisher_settings_partners_invitations
-#: model:ir.ui.menu,name:publisher.menu_sale_publisher_settings_subscriptions_languages
 msgid "Invitations Settings"
 msgstr "Paramètres Invitations"
 
@@ -650,15 +635,9 @@ msgid "Language"
 msgstr "Langue"
 
 #. module: publisher
-#: model:ir.actions.act_window,name:publisher.menu_sale_publisher_settings_subscriptions_languages_action
-msgid "Languages Settings"
-msgstr "Paramètres des langues"
-
-#. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_publisher_color___last_update
 #: model:ir.model.fields,field_description:publisher.field_publisher_format___last_update
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation___last_update
-#: model:ir.model.fields,field_description:publisher.field_publisher_language___last_update
 #: model:ir.model.fields,field_description:publisher.field_publisher_location___last_update
 #: model:ir.model.fields,field_description:publisher.field_publisher_media___last_update
 #: model:ir.model.fields,field_description:publisher.field_publisher_production___last_update
@@ -678,7 +657,6 @@ msgstr "Dernière Modification le"
 #: model:ir.model.fields,field_description:publisher.field_publisher_color_write_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_write_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_write_uid
-#: model:ir.model.fields,field_description:publisher.field_publisher_language_write_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_write_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_media_write_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_write_uid
@@ -691,7 +669,6 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:publisher.field_publisher_color_write_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_write_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_write_date
-#: model:ir.model.fields,field_description:publisher.field_publisher_language_write_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_write_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_media_write_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_write_date
@@ -759,7 +736,6 @@ msgstr "Supports"
 #: model:ir.model.fields,field_description:publisher.field_publisher_color_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_name
-#: model:ir.model.fields,field_description:publisher.field_publisher_language_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_media_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_name
@@ -1127,11 +1103,6 @@ msgstr "État"
 #: model:ir.model.fields,field_description:publisher.field_product_template_subscription_count
 msgid "Subscription Count"
 msgstr "Nombre d'abonnements"
-
-#. module: publisher
-#: model:ir.ui.menu,name:publisher.menu_sale_publisher_settings_subscriptions
-msgid "Subscriptions Management"
-msgstr "Gestion des abonnements"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_invoice_document_publisher
