@@ -253,7 +253,7 @@
                                                 <td style="width:40%;">Discount</td>
                                                 <td style="width:60%;">
                                                     <table style="width:100%; font-weight:bold;"><tr>
-                                                        <td><span t-esc="round(line.discount_base, 2)" />%</td>
+                                                        <td><span t-esc="round(line.discount_base, 2)" /> %</td>
                                                         <td style="text-align:right;"><span t-esc="line.price_unit * line.product_uom_qty * (1-line.discount_base)" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                                     </tr></table>
                                                 </td>
@@ -262,7 +262,7 @@
                                                 <td style="width:40%;">Commission</td>
                                                 <td style="width:60%;">
                                                     <table style="width:100%; font-weight:bold;"><tr>
-                                                        <td><span t-esc="round(line.commission, 2)" />%</td>
+                                                        <td><span t-esc="round(line.commission, 2)" /> %</td>
                                                         <td style="text-align:right;"><span t-esc="line.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                                     </tr></table>
                                                 </td>
@@ -441,7 +441,7 @@
                                         </tr>
                                         <tr>
                                             <td style="width:40%;">Invoiced Proportion</td>
-                                            <td style="font-weight:bold; width:60%;"><span t-esc="round(total_invoiced / total * 100 if total != 0 else 0, 2)" />%</td>
+                                            <td style="font-weight:bold; width:60%;"><span t-esc="round(total_invoiced / total * 100 if total != 0 else 0, 2)" /> %</td>
                                         </tr>
                                     </table>
                                 </td>
@@ -532,7 +532,7 @@
                                                 <td style="width:40%;">Discount</td>
                                                 <td style="width:60%;">
                                                     <table style="width:100%; font-weight:bold;"><tr>
-                                                        <td><span t-esc="round(line.discount_base, 2)" />%</td>
+                                                        <td><span t-esc="round(line.discount_base, 2)" /> %</td>
                                                         <td style="text-align:right;"><span t-esc="line.price_unit * line.product_uom_qty * (1-line.discount_base)" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                                     </tr></table>
                                                 </td>
@@ -541,7 +541,7 @@
                                                 <td style="width:40%;">Commission</td>
                                                 <td style="width:60%;">
                                                     <table style="width:100%; font-weight:bold;"><tr>
-                                                        <td><span t-esc="round(line.commission, 2)" />%</td>
+                                                        <td><span t-esc="round(line.commission, 2)" /> %</td>
                                                         <td style="text-align:right;"><span t-esc="line.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                                     </tr></table>
                                                 </td>
@@ -626,10 +626,10 @@
 
                                     <tr class="border-black" style="font-weight:bold;">
                                         <td colspan="2" style="font-size:1.2em;"><span t-esc="prod_type.name"/></td>
-                                        <td class="text-right"><span t-esc="prod_type_expected"/></td>
-                                        <td class="text-right"><span t-esc="prod_type_actual"/></td>
-                                        <td class="text-right"><span t-esc="round(prod_type_actual / prod_type_expected * 100 if prod_type_expected > 0 else 0, 2)"/>%</td>
-                                        <td class="text-right"><span t-esc="'+' if prod_type_delta > 0 else ''"/><span t-esc="prod_type_delta"/></td>
+                                        <td class="text-right"><span t-esc="prod_type_expected" t-options="{'widget': 'monetary', 'display_currency': prods[0].currency_id}"/></td>
+                                        <td class="text-right"><span t-esc="prod_type_actual" t-options="{'widget': 'monetary', 'display_currency': prods[0].currency_id}"/></td>
+                                        <td class="text-right"><span t-esc="round(prod_type_actual / prod_type_expected * 100 if prod_type_expected > 0 else 0, 2)"/> %</td>
+                                        <td class="text-right"><span t-esc="'+' if prod_type_delta > 0 else ''"/><span t-esc="prod_type_delta" t-options="{'widget': 'monetary', 'display_currency': prods[0].currency_id}"/></td>
                                         <td> </td>
                                     </tr>
 
@@ -640,21 +640,21 @@
                                         <tr>
                                             <td><span t-esc="prod.seq_number"/></td>
                                             <td><span t-esc="prod.name"/></td>
-                                            <td class="text-right"><span t-esc="prod.expected_turnover"/></td>
-                                            <td class="text-right"><span t-esc="prod.actual_turnover"/></td>
-                                            <td class="text-right"><span t-esc="round(prod.actual_turnover / prod.expected_turnover * 100 if prod.expected_turnover > 0 else 0, 2)"/>%</td>
-                                            <td class="text-right"><span t-esc="prod.turnover_delta_sign"/><span t-esc="prod.turnover_delta"/></td>
-                                            <td><span t-esc="prod.date_closing"/></td>
+                                            <td class="text-right"><span t-esc="prod.expected_turnover" t-options="{'widget': 'monetary', 'display_currency': prod.currency_id}"/></td>
+                                            <td class="text-right"><span t-esc="prod.actual_turnover" t-options="{'widget': 'monetary', 'display_currency': prod.currency_id}"/></td>
+                                            <td class="text-right"><span t-esc="round(prod.actual_turnover / prod.expected_turnover * 100 if prod.expected_turnover > 0 else 0, 2)"/> %</td>
+                                            <td class="text-right"><span t-esc="prod.turnover_delta_sign"/><span t-esc="prod.turnover_delta" t-options="{'widget': 'monetary', 'display_currency': prod.currency_id}"/></td>
+                                            <td><span t-field="prod.date_closing"/></td>
                                         </tr>
                                     </t>
                                 </t>
 
                                 <tr class="border-black" style="font-weight:bold;">
                                     <td colspan="2" style="font-size:1.4em;">Total</td>
-                                    <td class="text-right"><span t-esc="total_expected"/></td>
-                                    <td class="text-right"><span t-esc="total_actual"/></td>
-                                    <td class="text-right"><span t-esc="round(total_actual / total_expected * 100 if total_expected > 0 else 0, 2)"/>%</td>
-                                    <td class="text-right"><span t-esc="'+' if total_delta > 0 else ''"/><span t-esc="total_delta"/></td>
+                                    <td class="text-right"><span t-esc="total_expected"/> €</td>
+                                    <td class="text-right"><span t-esc="total_actual"/> €</td>
+                                    <td class="text-right"><span t-esc="round(total_actual / total_expected * 100 if total_expected > 0 else 0, 2)"/> %</td>
+                                    <td class="text-right"><span t-esc="'+' if total_delta > 0 else ''"/><span t-esc="total_delta"/> €</td>
                                     <td> </td>
                                 </tr>
 
