@@ -11,6 +11,4 @@ class ResCompany(models.Model):
     reports_logo = fields.Binary(string="Reports Logo")
     sfc_header = fields.Html(string="Standard Form Contract Header")
     sfc = fields.Html(string="Standard Form Contract")
-    bank = fields.Char(string="Bank")
-    iban = fields.Char(string="IBAN")
-    bic = fields.Char(string="BIC")
+    bank_acc = fields.Many2one('res.partner.bank', string="Bank Account")

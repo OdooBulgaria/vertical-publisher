@@ -103,13 +103,13 @@
                     <ul class="list-inline">
                         <li t-if="company.vat">TIN: <span t-field="company.vat"/></li>
 
-                        <li t-if="company.vat and company.iban">&amp;bull;</li>
-                        <li t-if="company.iban">IBAN: <span t-field="company.iban"/></li>
+                        <li t-if="company.vat and company.bank_acc.acc_number">&amp;bull;</li>
+                        <li t-if="company.bank_acc.acc_number">IBAN: <span t-field="company.bank_acc.acc_number"/></li>
 
-                        <li t-if="company.iban and company.bank or company.iban and company.bic">&amp;bull;</li>
-                        <li t-if="company.bank"><span t-field="company.bank"/>, </li>
+                        <li t-if="company.bank_acc.acc_number and company.bank_acc.bank_name or company.bank_acc.acc_number and company.bank_acc.bank_bic">&amp;bull;</li>
+                        <li t-if="company.bank_acc.bank_name"><span t-field="company.bank_acc.bank_name"/>, </li>
 
-                        <li t-if="company.bic">BIC: <span t-field="company.bic"/></li>
+                        <li t-if="company.bank_acc.bank_bic">BIC: <span t-field="company.bank_acc.bank_bic"/></li>
                     </ul>
 
                     <ul class="list-inline">
