@@ -4,28 +4,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e-20170707\n"
+"Project-Id-Version: Odoo Server 10.0+e-20170719\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-31 10:39+0000\n"
-"PO-Revision-Date: 2017-07-31 10:39+0000\n"
+"POT-Creation-Date: 2017-08-03 06:36+0000\n"
+"PO-Revision-Date: 2017-08-03 06:36+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:51
-#, python-format
-msgid " attachment(s) added"
-msgstr " fichier(s) joint(s) ajouté(s)"
-
-#. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:51
-#, python-format
-msgid " attachment(s) deleted"
-msgstr " fichier(s) joint(s) supprimé(s)"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.publisher_layout_footer
@@ -168,11 +156,6 @@ msgid "Attachments"
 msgstr "Pièces jointes"
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_res_company_bank
-msgid "BANK"
-msgstr "Banque"
-
-#. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_res_company_bic
 msgid "BIC"
 msgstr "BIC"
@@ -181,6 +164,11 @@ msgstr "BIC"
 #: model:ir.ui.view,arch_db:publisher.publisher_layout_footer
 msgid "BIC:"
 msgstr "BIC :"
+
+#. module: publisher
+#: model:ir.model.fields,field_description:publisher.field_res_company_bank
+msgid "Bank"
+msgstr "Banque"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_invoice_document_publisher
@@ -218,12 +206,6 @@ msgstr "Calendrier"
 #: model:ir.ui.view,arch_db:publisher.view_publisher_production_form
 msgid "Cancel"
 msgstr "Annuler"
-
-#. module: publisher
-#: code:addons/publisher/models/account_invoice.py:27
-#, python-format
-msgid "Cancelled Invoice"
-msgstr "Facture annulée"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_invoice_document_publisher
@@ -448,27 +430,9 @@ msgid "Draft"
 msgstr "Brouillon"
 
 #. module: publisher
-#: code:addons/publisher/models/account_invoice.py:26
-#, python-format
-msgid "Draft Invoice"
-msgstr "Facture brouillon"
-
-#. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_invoice_document_publisher
 msgid "Draft Invoice:"
 msgstr "Facture brouillon"
-
-#. module: publisher
-#: code:addons/publisher/models/account_invoice.py:48
-#, python-format
-msgid "Duplicate invoice"
-msgstr "Duplicata facture"
-
-#. module: publisher
-#: code:addons/publisher/models/account_invoice.py:47
-#, python-format
-msgid "Duplicate refund"
-msgstr "Duplicata note de crédit"
 
 #. module: publisher
 #: model:ir.actions.report.xml,name:publisher.account_invoice_action_report_duplicate
@@ -498,12 +462,6 @@ msgstr "Lignes Matériel Reçu"
 #: model:ir.ui.view,arch_db:publisher.report_production_template_document
 msgid "Equipment Received"
 msgstr "Equipment Received"
-
-#. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:48
-#, python-format
-msgid "Equipment set as not received"
-msgstr "Matériel déclaré non reçu"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_production_global_template
@@ -566,18 +524,6 @@ msgid "Full Equipment Received"
 msgstr "Matériel reçu"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:48
-#, python-format
-msgid "Full equipment is received"
-msgstr "Tout le matériel est reçu"
-
-#. module: publisher
-#: code:addons/publisher/models/publisher_production.py:426
-#, python-format
-msgid "Global Status"
-msgstr "Etat global"
-
-#. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_sale_order_has_production
 msgid "Has Production"
 msgstr "A une Production"
@@ -620,8 +566,8 @@ msgid "Internal Reference"
 msgstr "Référence interne"
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_res_partner_invitations
-#: model:ir.model.fields,field_description:publisher.field_res_users_invitations
+#: model:ir.model.fields,field_description:publisher.field_res_partner_invitation_ids
+#: model:ir.model.fields,field_description:publisher.field_res_users_invitation_ids
 msgid "Invitations"
 msgstr "Invitations"
 
@@ -633,14 +579,13 @@ msgid "Invitations Settings"
 msgstr "Paramètres Invitations"
 
 #. module: publisher
-#: code:addons/publisher/models/account_invoice.py:24
 #: model:ir.model,name:publisher.model_account_invoice
-#, python-format
 msgid "Invoice"
 msgstr "Facture"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_production_template_document
+#: model:ir.ui.view,arch_db:publisher.sale_subscription_view_form_publisher
 msgid "Invoice Address"
 msgstr "Adresse de facturation"
 
@@ -660,9 +605,7 @@ msgid "Invoice Mode"
 msgstr "Mode de facturation"
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:443
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_invoice_status
-#, python-format
 msgid "Invoice Status"
 msgstr "État de la facture"
 
@@ -826,17 +769,6 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:47
-#: code:addons/publisher/models/publisher_production.py:78
-#: code:addons/publisher/models/publisher_production.py:79
-#: code:addons/publisher/models/sale_order.py:68
-#: code:addons/publisher/models/sale_order.py:70
-#: code:addons/publisher/models/sale_order.py:72
-#, python-format
-msgid "New"
-msgstr "New"
-
-#. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_note
 msgid "Notes"
 msgstr "Notes"
@@ -850,19 +782,6 @@ msgstr "Rien à facturer"
 #: model:ir.ui.view,arch_db:publisher.report_production_template_document
 msgid "Option"
 msgstr "Option"
-
-#. module: publisher
-#: code:addons/publisher/models/sale_order.py:96
-#: code:addons/publisher/models/sale_order.py:114
-#, python-format
-msgid "Order"
-msgstr "Vente"
-
-#. module: publisher
-#: code:addons/publisher/models/account_invoice.py:25
-#, python-format
-msgid "PRO-FORMA"
-msgstr "PRO-FORMA"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_invoice_document_publisher
@@ -884,18 +803,6 @@ msgstr "Partenaire"
 #: model:ir.ui.menu,name:publisher.menu_sale_publisher_settings_partners
 msgid "Partners Management"
 msgstr "Gestion des partenaires"
-
-#. module: publisher
-#: code:addons/publisher/models/publisher_production.py:288
-#, python-format
-msgid "Please define an accounting sale journal for this company."
-msgstr "Veuillez définir un journal comptable pour cette entreprise."
-
-#. module: publisher
-#: code:addons/publisher/models/publisher_production.py:373
-#, python-format
-msgid "Please define income account for this product: \"%s\" (id:%d) - or for its category: \"%s\"."
-msgstr "Veuillez définir le compte de revenu pour ce produit : \"%s\" (id:%d) - ou pour sa catégorie: \"%s\"."
 
 #. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_potential_turnover
@@ -1034,11 +941,9 @@ msgid "Productions"
 msgstr "Productions"
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production_wizard.py:43
 #: model:ir.actions.act_window,name:publisher.production_wizard_action
 #: model:ir.actions.report.xml,name:publisher.report_production_global
 #: model:ir.ui.view,arch_db:publisher.wizard_with_step_form
-#, python-format
 msgid "Productions Global Status"
 msgstr "Etat global productions"
 
@@ -1087,13 +992,6 @@ msgid "Quantity"
 msgstr "Quantité"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order.py:97
-#: code:addons/publisher/models/sale_order.py:115
-#, python-format
-msgid "Quotation"
-msgstr "Offre"
-
-#. module: publisher
 #: model:ir.actions.report.xml,name:publisher.report_sale_order
 msgid "Quotation / Order"
 msgstr "Offre / Vente"
@@ -1112,12 +1010,6 @@ msgstr "Date du devis :"
 #: model:ir.ui.view,arch_db:publisher.report_production_global_template
 msgid "Ratio"
 msgstr "Ratio"
-
-#. module: publisher
-#: code:addons/publisher/models/account_invoice.py:28
-#, python-format
-msgid "Refund"
-msgstr "Note de crédit"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_invoice_document_publisher
@@ -1288,12 +1180,6 @@ msgid "To Invoice"
 msgstr "À facturer"
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production_wizard.py:44
-#, python-format
-msgid "To be closed from"
-msgstr "Se clôturant du"
-
-#. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_production_global_template
 #: model:ir.ui.view,arch_db:publisher.report_production_invoice_status_template_document
 #: model:ir.ui.view,arch_db:publisher.report_production_template_document
@@ -1331,21 +1217,9 @@ msgid "VAT:"
 msgstr "TVA :"
 
 #. module: publisher
-#: code:addons/publisher/models/account_invoice.py:30
-#, python-format
-msgid "Vendor Bill"
-msgstr "Facture fournisseur"
-
-#. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_invoice_document_publisher
 msgid "Vendor Bill:"
 msgstr "Facture fournisseur :"
-
-#. module: publisher
-#: code:addons/publisher/models/account_invoice.py:29
-#, python-format
-msgid "Vendor Refund"
-msgstr "Note de crédit fournisseur"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_invoice_document_publisher
@@ -1436,10 +1310,4 @@ msgstr "report.publisher.report_saleorder_publisher"
 #: model:ir.model,name:publisher.model_report_publisher_report_saleorder_publisher_noprice
 msgid "report.publisher.report_saleorder_publisher_noprice"
 msgstr "report.publisher.report_saleorder_publisher_noprice"
-
-#. module: publisher
-#: code:addons/publisher/models/publisher_production_wizard.py:44
-#, python-format
-msgid "to"
-msgstr "au"
 
