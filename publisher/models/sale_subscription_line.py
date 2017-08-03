@@ -9,7 +9,7 @@ class SaleSubscriptionLine(models.Model):
     _inherit = 'sale.subscription.line'
 
     partner_shipping_id = fields.Many2one('res.partner', string="Shipping Address")
-    language_id = fields.Many2one('publisher.language', string="Language")
+    language_id = fields.Many2one('res.lang', string="Language")
 
     @api.onchange('product_id', 'quantity')
     def onchange_product_id(self):

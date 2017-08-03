@@ -9,7 +9,6 @@ from . import publisher_production
 from . import publisher_production_type
 from . import publisher_invitation
 from . import publisher_production_wizard
-from . import publisher_language
 from . import res_partner
 from . import product_template
 from . import sale_order
