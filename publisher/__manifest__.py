@@ -24,7 +24,8 @@
         'sale',
         'project',
         'contacts',
-        'sale_workflow_rights'
+        'sale_workflow_rights',
+        'sale_contract'
     ],
 
     'data': [
