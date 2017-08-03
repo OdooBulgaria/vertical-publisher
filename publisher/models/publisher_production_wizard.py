@@ -41,11 +41,9 @@ class ProductionGlobalReport(models.AbstractModel):
 
         return report_obj.render('publisher.report_production_global_template', {
             'header_title1': _("Productions Global Status"),
-            'header_title2': _("To be closed from") + " " + date_from + " " + _("to") + " " + date_to,
+            'header_title2': _("To be closed from") + " " + data['date_from'] + " " + _("to") + " " + data['date_to'],
             'doc_ids': None,
             'doc_model': report.model,
             'docs': None,
-            'date_from': render_date(data['date_from']),
-            'date_to': render_date(data['date_to']),
             'data': production_types_map
         })
