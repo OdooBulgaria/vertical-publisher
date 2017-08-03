@@ -44,7 +44,6 @@
                             <sheet>
                                 <group>
                                     <group>
-                                        <field name="analytic_account_id" />
                                         <field name="partner_shipping_id" />
                                         <field name="name" />
                                         <field name="uom_id" />
