@@ -336,7 +336,7 @@ msgstr "Créer"
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.wizard_with_step_form
 msgid "Create Report"
-msgstr "Créer rapport"
+msgstr "Générer rapport"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.view_publisher_production_form
