@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e-20170707\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-04 07:07+0000\n"
-"PO-Revision-Date: 2017-08-04 07:32+0000\n"
+"PO-Revision-Date: 2017-08-09 07:32+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -175,7 +175,7 @@ msgstr "Montant"
 #: model:ir.ui.view,arch_db:publisher.report_production_template_document
 #: selection:publisher.production,state:0
 msgid "Archived"
-msgstr "Archivé"
+msgstr "Archivée"
 
 #. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_sale_order_line_attachment_count
@@ -453,7 +453,7 @@ msgstr "Nom affiché"
 #. module: publisher
 #: selection:publisher.production,state:0
 msgid "Done"
-msgstr "Archivé"
+msgstr "Terminée"
 
 #. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_down_payment
