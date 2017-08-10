@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <!-- PUBLISHER -->
+
         <menuitem name="Publisher"
             id="menu_sale_publisher"
             sequence="20" web_icon="publisher,static/description/menu.png" />
@@ -79,21 +81,6 @@
             id="menu_sale_publisher_settings_media_colors" parent="menu_sale_publisher_settings_media"
             sequence="5" action="menu_sale_publisher_settings_media_colors_action" />
 
-        <menuitem name="Partners Management"
-            id="menu_sale_publisher_settings_partners" parent="menu_sale_publisher_settings"
-            sequence="12"/>
-
-        <record id="menu_sale_publisher_settings_partners_invitations_action" model="ir.actions.act_window">
-            <field name="name">Invitations Settings</field>
-            <field name="res_model">publisher.invitation</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <menuitem name="Invitations Settings"
-            id="menu_sale_publisher_settings_partners_invitations" parent="menu_sale_publisher_settings_partners"
-            sequence="1" action="menu_sale_publisher_settings_partners_invitations_action" />
-
 
 
         <record id="production_wizard_action" model="ir.actions.act_window">
@@ -112,5 +99,22 @@
         <menuitem name="Print Global Status"
             id="menu_sale_publisher_reporting_global" parent="menu_sale_publisher_reporting"
             sequence="1" action="production_wizard_action" />
+
+        <!-- PARTNER -->
+
+        <menuitem name="Settings"
+            id="menu_contacts_settings" parent="contacts.menu_contacts"
+            sequence="100"/>
+
+        <record id="menu_contacts_settings_partners_invitations_action" model="ir.actions.act_window">
+            <field name="name">Invitations Settings</field>
+            <field name="res_model">publisher.invitation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Invitations Settings"
+            id="menu_contacts_settings_partners_invitations" parent="menu_contacts_settings"
+            sequence="1" action="menu_contacts_settings_partners_invitations_action" />
     </data>
 </odoo>
