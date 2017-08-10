@@ -22,7 +22,7 @@ class Production(models.Model):
         _('This sequence number is already taken')
     )]
 
-    name = fields.Char(string='Name', index=True, required=True, readonly=True, states={'draft': [('readonly', False)]})
+    name = fields.Char(string='Name', index=True, required=True, readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
     currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.user.company_id.currency_id)
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -32,22 +32,22 @@ class Production(models.Model):
         ], string='State', default='draft', required=True, track_visibility='always')
     production_type_id = fields.Many2one('publisher.production.type', string='Production Type', required=True, readonly=True, states={'draft': [('readonly', False)]})
     project_id = fields.Many2one('project.project', string="Project", track_visibility='always');
-    date_start = fields.Date(string='Publication Date / Event', required=True, readonly=True, states={'draft': [('readonly', False)]})
-    date_end = fields.Date(string='End Date', readonly=True, states={'draft': [('readonly', False)]})
-    date_closing = fields.Date(string='Closing Date', readonly=True, states={'draft': [('readonly', False)]})
-    date_full_equipment_limit = fields.Date(string='Full Equipment Limit Date', readonly=True, states={'draft': [('readonly', False)]})
+    date_start = fields.Date(string='Publication Date / Event', required=True, readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
+    date_end = fields.Date(string='End Date', readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
+    date_closing = fields.Date(string='Closing Date', readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
+    date_full_equipment_limit = fields.Date(string='Full Equipment Limit Date', readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
     sale_line_ids = fields.One2many('sale.order.line', 'production_id', string='Production Lines')
-    expected_turnover = fields.Monetary(string="Expected Turnover", readonly=True, states={'draft': [('readonly', False)]})
+    expected_turnover = fields.Monetary(string="Expected Turnover", readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
     invoicing_mode = fields.Selection([
         ('before', 'Before Publication'),
         ('after', 'After Publication'),
         ('both', 'Before & After Publication')
         ], string='Invoicing Mode', default='before', required=True, readonly=True, states={'draft': [('readonly', False)]})
     down_payment = fields.Float(string='Down Payment', default=0, readonly=True, states={'draft': [('readonly', False)]})
-    seq_number = fields.Char(string="Sequence Number", required=True, readonly=True, copy=False, states={'draft': [('readonly', False)]}, index=True, default=lambda self: _('New'))
-    date_blanco = fields.Date(string='Blanco Date', readonly=True, states={'draft': [('readonly', False)]})
+    seq_number = fields.Char(string="Sequence Number", required=True, readonly=True, copy=False, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]}, index=True, default=lambda self: _('New'))
+    date_blanco = fields.Date(string='Blanco Date', readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
     note = fields.Text(string="Notes")
-    themes = fields.Char(string="Production Themes", readonly=True, states={'draft': [('readonly', False)]})
+    themes = fields.Char(string="Production Themes", readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
 
     # sale_lines_count = fields.Integer(string="Production Lines Count", compute=_compute_sale_lines_count)
     sale_lines_confirmed_count = fields.Char(string="Confirmed Lines", compute='_compute_sale_lines_confirmed_count')
@@ -57,7 +57,7 @@ class Production(models.Model):
     turnover_delta = fields.Monetary(string='Diff. Actual / Expected Turnover', compute='_compute_turnover_delta')
     turnover_delta_sign = fields.Char(string='Turnover Delta Sign', compute='_compute_turnover_delta_sign')
 
-    export_file = fields.Binary(attachment=True, help="This field holds the export file for Sage 50.", readonly=True)
+    export_file = fields.Binary(attachment=True, help="This field holds the attachments export file.", readonly=True)
     sale_ids = fields.Many2many('sale.order', string="Sales", compute='_compute_sale_ids')
     invoice_ids = fields.Many2many('account.invoice', string="Invoices", compute='_compute_invoice_ids')
     invoice_count = fields.Integer(string="Invoice Count", compute='_compute_invoice_count')
@@ -66,7 +66,7 @@ class Production(models.Model):
         ('to invoice', 'To Invoice')
     ], string="Invoice Status", compute='_compute_invoice_status')
     calendar_view = fields.Boolean(string="Allow Calendar View", compute='_compute_calendar_view')
-    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('publisher.production'))
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('publisher.production'), states={'draft': [('readonly', False)]})
 
     # @api.one
     # def _compute_sale_lines_count(self):
