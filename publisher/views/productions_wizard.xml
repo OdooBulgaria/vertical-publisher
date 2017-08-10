@@ -15,6 +15,9 @@
                             <field name="date_to" required="1" />
                         </group>
                     </group>
+                    <group>
+                        <field name="hide_drafts" />
+                    </group>
 
                     <footer>
                         <button name="action_report" string="Create Report" type="object" />

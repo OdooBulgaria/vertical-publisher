@@ -10,9 +10,14 @@ class ProductionWizard(models.Model):
 
     date_from = fields.Date(string="From")
     date_to = fields.Date(string="To")
+    hide_drafts = fields.Boolean(string="Hide draft productions in report", default=True)
 
     def action_report(self):
-        return self.env['report'].get_action(self, 'publisher.report_production_global_template', data={'date_from': self.date_from, 'date_to': self.date_to})
+        return self.env['report'].get_action(self, 'publisher.report_production_global_template', data={
+            'date_from': self.date_from,
+            'date_to': self.date_to,
+            'hide_drafts': self.hide_drafts
+        })
 
 
 class ProductionGlobalReport(models.AbstractModel):
@@ -24,13 +29,14 @@ class ProductionGlobalReport(models.AbstractModel):
         production_types_map = {}
 
         for production in productions:
-            if not production.production_type_id.id in production_types_map:
-                production_types_map[production.production_type_id.id] = {
-                    'obj': production.production_type_id,
-                    'prods': []
-                }
+            if not data['hide_drafts'] or production.state != 'draft':
+                if not production.production_type_id.id in production_types_map:
+                    production_types_map[production.production_type_id.id] = {
+                        'obj': production.production_type_id,
+                        'prods': []
+                    }
 
-            production_types_map[production.production_type_id.id]['prods'].append(production)
+                production_types_map[production.production_type_id.id]['prods'].append(production)
 
         report_obj = self.env['report']
         report = report_obj._get_report_from_name('publisher.report_production_global_template')
