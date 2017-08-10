@@ -10,6 +10,7 @@ class Media(models.Model):
     _order = 'name'
 
     name = fields.Char(string='Name', copy=False, index=True, required=True)
+    active = fields.Boolean(string='Is Active', copy=False, default=True)
 
     format_needed = fields.Boolean(string="Format Needed", required=True)
     location_needed = fields.Boolean(string="Location Needed", required=True)

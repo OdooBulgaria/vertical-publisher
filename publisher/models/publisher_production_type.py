@@ -10,6 +10,7 @@ class ProductionType(models.Model):
     _order = 'name'
 
     name = fields.Char(string='Name', copy=False, index=True, required=True)
+    active = fields.Boolean(string='Is Active', copy=False, default=True)
     product_category_id = fields.Many2one('product.category', string='Product Category', required=True)
     media_id = fields.Many2one('publisher.media', string='Media', required=True)
     invoicing_mode = fields.Selection([

@@ -19,7 +19,12 @@
                 <form string="Format">
                     <sheet>
                         <group>
-                            <field name="name" />
+                            <group>
+                                <field name="name" />
+                            </group>
+                            <group>
+                                <field name="active" />
+                            </group>
                         </group>
                         <group>
                             <field name="media_ids" domain="[('format_needed', '=', True)]" widget="many2many_checkboxes" />

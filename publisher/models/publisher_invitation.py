@@ -10,4 +10,5 @@ class Invitation(models.Model):
     _order = 'name'
 
     name = fields.Char(string='Name', copy=False, index=True, required=True)
+    active = fields.Boolean(string='Is Active', copy=False, default=True)
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id, required=True)

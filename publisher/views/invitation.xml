@@ -23,8 +23,11 @@
                                 <field name="name" />
                             </group>
                             <group>
-                                <field name="company_id" />
+                                <field name="active" />
                             </group>
+                        </group>
+                        <group>
+                            <field name="company_id" />
                         </group>
                     </sheet>
                 </form>
