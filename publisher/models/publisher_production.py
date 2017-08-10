@@ -186,6 +186,14 @@ class Production(models.Model):
             production.invoicing_mode = production.production_type_id.invoicing_mode
             production.down_payment = production.production_type_id.down_payment
 
+    @api.one
+    def write(self, values):
+        if values.get('state') and values['state'] == 'draft' and len(self.sale_line_ids) > 0:
+            raise exceptions.ValidationError(_("Production can't be set to draft if there are production lines."))
+            return False
+
+        return super(Production, self).write(values)
+
     @api.multi
     def order_lines_layouted(self):
         """
