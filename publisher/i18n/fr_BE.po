@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e-20170707\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-04 07:07+0000\n"
-"PO-Revision-Date: 2017-08-09 07:32+0000\n"
+"PO-Revision-Date: 2017-08-11 07:05+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1439,7 +1439,7 @@ msgstr "Note de crédit fournisseur :"
 #: code:addons/publisher/models/sale_order_line.py:110
 #, python-format
 msgid "Your Customer : "
-msgstr "Vptre client : "
+msgstr "Votre client : "
 
 #. module: publisher
 #: model:ir.model,name:publisher.model_publisher_color
