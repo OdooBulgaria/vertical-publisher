@@ -8,6 +8,7 @@
                 <tree string="Locations">
                     <field name="name" />
                     <field name="media_ids" />
+                    <field name="unique" />
                 </tree>
             </field>
         </record>
