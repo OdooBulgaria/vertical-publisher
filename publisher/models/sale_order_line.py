@@ -40,13 +40,17 @@ class SaleOrderLine(models.Model):
     def _compute_discount(self):
         self.discount = (1.0 - (100.0-self.discount_base)/100.0 * (100.0-self.commission)/100.0) * 100.0
 
-    def _check_location_unique(self, vals):
+    def _check_publisher_fields(self, vals):
 
         production_id = (vals.get('production_id') and self.env['publisher.production'].search([('id', '=', vals['production_id'])])) or self.production_id or False
+
+        if not production_id:
+            return True
+
         location_id = (vals.get('location_id') and self.env['publisher.location'].search([('id', '=', vals['location_id'])])) or self.location_id or False
         name = vals.get('name') or self.name or False
 
-        if production_id and location_id and location_id.unique:
+        if location_id and location_id.unique:
             for line in production_id.sale_line_ids:
                 if line.id != self.id:
                     if location_id.id == line.location_id.id:
@@ -57,14 +61,14 @@ class SaleOrderLine(models.Model):
 
     @api.model
     def create(self, vals):
-        if not self._check_location_unique(vals):
+        if not self._check_publisher_fields(vals):
             return False
 
         return super(SaleOrderLine, self).create(vals)
 
     @api.multi
     def write(self, vals):
-        if not self._check_location_unique(vals):
+        if not self._check_publisher_fields(vals):
             return False
 
         if self.production_id:
@@ -75,16 +79,14 @@ class SaleOrderLine(models.Model):
                 self.production_id.message_post(subject=self.name, body=self.name + " : " + str(abs(delta)) + " " + (_(" attachment(s) added") if delta>0 else _(" attachment(s) deleted")))
         return super(SaleOrderLine, self).write(vals)
 
-    @api.onchange('product_id')
+    @api.onchange('product_id', 'production_id')
     def _onchange_product_id(self):
-        if self.product_id:
-            self.format_id = self.product_id.format_id
-            self.location_id = self.product_id.location_id
-            self.color_id = self.product_id.color_id
-        else:
-            self.format_id = False
-            self.location_id = False
-            self.color_id = False
+
+        media_id = self.production_id and self.production_id.production_type_id.media_id
+
+        self.format_id = self.product_id and (media_id in self.product_id.format_id.media_ids) and self.product_id.format_id
+        self.location_id = self.product_id and (media_id in self.product_id.location_id.media_ids) and self.product_id.location_id
+        self.color_id = self.product_id and (media_id in self.product_id.color_id.media_ids) and self.product_id.color_id
 
     @api.onchange('product_id', 'price_unit', 'product_uom', 'product_uom_qty', 'tax_id')
     def _onchange_discount(self):
