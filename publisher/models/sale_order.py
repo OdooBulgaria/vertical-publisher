@@ -21,16 +21,18 @@ class SaleOrder(models.Model):
         return {}
 
     @api.multi
-    @api.onchange('partner_invoice_id', 'partner_id', 'agency_id')
+    @api.onchange('partner_id', 'agency_id')
     def onchange_partner_invoice_id(self):
         """
         Trigger the change of fiscal position when the invoice address is modified.
         """
 
+        partner_to_use = self.agency_id if self.agency_id else self.partner_id
+
         self.update({
-            'pricelist_id': self.partner_invoice_id.property_product_pricelist and self.partner_invoice_id.property_product_pricelist.id or False,
-            'payment_term_id': self.partner_invoice_id.property_payment_term_id and self.partner_invoice_id.property_payment_term_id.id or False,
-            'fiscal_position_id': self.env['account.fiscal.position'].get_fiscal_position(self.partner_id.id, self.partner_invoice_id.id)
+            'pricelist_id': partner_to_use.property_product_pricelist and partner_to_use.property_product_pricelist.id or False,
+            'payment_term_id': partner_to_use.property_payment_term_id and partner_to_use.property_payment_term_id.id or False,
+            'fiscal_position_id': self.env['account.fiscal.position'].get_fiscal_position(partner_to_use.id, partner_to_use.id)
         })
 
     @api.multi
