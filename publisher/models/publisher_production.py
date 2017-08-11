@@ -378,7 +378,7 @@ class Production(models.Model):
 
                     account_line = line.product_id.property_account_income_id or line.product_id.categ_id.property_account_income_categ_id
                     if not account_line:
-                        raise UserError(_('Please define income account for this product: "%s" (id:%d) - or for its category: "%s".') %
+                        raise exceptions.UserError(_('Please define income account for this product: "%s" (id:%d) - or for its category: "%s".') %
                             (line.product_id.name, line.product_id.id, line.product_id.categ_id.name))
 
                     fpos = sale_id.fiscal_position_id or sale_id.partner_id.property_account_position_id
