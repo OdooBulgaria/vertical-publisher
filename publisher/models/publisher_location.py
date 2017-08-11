@@ -12,3 +12,4 @@ class Location(models.Model):
     name = fields.Char(string='Name', copy=False, index=True, required=True)
     active = fields.Boolean(string='Is Active', copy=False, default=True)
     media_ids = fields.Many2many('publisher.media', string='Medias', required=True)
+    unique = fields.Boolean(string='Sellable one time by prod. max.', default=False)

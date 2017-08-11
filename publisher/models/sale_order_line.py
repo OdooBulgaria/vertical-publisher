@@ -40,9 +40,33 @@ class SaleOrderLine(models.Model):
     def _compute_discount(self):
         self.discount = (1.0 - (100.0-self.discount_base)/100.0 * (100.0-self.commission)/100.0) * 100.0
 
+    def _check_location_unique(self, vals):
+
+        production_id = (vals.get('production_id') and self.env['publisher.production'].search([('id', '=', vals['production_id'])])) or self.production_id or False
+        location_id = (vals.get('location_id') and self.env['publisher.location'].search([('id', '=', vals['location_id'])])) or self.location_id or False
+        name = vals.get('name') or self.name or False
+
+        if production_id and location_id and location_id.unique:
+            for line in production_id.sale_line_ids:
+                if line.id != self.id:
+                    if location_id.id == line.location_id.id:
+                        raise exceptions.ValidationError(_('Line ') + name + _(' : Another line (') + line.order_id.name + ' - ' + line.name + _(') in the production (') + production_id.name + _(') has the same location which is set as unique.'))
+                        return False
+
+        return True
+
+    @api.model
+    def create(self, vals):
+        if not self._check_location_unique(vals):
+            return False
+
+        return super(SaleOrderLine, self).create(vals)
 
     @api.multi
     def write(self, vals):
+        if not self._check_location_unique(vals):
+            return False
+
         if self.production_id:
             if 'full_equipment_received' in vals:
                 self.production_id.message_post(subject=self.name, body=self.name + " : " + (_("Full equipment is received") if vals['full_equipment_received'] else _("Equipment set as not received")))

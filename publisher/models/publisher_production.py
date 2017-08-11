@@ -293,7 +293,7 @@ class Production(models.Model):
         now = datetime.datetime.now()
 
         if not account_journal_id:
-            raise UserError(_('Please define an accounting sale journal for this company.'))
+            raise exceptions.UserError(_('Please define an accounting sale journal for this company.'))
 
         invoice_ids = []
 
