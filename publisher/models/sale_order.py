@@ -13,13 +13,25 @@ class SaleOrder(models.Model):
     has_production = fields.Boolean(string='Has Production', compute='_compute_has_production')
 
     @api.multi
+    @api.onchange('partner_shipping_id', 'partner_id')
+    def onchange_partner_shipping_id(self):
+        """
+        Trigger the change of fiscal position when the shipping address is modified.
+        """
+        return {}
+
+    @api.multi
     @api.onchange('partner_invoice_id', 'partner_id', 'agency_id')
     def onchange_partner_invoice_id(self):
         """
         Trigger the change of fiscal position when the invoice address is modified.
         """
-        self.fiscal_position_id = self.env['account.fiscal.position'].get_fiscal_position(self.partner_id.id, self.partner_invoice_id.id)
-        return {}
+
+        self.update({
+            'pricelist_id': self.partner_invoice_id.property_product_pricelist and self.partner_invoice_id.property_product_pricelist.id or False,
+            'payment_term_id': self.partner_invoice_id.property_payment_term_id and self.partner_invoice_id.property_payment_term_id.id or False,
+            'fiscal_position_id': self.env['account.fiscal.position'].get_fiscal_position(self.partner_id.id, self.partner_invoice_id.id)
+        })
 
     @api.multi
     @api.onchange('partner_id')
