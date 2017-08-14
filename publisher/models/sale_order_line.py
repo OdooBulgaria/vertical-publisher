@@ -27,6 +27,7 @@ class SaleOrderLine(models.Model):
     date_end_needed = fields.Boolean(related='production_id.production_type_id.media_id.date_end_needed', string="End Date Needed")
 
     media_id = fields.Many2one(related='production_id.production_type_id.media_id', string="Media")
+    product_category_id = fields.Many2one('product.category', string="Product Category", compute='_compute_product_category_id')
 
     discount_base = fields.Float(string='Discount (%)', digits=dp.get_precision('Discount'), default=0.0)
     commission = fields.Float(string='Agency Commission (%)', digits=dp.get_precision('Discount'), default=0.0)
@@ -42,13 +43,13 @@ class SaleOrderLine(models.Model):
 
     def _check_publisher_fields(self, vals):
 
-        production_id = (vals.get('production_id') and self.env['publisher.production'].search([('id', '=', vals['production_id'])])) or self.production_id or False
+        production_id = self.env['publisher.production'].search([('id', '=', vals['production_id'])]) if vals.get('production_id') else self.production_id
 
         if not production_id:
             return True
 
-        location_id = (vals.get('location_id') and self.env['publisher.location'].search([('id', '=', vals['location_id'])])) or self.location_id or False
-        name = vals.get('name') or self.name or False
+        location_id = self.env['publisher.location'].search([('id', '=', vals['location_id'])]) if vals.get('location_id') else self.location_id
+        name = vals.get('name') or self.name
 
         if location_id and location_id.unique:
             for line in production_id.sale_line_ids:
@@ -79,14 +80,19 @@ class SaleOrderLine(models.Model):
                 self.production_id.message_post(subject=self.name, body=self.name + " : " + str(abs(delta)) + " " + (_(" attachment(s) added") if delta>0 else _(" attachment(s) deleted")))
         return super(SaleOrderLine, self).write(vals)
 
-    @api.onchange('product_id', 'production_id')
+    @api.onchange('production_id')
+    def _onchange_production_id(self):
+        if self.production_id and self.product_id and self.product_id not in self.env['product.product'].search([('categ_id', 'child_of', self.production_id.production_type_id.product_category_id.id)]):
+            self.product_id = False
+
+    @api.onchange('product_id')
     def _onchange_product_id(self):
 
-        media_id = self.production_id and self.production_id.production_type_id.media_id
+        media_id = self.production_id.production_type_id.media_id if self.production_id else False
 
-        self.format_id = self.product_id and (media_id in self.product_id.format_id.media_ids) and self.product_id.format_id
-        self.location_id = self.product_id and (media_id in self.product_id.location_id.media_ids) and self.product_id.location_id
-        self.color_id = self.product_id and (media_id in self.product_id.color_id.media_ids) and self.product_id.color_id
+        self.format_id = self.product_id.format_id if self.product_id and media_id and (media_id in self.product_id.format_id.media_ids) else False
+        self.location_id = self.product_id.location_id if self.product_id and media_id and (media_id in self.product_id.location_id.media_ids) else False
+        self.color_id = self.product_id.color_id if self.product_id and media_id and (media_id in self.product_id.color_id.media_ids) else False
 
     @api.onchange('product_id', 'price_unit', 'product_uom', 'product_uom_qty', 'tax_id')
     def _onchange_discount(self):
@@ -123,6 +129,15 @@ class SaleOrderLine(models.Model):
     @api.one
     def _compute_attachment_count(self):
         self.attachment_count = len(self.attachment_ids)
+
+    @api.one
+    @api.depends('production_id')
+    def _compute_product_category_id(self):
+        if self.production_id:
+            self.product_category_id = self.production_id.production_type_id.product_category_id
+        else:
+            categories = self.env['product.category'].search([('parent_id', '=', False)])
+            self.product_category_id = categories[0] if len(categories) >= 1 else False
 
     @api.multi
     def _prepare_invoice_line(self, qty):
