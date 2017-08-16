@@ -254,7 +254,7 @@
                                                 <td style="width:60%;">
                                                     <table style="width:100%; font-weight:bold;"><tr>
                                                         <td><span t-esc="round(line.discount_base, 2)" /> %</td>
-                                                        <td style="text-align:right;"><span t-esc="line.price_unit * line.product_uom_qty * (1-line.discount_base)" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
+                                                        <td style="text-align:right;"><span t-esc="line.price_unit * line.product_uom_qty * (1-line.discount_base/100)" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                                     </tr></table>
                                                 </td>
                                             </tr>
@@ -533,7 +533,7 @@
                                                 <td style="width:60%;">
                                                     <table style="width:100%; font-weight:bold;"><tr>
                                                         <td><span t-esc="round(line.discount_base, 2)" /> %</td>
-                                                        <td style="text-align:right;"><span t-esc="line.price_unit * line.product_uom_qty * (1-line.discount_base)" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
+                                                        <td style="text-align:right;"><span t-esc="line.price_unit * line.product_uom_qty * (1-line.discount_base/100)" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                                     </tr></table>
                                                 </td>
                                             </tr>

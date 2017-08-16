@@ -115,7 +115,7 @@
                     <!-- Remove original invoice lines & replace by tabs (production, invoice lines) -->
                     <xpath expr="//field[@name='order_line']/form/div[@groups='base.group_no_one']" position="replace">
                         <notebook>
-                            <page string="Production" name="production">
+                            <page string="Production" name="production" attrs="{'invisible': [('production_id', '=', False)]}">
                                 <group>
                                     <group>
                                         <field name="full_equipment_received" readonly="1" />
