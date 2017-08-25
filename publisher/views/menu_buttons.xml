@@ -102,6 +102,10 @@
 
         <!-- PARTNER -->
 
+        <menuitem name="Contacts"
+            id="menu_contacts_contacts" parent="contacts.menu_contacts"
+            sequence="1" action="contacts.action_contacts"/>
+
         <menuitem name="Settings"
             id="menu_contacts_settings" parent="contacts.menu_contacts"
             sequence="100"/>
