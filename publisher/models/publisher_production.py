@@ -72,6 +72,10 @@ class Production(models.Model):
     # def _compute_sale_lines_count(self):
     #     self.sale_lines_count = len(self.sale_line_ids)
 
+    @api.one
+    def name_get(self):
+        return (self.id, '[' + self.seq_number + '] ' + self.name)
+
 
     @api.model
     def create(self, vals):
