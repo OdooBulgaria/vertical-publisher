@@ -44,7 +44,7 @@ class Production(models.Model):
         ('both', 'Before & After Publication')
         ], string='Invoicing Mode', default='before', required=True, readonly=True, states={'draft': [('readonly', False)]})
     down_payment = fields.Float(string='Down Payment', default=0, readonly=True, states={'draft': [('readonly', False)]})
-    seq_number = fields.Char(string="Sequence Number", required=True, readonly=True, copy=False, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]}, index=True, default=lambda self: _('New'))
+    seq_number = fields.Char(string="Sequence Number", required=True, readonly=True, copy=False, track_visibility='always', states={'draft': [('readonly', False)]}, index=True, default=lambda self: _('New'))
     date_blanco = fields.Date(string='Blanco Date', readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
     note = fields.Text(string="Notes")
     themes = fields.Char(string="Production Themes", readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
