@@ -76,6 +76,15 @@ class Production(models.Model):
     def name_get(self):
         return (self.id, '[' + self.seq_number + '] ' + self.name)
 
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        if name:
+            args = args or []
+            args.extend(['|', ('seq_number', operator, name), ('name', operator, name)])
+            return self.search(args, limit=limit).name_get()
+
+        return super(Production, self).name_search(name, args=args, operator=operator, limit=limit)
+
 
     @api.model
     def create(self, vals):
