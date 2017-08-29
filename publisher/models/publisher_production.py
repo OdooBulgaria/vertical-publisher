@@ -22,7 +22,7 @@ class Production(models.Model):
         _('This sequence number is already taken')
     )]
 
-    name = fields.Char(string='Name', index=True, required=True, readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
+    name = fields.Char(string='Name', index=True, required=True, readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]}, default=lambda self: _('New'))
     currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.user.company_id.currency_id)
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -88,8 +88,13 @@ class Production(models.Model):
 
     @api.model
     def create(self, vals):
+        seq_val = self.env['publisher.production.type'].search([('id', '=', vals['production_type_id'])]).sequence_id.next_by_id() or _('New')
+
         if vals.get('seq_number', _('New')) == _('New'):
-            vals['seq_number'] = self.env['publisher.production.type'].search([('id', '=', vals['production_type_id'])]).sequence_id.next_by_id() or _('New')
+            vals['seq_number'] = seq_val
+
+        if vals.get('name', _('New')) == _('New'):
+            vals['name'] = seq_val
 
         return super(Production, self).create(vals)
 
