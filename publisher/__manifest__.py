@@ -43,6 +43,7 @@
         'views/invitation.xml',
         'views/account_invoice.xml',
         'views/sale_subscription.xml',
+        'views/account_fiscal_position.xml',
 
         'views/menu_buttons.xml',
 

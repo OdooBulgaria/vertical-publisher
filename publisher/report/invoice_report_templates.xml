@@ -14,6 +14,10 @@
                 <t t-set="header_title1" t-value="header_title1_6" t-if="o.type == 'in_refund'" />
                 <t t-set="header_title1" t-value="header_title1_7" t-if="o.type == 'in_invoice'" />
 
+                <t t-if="o.fiscal_position_id and o.fiscal_position_id.invoice_display">
+                    <t t-set="header_title1" t-value="header_title1 + ' ' + o.fiscal_position_id.invoice_display" />
+                </t>
+
                 <t t-call="publisher.publisher_layout">
                     <div class="page">
                         <div class="oe_structure"/>

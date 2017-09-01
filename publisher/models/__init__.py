@@ -17,3 +17,4 @@ from . import account_invoice
 from . import sale_subscription
 from . import sale_subscription_line
 from . import res_company
+from . import account_fiscal_position
