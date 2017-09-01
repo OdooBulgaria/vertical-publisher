@@ -2,11 +2,11 @@
 <odoo>
     <data>
         <record id="sale.action_quotations" model="ir.actions.act_window">
-            <field name="domain">[('state', 'not in', ['draft', 'sent', 'option'])]</field>
+            <field name="domain">[('state', 'in', ['draft', 'sent', 'option'])]</field>
         </record>
 
         <record id="sale.action_orders" model="ir.actions.act_window">
-            <field name="domain">[('state', 'in', ['draft', 'sent', 'option'])]</field>
+            <field name="domain">[('state', 'not in', ['draft', 'sent', 'option'])]</field>
         </record>
 
         <record id="view_order_form_publisher" model="ir.ui.view">
