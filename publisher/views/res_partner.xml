@@ -42,8 +42,8 @@
                         <button class="oe_stat_button" name="%(res_partner_sale_order_line_action)d" type="action" icon="fa-industry" context="{'partner_id': id}">
                             <field string="Production Lines" name="production_line_count" widget="statinfo" modifiers="{'readonly': true}"/>
                         </button>
-                        <button class="oe_stat_button" name="%(product_template_subscription_shipped_action)d" type="action" icon="fa-book" context="{'partner_id': id}">
-                            <field string="Shipped Subscriptions" name="subscription_shipped_count" widget="statinfo" modifiers="{'readonly': true}"/>
+                        <button class="oe_stat_button" name="%(product_template_subscription_shipped_action)d" type="action" icon="fa-truck" context="{'partner_id': id}">
+                            <field string="Shipments" name="subscription_shipped_count" widget="statinfo" modifiers="{'readonly': true}"/>
                         </button>
                     </xpath>
 
