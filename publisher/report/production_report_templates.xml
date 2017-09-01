@@ -491,25 +491,39 @@
                                     <td style="padding:0.5em; width:33.333333%; border-right:0.5px solid grey; border-bottom:0.5px solid black;">
                                         <div style="font-weight:bold; padding-bottom:0.5em; text-decoration:underline;">Invoices</div>
 
-                                        <t t-set="invoices" t-value="[]"/>
+                                        <t t-set="invoices" t-value="[]" />
+                                        <t t-set="draft_invoices_count" t-value="0" />
                                         <t t-foreach="line.invoice_lines" t-as="invoice_line">
-                                            <t t-if="not invoice_line.invoice_id.id in invoices">
-                                                <t t-set="invoices" t-value="invoices + [invoice_line.invoice_id.id]"/>
+                                            <t t-if="not invoice_line.invoice_id in invoices">
+                                                <t t-set="invoices" t-value="invoices + [invoice_line.invoice_id]"/>
 
+                                                <t t-if="not invoice_line.invoice_id.number">
+                                                    <t t-set="draft_invoices_count" t-value="draft_invoices_count + 1" />
+                                                </t>
+                                            </t>
+                                        </t>
+
+                                        <t t-if="draft_invoices_count &gt; 0">
+                                            <div><em><t t-esc="draft_invoices_count" /> Draft Invoice(s)</em></div>
+                                        </t>
+
+                                        <t t-set="invoices_count" t-value="1" />
+                                        <t t-foreach="invoices" t-as="invoice">
+                                            <t t-if="invoice.number">
                                                 <div>
-                                                    #<span t-esc="len(invoices)" />
+                                                    #<span t-esc="invoices_count" />
 
-                                                    <t t-if="invoice_line.invoice_id.number">
-                                                        
-                                                        <t t-set="invoice_date" t-value="invoice_line.invoice_id.date_invoice.split('-')"/>
+                                                    <strong t-esc="invoice.number" />
 
-                                                        <strong t-esc="invoice_line.invoice_id.number" />
-                                                        (<span t-esc="invoice_date[2] + '/' + invoice_date[1] + '/' + invoice_date[0]" />)
-                                                    </t>
-                                                    <t t-if="not invoice_line.invoice_id.number">
-                                                        <em>Draft Invoice</em>
-                                                    </t>
+                                                    <t t-set="invoice_date" t-value="invoice.date_invoice.split('-')"/>
+                                                    (<span t-esc="invoice_date[2] + '/' + invoice_date[1] + '/' + invoice_date[0]" />)
+
+                                                     - 
+
+                                                    <t t-field="invoice.state" />
                                                 </div>
+
+                                                <t t-set="invoices_count" t-value="invoices_count + 1" />
                                             </t>
                                         </t>
                                     </td>
