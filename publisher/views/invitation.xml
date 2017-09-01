@@ -42,6 +42,9 @@
                         <group>
                             <field name="company_id" />
                         </group>
+                        <group>
+                            <field name="partner_ids" />
+                        </group>
                     </sheet>
                 </form>
             </field>

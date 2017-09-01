@@ -13,6 +13,7 @@ class Invitation(models.Model):
     active = fields.Boolean(string='Is Active', copy=False, default=True)
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id, required=True)
     partner_count = fields.Integer(string="Partner Count", compute='_compute_partner_count')
+    partner_ids = fields.Many2many('res.partner', string="Partners")
 
     @api.one
     def _compute_partner_count(self):
