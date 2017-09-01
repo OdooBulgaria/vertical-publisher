@@ -16,6 +16,7 @@
             <field name="arch" type="xml">
                 <tree string="Productions">
                     <field name="name" />
+                    <field name="seq_number" />
                     <field name="state" />
                     <field name="production_type_id" />
                     <field name="sale_lines_confirmed_count" />
