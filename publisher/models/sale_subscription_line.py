@@ -8,7 +8,7 @@ _logger = logging.getLogger(__name__)
 class SaleSubscriptionLine(models.Model):
     _inherit = 'sale.subscription.line'
 
-    partner_shipping_id = fields.Many2one('res.partner', string="Shipping Address")
+    partner_shipping_id = fields.Many2one('res.partner', string="Shipping Contact")
     language_id = fields.Many2one('res.lang', string="Language")
 
     @api.onchange('product_id', 'quantity')
