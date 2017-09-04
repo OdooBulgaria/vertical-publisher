@@ -24,6 +24,7 @@
         'sale',
         'project',
         'contacts',
+        'partner_sector',
         'sale_workflow_rights',
         'sale_contract'
     ],

@@ -102,14 +102,6 @@
 
         <!-- PARTNER -->
 
-        <menuitem name="Contacts"
-            id="menu_contacts_contacts" parent="contacts.menu_contacts"
-            sequence="1" action="contacts.action_contacts"/>
-
-        <menuitem name="Settings"
-            id="menu_contacts_settings" parent="contacts.menu_contacts"
-            sequence="100"/>
-
         <record id="menu_contacts_settings_partners_invitations_action" model="ir.actions.act_window">
             <field name="name">Invitations Settings</field>
             <field name="res_model">publisher.invitation</field>
@@ -117,8 +109,8 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem name="Invitations Settings"
-            id="menu_contacts_settings_partners_invitations" parent="menu_contacts_settings"
-            sequence="1" action="menu_contacts_settings_partners_invitations_action" />
+        <menuitem name="Invitations"
+            id="menu_contacts_partners_invitations" parent="contacts.menu_contacts"
+            sequence="5" action="menu_contacts_settings_partners_invitations_action" />
     </data>
 </odoo>
