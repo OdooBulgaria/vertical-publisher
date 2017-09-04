@@ -10,7 +10,7 @@ class SaleOrder(models.Model):
 
     agency_id = fields.Many2one('res.partner', string="Agency")
     reference = fields.Char(string='Internal Reference')
-    has_production = fields.Boolean(string='Has Production', compute='_compute_has_production')
+    # has_production = fields.Boolean(string='Has Production', compute='_compute_has_production')
 
     @api.multi
     @api.onchange('partner_shipping_id', 'partner_id')
@@ -87,14 +87,14 @@ class SaleOrder(models.Model):
 
         return super(SaleOrder, self).create(vals)
 
-    @api.one
-    @api.depends('order_line')
-    def _compute_has_production(self):
-        self.has_production = False
-        for line in self.order_line:
-            if line.production_id:
-                self.has_production = True
-                break;
+    # @api.one
+    # @api.depends('order_line')
+    # def _compute_has_production(self):
+    #     self.has_production = False
+    #     for line in self.order_line:
+    #         if line.production_id:
+    #             self.has_production = True
+    #             break;
 
 
 

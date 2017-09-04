@@ -21,12 +21,12 @@
                     <xpath expr="/form/sheet//field[@name='client_order_ref']" position="replace" />
 
                     <!-- Hide Create Invoice Header Button when a production is selected -->
-                    <xpath expr="/form//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="before">
+                    <!-- <xpath expr="/form//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="before">
                         <field name="has_production" invisible="1" />
                     </xpath>
                     <xpath expr="/form//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="attributes">
                         <attribute name="attrs">{'invisible': ['|', ('has_production', '=', True), ('invoice_status', '!=', 'to invoice')]}</attribute>
-                    </xpath>
+                    </xpath> -->
 
                     <!-- Hide Lock Header Button -->
                     <xpath expr="/form//button[@name='action_done']" position="attributes">

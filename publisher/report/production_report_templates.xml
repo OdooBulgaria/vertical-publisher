@@ -430,12 +430,12 @@
                                             <td style="font-weight:bold; width:60%; text-align:right;"><span t-esc="total" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                         </tr>
                                         <tr>
-                                            <t t-set="total_invoiced" t-value="sum((l.price_subtotal * l.qty_invoiced / l.product_uom_qty) for l in sale.order_line)"/>
+                                            <t t-set="total_invoiced" t-value="sum((l.price_subtotal * l.qty_invoiced_confirmed / l.product_uom_qty) for l in sale.order_line)"/>
                                             <td style="width:40%;">Invoiced</td>
                                             <td style="font-weight:bold; width:60%; text-align:right;"><span t-esc="total_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                         </tr>
                                         <tr>
-                                            <t t-set="total_to_invoice" t-value="sum((l.price_subtotal * l.qty_to_invoice / l.product_uom_qty) for l in sale.order_line)"/>
+                                            <t t-set="total_to_invoice" t-value="sum((l.price_subtotal * l.qty_to_invoice_confirmed / l.product_uom_qty) for l in sale.order_line)"/>
                                             <td style="width:40%;">To Invoice</td>
                                             <td style="font-weight:bold; width:60%; text-align:right;"><span t-esc="total_to_invoice" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                         </tr>
@@ -503,10 +503,6 @@
                                             </t>
                                         </t>
 
-                                        <t t-if="draft_invoices_count &gt; 0">
-                                            <div><em><t t-esc="draft_invoices_count" /> Draft Invoice(s)</em></div>
-                                        </t>
-
                                         <t t-set="invoices_count" t-value="1" />
                                         <t t-foreach="invoices" t-as="invoice">
                                             <t t-if="invoice.number">
@@ -520,11 +516,15 @@
 
                                                      - 
 
-                                                    <t t-field="invoice.state" />
+                                                    <span t-field="invoice.state" />
                                                 </div>
 
                                                 <t t-set="invoices_count" t-value="invoices_count + 1" />
                                             </t>
+                                        </t>
+
+                                        <t t-if="draft_invoices_count &gt; 0">
+                                            <div><em>+<t t-esc="draft_invoices_count" /> Draft Invoice(s)</em></div>
                                         </t>
                                     </td>
                                     <td style="padding:0.5em; width:33.333333%; border-bottom:0.5px solid black;">
@@ -566,11 +566,11 @@
                                             </tr>
                                             <tr>
                                                 <td style="width:40%;">Invoiced</td>
-                                                <td style="font-weight:bold; width:60%; text-align:right;"><span t-esc="line.price_subtotal * line.qty_invoiced / line.product_uom_qty if line.product_uom_qty != 0 else 0" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
+                                                <td style="font-weight:bold; width:60%; text-align:right;"><span t-esc="line.price_subtotal * line.qty_invoiced_confirmed / line.product_uom_qty if line.product_uom_qty != 0 else 0" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                             </tr>
                                             <tr>
                                                 <td style="width:40%;">To Invoice</td>
-                                                <td style="font-weight:bold; width:60%; text-align:right;"><span t-esc="line.price_subtotal * line.qty_to_invoice / line.product_uom_qty if line.product_uom_qty != 0 else 0" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
+                                                <td style="font-weight:bold; width:60%; text-align:right;"><span t-esc="line.price_subtotal * line.qty_to_invoice_confirmed / line.product_uom_qty if line.product_uom_qty != 0 else 0" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}" /></td>
                                             </tr>
                                         </table>
                                     </td>

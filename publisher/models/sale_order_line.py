@@ -35,6 +35,13 @@ class SaleOrderLine(models.Model):
 
     prod_state = fields.Selection(related='production_id.state', string="Production State")
 
+    qty_to_invoice_confirmed = fields.Float(
+        compute='_get_to_invoice_qty_confirmed', string='To Invoice', store=True, readonly=True,
+        digits=dp.get_precision('Product Unit of Measure'))
+    qty_invoiced_confirmed = fields.Float(
+        compute='_get_invoiced_qty_confirmed', string='Invoiced', store=True, readonly=True,
+        digits=dp.get_precision('Product Unit of Measure'))
+
 
     @api.one
     @api.depends('discount_base', 'commission')
@@ -153,6 +160,41 @@ class SaleOrderLine(models.Model):
         ]))
 
         return vals
+
+    @api.depends('qty_invoiced_confirmed', 'qty_delivered', 'product_uom_qty', 'order_id.state')
+    def _get_to_invoice_qty_confirmed(self):
+        """
+        Compute the quantity to invoice confirmed (if the invoices are not open or paid, they are considered to invoice).
+        If the invoice policy is order, the quantity to invoice is
+        calculated from the ordered quantity. Otherwise, the quantity delivered is used.
+        """
+        for line in self:
+            if line.order_id.state in ['sale', 'done']:
+                if line.product_id.invoice_policy == 'order':
+                    line.qty_to_invoice_confirmed = line.product_uom_qty - line.qty_invoiced_confirmed
+                else:
+                    line.qty_to_invoice_confirmed = line.qty_delivered - line.qty_invoiced_confirmed
+            else:
+                line.qty_to_invoice_confirmed = 0
+
+    @api.depends('invoice_lines.invoice_id.state', 'invoice_lines.quantity')
+    def _get_invoiced_qty_confirmed(self):
+        """
+        Compute the quantity invoiced confirmed (only the open & paid invoices).
+        If case of a refund, the quantity invoiced is decreased. Note
+        that this is the case only if the refund is generated from the SO and that is intentional: if
+        a refund made would automatically decrease the invoiced quantity, then there is a risk of reinvoicing
+        it automatically, which may not be wanted at all. That's why the refund has to be created from the SO
+        """
+        for line in self:
+            qty_invoiced_confirmed = 0.0
+            for invoice_line in line.invoice_lines:
+                if invoice_line.invoice_id.state in ['open', 'paid']:
+                    if invoice_line.invoice_id.type == 'out_invoice':
+                        qty_invoiced_confirmed += invoice_line.uom_id._compute_quantity(invoice_line.quantity, line.product_uom)
+                    elif invoice_line.invoice_id.type == 'out_refund':
+                        qty_invoiced_confirmed -= invoice_line.uom_id._compute_quantity(invoice_line.quantity, line.product_uom)
+            line.qty_invoiced_confirmed = qty_invoiced_confirmed
 
     # @api.one
     # def toggle_full_equipment_received(self):
