@@ -13,7 +13,7 @@
             <field name="name">view_publisher_invitation_tree</field>
             <field name="model">publisher.invitation</field>
             <field name="arch" type="xml">
-                <tree string="Medias">
+                <tree string="Invitation Groups">
                     <field name="name" />
                     <field name="company_id" />
                 </tree>
@@ -24,7 +24,7 @@
             <field name="name">view_publisher_invitation_form</field>
             <field name="model">publisher.invitation</field>
             <field name="arch" type="xml">
-                <form string="Media">
+                <form string="Invitation Group">
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                             <button class="oe_stat_button" name="%(publisher_invitation_partner_action)d" type="action" icon="fa-paper-plane" context="{'invitation_id': id, 'default_invitation_ids': [id]}">

@@ -103,13 +103,13 @@
         <!-- PARTNER -->
 
         <record id="menu_contacts_settings_partners_invitations_action" model="ir.actions.act_window">
-            <field name="name">Invitations Settings</field>
+            <field name="name">Invitation Groups</field>
             <field name="res_model">publisher.invitation</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem name="Invitations"
+        <menuitem name="Invitation Groups"
             id="menu_contacts_partners_invitations" parent="contacts.menu_contacts"
             sequence="5" action="menu_contacts_settings_partners_invitations_action" />
     </data>
