@@ -36,7 +36,8 @@ class Production(models.Model):
     date_end = fields.Date(string='End Date', readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
     date_closing = fields.Date(string='Closing Date', readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
     date_full_equipment_limit = fields.Date(string='Full Equipment Limit Date', readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
-    sale_line_ids = fields.One2many('sale.order.line', 'production_id', string='Production Lines')
+    sale_line_all_ids = fields.One2many('sale.order.line', 'production_id', string='Production Lines')
+    sale_line_ids = fields.One2many('sale.order.line', string='Production Lines', compute='_compute_sale_line_ids')
     expected_turnover = fields.Monetary(string="Expected Turnover", readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
     invoicing_mode = fields.Selection([
         ('before', 'Before Publication'),
@@ -95,6 +96,15 @@ class Production(models.Model):
 
 
     @api.one
+    def _compute_sale_line_ids(self):
+        sale_line_ids_id = []
+        for line in self.sale_line_all_ids:
+            if line.order_id.state in ['option', 'sale', 'done']:
+                sale_line_ids_id.append(line.id)
+        
+        self.sale_line_ids = self.env['sale.order.line'].search([('id', 'in', sale_line_ids_id)])
+
+    @api.one
     def _compute_sale_lines_confirmed_count(self):
         count = 0
         for line in self.sale_line_ids:
@@ -107,11 +117,14 @@ class Production(models.Model):
     @api.one
     def _compute_sale_lines_full_equipment_count(self):
         count = 0
+        confirmed_count = 0
         for line in self.sale_line_ids:
-            if line.full_equipment_received:
-                count += 1
+            if line.order_id.state in ['sale', 'done']:
+                confirmed_count += 1
+                if line.full_equipment_received:
+                    count += 1
 
-        self.sale_lines_full_equipment_count = str(count) + '/' + str(len(self.sale_line_ids))
+        self.sale_lines_full_equipment_count = str(count) + '/' + str(confirmed_count)
 
 
     @api.one
@@ -201,8 +214,8 @@ class Production(models.Model):
 
     @api.one
     def write(self, values):
-        if values.get('state') and values['state'] == 'draft' and len(self.sale_line_ids) > 0:
-            raise exceptions.ValidationError(_("Production can't be set to draft if there are production lines."))
+        if values.get('state') and values['state'] == 'draft' and len(self.sale_line_all_ids) > 0:
+            raise exceptions.ValidationError(_("Production can't be set to draft if there are production lines (even draft lines)."))
             return False
 
         return super(Production, self).write(values)
