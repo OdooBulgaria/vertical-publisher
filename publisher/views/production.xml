@@ -36,8 +36,8 @@
                         <field name="invoice_status" invisible="1" />
                         <field name="calendar_view" invisible="1" />
                         <button string="Create invoices" class="btn-primary" type="object" name="create_invoices" attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}" groups="account.group_account_invoice" />
-                        <button string="Print Production" class="btn-primary" type="object" name="print_production" />
-                        <button string="Print Invoice Status" class="btn-primary" type="object" name="print_production_invoice_status" attrs="{'invisible': [('state', '=', 'draft')]}" />
+                        <button string="Print Report" class="btn-primary" type="object" name="print_production" />
+                        <button string="Print Invoice Report" class="btn-primary" type="object" name="print_production_invoice_status" attrs="{'invisible': [('state', '=', 'draft')]}" />
                         <button string="Download Attachments" class="btn-primary" type="object" name="download_attachments"  attrs="{'invisible': [('state', '=', 'draft')]}"/>
                         <button string="Calendar" class="btn-primary" type="action" name="%(production_sale_order_line_action)d" context="{'production_id': id}" attrs="{'invisible': [('calendar_view', '=', False)]}" />
                         <field name="state" widget="statusbar" clickable="True" />

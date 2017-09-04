@@ -3,7 +3,7 @@
     <data>
         <report 
             id="report_production"
-            string="Production"
+            string="Production Report"
             model="publisher.production" 
             report_type="qweb-pdf"
             file="publisher.report_production"
@@ -13,7 +13,7 @@
 
         <report 
             id="report_production_invoice_status"
-            string="Production Invoice Status"
+            string="Invoice Status Report"
             model="publisher.production" 
             report_type="qweb-pdf"
             file="publisher.report_production_invoice_status"
@@ -23,7 +23,7 @@
 
         <report 
             id="report_production_global"
-            string="Productions Global Status"
+            string="Productions Global Status Report"
             model="publisher.production" 
             report_type="qweb-pdf"
             file="publisher.report_production_global"
