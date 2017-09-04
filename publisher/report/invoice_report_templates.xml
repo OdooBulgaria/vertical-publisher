@@ -4,7 +4,7 @@
         <template id="report_invoice_document_publisher" inherit_id="account.report_invoice_document">
             <xpath expr="(//t[@t-call='report.external_layout'])" position="replace">
 
-                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+                <t t-set="o" t-value="o.with_context({'lang':o.company_id.partner_id.lang})" />
 
                 <t t-set="header_title1" t-value="header_title1_1" t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')" />
                 <t t-set="header_title1" t-value="header_title1_2" t-if="o.type == 'out_invoice' and o.state == 'proforma2'" />
@@ -21,6 +21,9 @@
                 <t t-call="publisher.publisher_layout">
                     <div class="page">
                         <div class="oe_structure"/>
+
+                        <!-- <span t-esc="str(o.company_id.partner_id.lang)" />
+                        <span t-esc="str(o._context['lang'])" /> -->
 
                         <div class="row">
                             <div class="col-xs-5">
@@ -166,6 +169,14 @@
             </xpath>
         </template>
 
+        <template id="report_invoice_publisher">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="publisher.report_invoice_document_publisher" t-lang="o.company_id.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
         <template id="report_invoice_document_publisher_duplicate" inherit_id="publisher.report_invoice_document_publisher" primary="True">
             <xpath expr="//t[@t-call='publisher.publisher_layout']" position="before">
                 <t t-set="header_title1" t-value="header_title1_1" t-if="o.type == 'out_refund'" />
@@ -176,7 +187,7 @@
         <template id="report_invoice_publisher_duplicate">
             <t t-call="report.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <t t-call="publisher.report_invoice_document_publisher_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-call="publisher.report_invoice_document_publisher_duplicate" t-lang="o.company_id.partner_id.lang"/>
                 </t>
             </t>
         </template>
