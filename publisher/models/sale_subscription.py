@@ -35,3 +35,11 @@ class SaleSubscription(models.Model):
         ]))
 
         return vals
+
+    @api.multi
+    def set_open(self):
+        return self.write({'state': 'open'})
+
+    @api.multi
+    def set_close(self):
+        return self.write({'state': 'close'})
