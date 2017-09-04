@@ -52,9 +52,9 @@ class Production(models.Model):
     # sale_lines_count = fields.Integer(string="Production Lines Count", compute=_compute_sale_lines_count)
     sale_lines_confirmed_count = fields.Char(string="Confirmed Lines", compute='_compute_sale_lines_confirmed_count')
     sale_lines_full_equipment_count = fields.Char(string="Equip. Received Lines", compute='_compute_sale_lines_full_equipment_count')
-    potential_turnover = fields.Monetary(string="Potential Turnover", compute='_compute_potential_turnover')
-    actual_turnover = fields.Monetary(string="Actual Turnover", compute='_compute_actual_turnover')
-    turnover_delta = fields.Monetary(string='Diff. Actual / Expected Turnover', compute='_compute_turnover_delta')
+    potential_turnover = fields.Monetary(string="Potential Turnover", compute='_compute_potential_turnover', store=True)
+    actual_turnover = fields.Monetary(string="Actual Turnover", compute='_compute_actual_turnover', store=True)
+    turnover_delta = fields.Monetary(string='Diff. Actual / Expected Turnover', compute='_compute_turnover_delta', store=True)
     turnover_delta_sign = fields.Char(string='Turnover Delta Sign', compute='_compute_turnover_delta_sign')
 
     export_file = fields.Binary(attachment=True, help="This field holds the attachments export file.", readonly=True)

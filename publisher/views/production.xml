@@ -121,5 +121,20 @@
                 </form>
             </field>
         </record>
+
+        <record id="view_publisher_production_graph" model="ir.ui.view">
+            <field name="name">view_publisher_production_graph</field>
+            <field name="model">publisher.production</field>
+            <field name="arch" type="xml">
+                <graph string="Productions">
+                    <field name="production_type_id" type="row" />
+                    <field name="name" type="row" />
+                    <field name="expected_turnover" type="measure" />
+                    <field name="potential_turnover" type="measure" />
+                    <field name="actual_turnover" type="measure" />
+                    <field name="turnover_delta" type="measure" />
+                </graph>
+            </field>
+        </record>
     </data>
 </odoo>
