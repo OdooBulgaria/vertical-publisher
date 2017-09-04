@@ -180,5 +180,30 @@
                 </data>
             </field>
         </record>
+
+        <record id="view_order_form_publisher_hide_fields" model="ir.ui.view">
+            <field name="name">view_order_form_publisher_hide_fields</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='order_line']/form//label[@for='customer_lead']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+
+                    <xpath expr="//field[@name='order_line']/form//field[@name='customer_lead']/.." position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    
+                    <xpath expr="//field[@name='order_line']/form//label[@for='analytic_tag_ids']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+
+                    <xpath expr="//field[@name='order_line']/form//field[@name='analytic_tag_ids']/.." position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
     </data>
 </odoo>
