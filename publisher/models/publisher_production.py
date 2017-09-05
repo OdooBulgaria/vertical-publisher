@@ -188,9 +188,13 @@ class Production(models.Model):
 
     @api.one
     def action_create_project(self):
-        self.project_id = self.env['project.project'].create({
-            'name': self.name, 'production_id': self.id
-        })
+        self.project_id = self.env['publisher.project.template'].create_project(
+            [('is_production_template', '=', True)],
+            {
+                'name': self.name,
+                'production_id': self.id
+            }
+        )
 
     @api.multi
     def action_view_invoice(self):

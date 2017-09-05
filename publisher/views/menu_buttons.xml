@@ -112,5 +112,18 @@
         <menuitem name="Invitation Groups"
             id="menu_contacts_partners_invitations" parent="contacts.menu_contacts"
             sequence="5" action="menu_contacts_settings_partners_invitations_action" />
+
+        <!-- PROJECT -->
+
+        <record id="menu_publisher_project_template_action" model="ir.actions.act_window">
+            <field name="name">Project Templates</field>
+            <field name="res_model">publisher.project.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Project Templates"
+            id="menu_publisher_project_template" parent="project.menu_project_config"
+            sequence="1" action="menu_publisher_project_template_action" />
     </data>
 </odoo>

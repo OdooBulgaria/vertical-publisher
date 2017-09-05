@@ -8,6 +8,7 @@ from . import publisher_media
 from . import publisher_production
 from . import publisher_production_type
 from . import publisher_invitation
+from . import publisher_project_template
 from . import publisher_production_wizard
 from . import res_partner
 from . import product_template

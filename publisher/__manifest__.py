@@ -42,6 +42,7 @@
         'views/sale_order.xml',
         'views/project_project.xml',
         'views/invitation.xml',
+        'views/project_template.xml',
         'views/account_invoice.xml',
         'views/sale_subscription.xml',
         'views/account_fiscal_position.xml',
