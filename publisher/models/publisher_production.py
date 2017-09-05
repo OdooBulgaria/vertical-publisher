@@ -400,7 +400,6 @@ class Production(models.Model):
                         ', '.join(filter(None, [
                             _('Format : ')+line.format_id.name if line.format_id else '',
                             _('Location : ')+line.location_id.name if line.location_id else '',
-                            _('Color : ')+line.color_id.name if line.color_id else '',
                         ])),
                         _('Your Customer : ')+sale_id.partner_id.name if sale_id.agency_id else '',
                         _('Price : ')+str(quantity*line.price_unit)+self.currency_id.symbol+(' - '+str(line.discount_base)+_(' % customer discount') if line.discount_base>0 else '')+(' = '+str(quantity*line.price_unit*(1-line.discount_base/100))+self.currency_id.symbol if line.discount_base>0 and line.commission>0 else '')+(' - '+str(line.commission)+_(' % agency commission') if line.commission>0 else ''),

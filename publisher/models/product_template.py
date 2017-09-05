@@ -10,7 +10,6 @@ class ProductTemplate(models.Model):
 
     format_id = fields.Many2one('publisher.format', string="Format")
     location_id = fields.Many2one('publisher.location', string="Location")
-    color_id = fields.Many2one('publisher.color', string="Color")
     production_line_count = fields.Integer(string="Production Line Count", compute='_compute_production_line_count')
     subscription_count = fields.Integer(string="Subscription Count", compute='_compute_subscription_count')
 

@@ -33,7 +33,6 @@
         'views/media.xml',
         'views/format.xml',
         'views/location.xml',
-        'views/color.xml',
         'views/production_type.xml',
         'views/production_line.xml',
         'views/production.xml',

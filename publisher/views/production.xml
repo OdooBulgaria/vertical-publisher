@@ -104,7 +104,6 @@
                                     <field name="full_equipment_received" />
                                     <field name="attachment_count" />
                                     <field name="format_id" />
-                                    <field name="color_id" />
                                     <field name="location_id" />
                                     <field name="date_start" />
                                     <field name="date_end" />

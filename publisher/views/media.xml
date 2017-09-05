@@ -8,7 +8,6 @@
                 <tree string="Medias">
                     <field name="name" />
                     <field name="format_needed" />
-                    <field name="color_needed" />
                     <field name="location_needed" />
                     <field name="date_start_needed" />
                     <field name="date_end_needed" />
@@ -33,10 +32,9 @@
                         <group string="Production item requirements">
                             <group>
                                 <field name="format_needed" />
-                                <field name="color_needed" />
+                                <field name="location_needed" />
                             </group>
                             <group>
-                                <field name="location_needed" />
                                 <field name="date_start_needed" />
                                 <field name="date_end_needed" />
                             </group>

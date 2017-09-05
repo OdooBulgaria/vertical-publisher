@@ -14,6 +14,5 @@ class Media(models.Model):
 
     format_needed = fields.Boolean(string="Format Needed", required=True)
     location_needed = fields.Boolean(string="Location Needed", required=True)
-    color_needed = fields.Boolean(string="Color Needed", required=True)
     date_start_needed = fields.Boolean(string="Publication Date Needed", required=True)
     date_end_needed = fields.Boolean(string="End Date Needed", required=True)

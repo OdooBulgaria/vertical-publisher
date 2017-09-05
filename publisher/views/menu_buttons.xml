@@ -70,17 +70,6 @@
             id="menu_sale_publisher_settings_media_locations" parent="menu_sale_publisher_settings_media"
             sequence="4" action="menu_sale_publisher_settings_media_locations_action" />
 
-        <record id="menu_sale_publisher_settings_media_colors_action" model="ir.actions.act_window">
-            <field name="name">Colors</field>
-            <field name="res_model">publisher.color</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <menuitem name="Colors"
-            id="menu_sale_publisher_settings_media_colors" parent="menu_sale_publisher_settings_media"
-            sequence="5" action="menu_sale_publisher_settings_media_colors_action" />
-
 
 
         <record id="production_wizard_action" model="ir.actions.act_window">

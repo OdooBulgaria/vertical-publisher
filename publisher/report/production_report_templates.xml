@@ -220,10 +220,6 @@
                                                 <td style="width:40%;">Location</td>
                                                 <td style="font-weight:bold; width:60%;"><span t-field="line.location_id" /></td>
                                             </tr>
-                                            <tr t-if="line.color_id">
-                                                <td style="width:40%;">Color</td>
-                                                <td style="font-weight:bold; width:60%;"><span t-field="line.color_id" /></td>
-                                            </tr>
                                             <tr t-if="line.date_start">
                                                 <td style="width:40%;">Publication Date</td>
                                                 <td style="font-weight:bold; width:60%;"><span t-field="line.date_start" /></td>
@@ -473,10 +469,6 @@
                                             <tr t-if="line.location_id">
                                                 <td style="width:40%;">Location</td>
                                                 <td style="font-weight:bold; width:60%;"><span t-field="line.location_id" /></td>
-                                            </tr>
-                                            <tr t-if="line.color_id">
-                                                <td style="width:40%;">Color</td>
-                                                <td style="font-weight:bold; width:60%;"><span t-field="line.color_id" /></td>
                                             </tr>
                                             <tr t-if="line.date_start">
                                                 <td style="width:40%;">Publication Date</td>

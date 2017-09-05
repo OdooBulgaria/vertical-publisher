@@ -90,7 +90,6 @@
                     <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="after">
                         <field name="production_id" />
                         <field name="format_id" />
-                        <field name="color_id" />
                         <field name="location_id" />
                         <field name="date_start" />
                         <field name="date_end" />
@@ -140,14 +139,6 @@
                                             attrs="{
                                                 'required': [('format_needed', '=', True)],
                                                 'invisible': [('format_needed', '=', False)]
-                                            }"
-                                            domain="[('media_ids', 'in', media_id)]"
-                                        />
-                                        <field name="color_needed" invisible="1" />
-                                        <field name="color_id" options="{'no_quick_create': True, 'no_create_edit': True}"
-                                            attrs="{
-                                                'required': [('color_needed', '=', True)],
-                                                'invisible': [('color_needed', '=', False)]
                                             }"
                                             domain="[('media_ids', 'in', media_id)]"
                                         />

@@ -12,7 +12,6 @@ class SaleOrderLine(models.Model):
     production_id = fields.Many2one('publisher.production', string="Production")
     format_id = fields.Many2one('publisher.format', string="Format")
     location_id = fields.Many2one('publisher.location', string="Location")
-    color_id = fields.Many2one('publisher.color', string="Color")
     date_start = fields.Date(string='Publication Date')
     date_end = fields.Date(string='End Date')
     full_equipment_received = fields.Boolean(string='Full Equipment Received')
@@ -22,7 +21,6 @@ class SaleOrderLine(models.Model):
 
     format_needed = fields.Boolean(related='production_id.production_type_id.media_id.format_needed', string="Format Needed")
     location_needed = fields.Boolean(related='production_id.production_type_id.media_id.location_needed', string="Location Needed")
-    color_needed = fields.Boolean(related='production_id.production_type_id.media_id.color_needed', string="Color Needed")
     date_start_needed = fields.Boolean(related='production_id.production_type_id.media_id.date_start_needed', string="Publication Date Needed")
     date_end_needed = fields.Boolean(related='production_id.production_type_id.media_id.date_end_needed', string="End Date Needed")
 
@@ -100,7 +98,6 @@ class SaleOrderLine(models.Model):
 
         self.format_id = self.product_id.format_id if self.product_id and media_id and (media_id in self.product_id.format_id.media_ids) else False
         self.location_id = self.product_id.location_id if self.product_id and media_id and (media_id in self.product_id.location_id.media_ids) else False
-        self.color_id = self.product_id.color_id if self.product_id and media_id and (media_id in self.product_id.color_id.media_ids) else False
 
     @api.onchange('product_id', 'price_unit', 'product_uom', 'product_uom_qty', 'tax_id')
     def _onchange_discount(self):
