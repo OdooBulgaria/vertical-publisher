@@ -71,6 +71,10 @@
 
                     <!-- SALE ORDER LINE -->
 
+                    <xpath expr="//field[@name='order_line']" position="attributes">
+                        <attribute name="context">{'agency_id': agency_id}</attribute>
+                    </xpath>
+
                     <!-- Make Tree view non-editable (to allow the form to open) -->
                     <xpath expr="//field[@name='order_line']/tree" position="attributes">
                         <attribute name="editable" />

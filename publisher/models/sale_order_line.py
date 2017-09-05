@@ -30,7 +30,8 @@ class SaleOrderLine(models.Model):
     product_category_id = fields.Many2one('product.category', string="Product Category", compute='_compute_product_category_id')
 
     discount_base = fields.Float(string='Discount (%)', digits=dp.get_precision('Discount'), default=0.0)
-    commission = fields.Float(string='Agency Commission (%)', digits=dp.get_precision('Discount'), default=0.0)
+
+    commission = fields.Float(string='Agency Commission (%)', digits=dp.get_precision('Discount'), default=lambda self: 15.0 if self._context.get('agency_id') else 0.0)
     discount = fields.Float(string='Total Discount (%)', digits=dp.get_precision('Discount'), default=0.0, compute='_compute_discount')
 
     prod_state = fields.Selection(related='production_id.state', string="Production State")
