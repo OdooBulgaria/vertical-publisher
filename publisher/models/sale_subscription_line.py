@@ -10,6 +10,7 @@ class SaleSubscriptionLine(models.Model):
 
     partner_shipping_id = fields.Many2one('res.partner', string="Shipping Contact")
     language_id = fields.Many2one('res.lang', string="Language")
+    free_subscription = fields.Boolean(related='analytic_account_id.free_subscription')
 
     @api.onchange('product_id', 'quantity')
     def onchange_product_id(self):
