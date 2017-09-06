@@ -29,13 +29,13 @@
                     <xpath expr="/form/sheet//field[@name='partner_id']" position="after">
                         <field name="partner_customer_id" />
                     </xpath>
-                    <xpath expr="/form/sheet//field[@name='recurring_next_date']" position="before">
+                    <xpath expr="/form/sheet//label[@for='recurring_next_date']" position="before">
                         <field name="free_subscription" />
                     </xpath>
-                    <xpath expr="/form/sheet//field[@name='recurring_next_date']" position="attributes">
+                    <xpath expr="/form/sheet//label[@for='recurring_next_date']" position="attributes">
                         <attribute name="attrs">{'invisible': [('free_subscription', '=', True)]}</attribute>
                     </xpath>
-                    <xpath expr="/form/sheet//button[@name='recurring_invoice']" position="attributes">
+                    <xpath expr="/form/sheet//field[@name='recurring_next_date']/.." position="attributes">
                         <attribute name="attrs">{'invisible': [('free_subscription', '=', True)]}</attribute>
                     </xpath>
                     <xpath expr="/form/sheet//field[@name='recurring_total']/.." position="attributes">
