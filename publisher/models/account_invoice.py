@@ -22,15 +22,16 @@ class AccountInvoice(models.Model):
 
 
 class AccountInvoiceReport(models.AbstractModel):
-    _name = 'report.account.report_invoice'
+    _name = 'report.publisher.report_invoice_publisher'
 
     @api.model
     def render_html(self, docids, data=None):
 
         report_obj = self.env['report']
-        report = report_obj._get_report_from_name('account.report_invoice')
+        report = report_obj._get_report_from_name('publisher.report_invoice_publisher')
         docargs = {
-        	'header_title1_1': _("Invoice"),
+            'header_prefix': _(""),
+            'header_title1_1': _("Invoice"),
             'header_title1_2': _("PRO-FORMA"),
             'header_title1_3': _("Draft Invoice"),
             'header_title1_4': _("Cancelled Invoice"),
@@ -42,7 +43,7 @@ class AccountInvoiceReport(models.AbstractModel):
             'docs': self.env['account.invoice'].search([('id', 'in', docids)])
         }
 
-        return report_obj.render('account.report_invoice', docargs)
+        return report_obj.render('publisher.report_invoice_publisher', docargs)
 
 class AccountInvoiceDuplicateReport(models.AbstractModel):
     _name = 'report.publisher.report_invoice_publisher_duplicate'
@@ -53,8 +54,14 @@ class AccountInvoiceDuplicateReport(models.AbstractModel):
         report_obj = self.env['report']
         report = report_obj._get_report_from_name('publisher.report_invoice_publisher_duplicate')
         docargs = {
-            'header_title1_1': _("Duplicate refund"),
-            'header_title1_2': _("Duplicate invoice"),
+            'header_prefix': _("Duplicate "),
+            'header_title1_1': _("Invoice"),
+            'header_title1_2': _("PRO-FORMA"),
+            'header_title1_3': _("Draft Invoice"),
+            'header_title1_4': _("Cancelled Invoice"),
+            'header_title1_5': _("Refund"),
+            'header_title1_6': _("Vendor Refund"),
+            'header_title1_7': _("Vendor Bill"),
             'doc_ids': docids,
             'doc_model': report.model,
             'docs': self.env['account.invoice'].search([('id', 'in', docids)])
