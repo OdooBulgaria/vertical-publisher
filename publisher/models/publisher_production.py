@@ -128,11 +128,13 @@ class Production(models.Model):
 
 
     @api.one
+    @api.depends('sale_line_all_ids', 'sale_line_all_ids.price_subtotal', 'sale_line_all_ids.order_id.state')
     def _compute_potential_turnover(self):
         self.potential_turnover = sum([line.price_subtotal for line in self.sale_line_ids])
 
 
     @api.one
+    @api.depends('sale_line_all_ids', 'sale_line_all_ids.price_subtotal', 'sale_line_all_ids.order_id.state')
     def _compute_actual_turnover(self):
         self.actual_turnover = 0
         for line in self.sale_line_ids:
@@ -140,13 +142,12 @@ class Production(models.Model):
                 self.actual_turnover += line.price_subtotal
 
 
-    @api.depends('expected_turnover')
     @api.one
+    @api.depends('expected_turnover', 'actual_turnover')
     def _compute_turnover_delta(self):
         self.turnover_delta = self.actual_turnover - self.expected_turnover
 
 
-    @api.depends('expected_turnover')
     @api.one
     def _compute_turnover_delta_sign(self):
         self.turnover_delta_sign = '+' if self.turnover_delta > 0 else ''
@@ -174,6 +175,7 @@ class Production(models.Model):
         self.invoice_count = len(self.invoice_ids)
 
     @api.one
+    @api.depends('sale_line_ids')
     def _compute_invoice_status(self):
         if self.state in ['confirmed', 'done']:
             for line in self.sale_line_ids:
