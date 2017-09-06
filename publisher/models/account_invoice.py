@@ -10,6 +10,15 @@ class AccountInvoice(models.Model):
 
     client_ref = fields.Char(string='Customer Reference')
 
+    @api.multi
+    def invoice_print(self):
+        """ Print the invoice and mark it as sent, so that we can see more
+            easily the next step of the workflow
+        """
+        self.ensure_one()
+        self.sent = True
+        return self.env['report'].get_action(self, 'publisher.report_invoice_publisher')
+
 
 
 class AccountInvoiceReport(models.AbstractModel):
