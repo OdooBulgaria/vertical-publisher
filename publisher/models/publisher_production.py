@@ -36,8 +36,8 @@ class Production(models.Model):
     date_end = fields.Date(string='End Date', readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
     date_closing = fields.Date(string='Closing Date', readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
     date_full_equipment_limit = fields.Date(string='Full Equipment Limit Date', readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
-    sale_line_all_ids = fields.One2many('sale.order.line', 'production_id', string='Production Lines')
-    sale_line_ids = fields.One2many('sale.order.line', string='Production Lines', compute='_compute_sale_line_ids')
+    sale_line_all_ids = fields.One2many('sale.order.line', 'production_id', string='All Production Lines')
+    sale_line_ids = fields.One2many('sale.order.line', 'production_id', string='Production Lines', domain=[('state', 'in', ['option', 'sale', 'done'])])
     expected_turnover = fields.Monetary(string="Expected Turnover", readonly=True, track_visibility='always', states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]})
     invoicing_mode = fields.Selection([
         ('before', 'Before Publication'),
@@ -96,15 +96,6 @@ class Production(models.Model):
 
 
     @api.one
-    def _compute_sale_line_ids(self):
-        sale_line_ids_id = []
-        for line in self.sale_line_all_ids:
-            if line.order_id.state in ['option', 'sale', 'done']:
-                sale_line_ids_id.append(line.id)
-        
-        self.sale_line_ids = self.env['sale.order.line'].search([('id', 'in', sale_line_ids_id)])
-
-    @api.one
     def _compute_sale_lines_confirmed_count(self):
         count = 0
         for line in self.sale_line_ids:
@@ -128,13 +119,13 @@ class Production(models.Model):
 
 
     @api.one
-    @api.depends('sale_line_all_ids', 'sale_line_all_ids.price_subtotal', 'sale_line_all_ids.order_id.state')
+    @api.depends('sale_line_ids', 'sale_line_ids.price_subtotal', 'sale_line_ids.order_id.state')
     def _compute_potential_turnover(self):
         self.potential_turnover = sum([line.price_subtotal for line in self.sale_line_ids])
 
 
     @api.one
-    @api.depends('sale_line_all_ids', 'sale_line_all_ids.price_subtotal', 'sale_line_all_ids.order_id.state')
+    @api.depends('sale_line_ids', 'sale_line_ids.price_subtotal', 'sale_line_ids.order_id.state')
     def _compute_actual_turnover(self):
         self.actual_turnover = 0
         for line in self.sale_line_ids:
@@ -221,7 +212,13 @@ class Production(models.Model):
     @api.one
     def write(self, values):
         if values.get('state') and values['state'] == 'draft' and len(self.sale_line_all_ids) > 0:
-            raise exceptions.ValidationError(_("Production can't be set to draft if there are production lines (even draft lines)."))
+
+            sales = []
+            for line in self.sale_line_all_ids:
+                if line.order_id not in sales:
+                    sales.append(line.order_id)
+
+            raise exceptions.ValidationError(_("Production can't be set to draft if sale lines are still linked (in " + ', '.join(sale.name for sale in sales) + ")."))
             return False
 
         return super(Production, self).write(values)
