@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e-20170907\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-08 09:43+0000\n"
-"PO-Revision-Date: 2017-09-08 09:43+0000\n"
+"POT-Creation-Date: 2017-09-08 10:12+0000\n"
+"PO-Revision-Date: 2017-09-08 10:12+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -259,6 +259,11 @@ msgstr "Facture annulée"
 #: model:ir.ui.view,arch_db:publisher.report_invoice_document_publisher
 msgid "Cancelled Invoice:"
 msgstr "Facture annulée :"
+
+#. module: publisher
+#: sql_constraint:publisher.production:0
+msgid "Ce numéro de séquence est déjà utilisé"
+msgstr "Ce numéro de séquence est déjà utilisé"
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_production_global_template
@@ -1163,13 +1168,9 @@ msgid "Project Template"
 msgstr "Modèle de projet"
 
 #. module: publisher
-#: model:ir.ui.view,arch_db:publisher.view_publisher_project_template_tree
-msgid "Project Templates"
-msgstr "Modèles de projet"
-
-#. module: publisher
 #: model:ir.actions.act_window,name:publisher.menu_publisher_project_template_action
 #: model:ir.ui.menu,name:publisher.menu_publisher_project_template
+#: model:ir.ui.view,arch_db:publisher.view_publisher_project_template_tree
 msgid "Project Templates"
 msgstr "Modèles de projet"
 
@@ -1427,7 +1428,6 @@ msgstr "Ce champ contient le fichier exporté pour les fichiers joints."
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:22
-#: sql_constraint:publisher.production:0
 #, python-format
 msgid "This sequence number is already taken"
 msgstr "Ce numéro de séquence est déjà utilisé"
