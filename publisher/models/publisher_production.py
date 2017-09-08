@@ -218,7 +218,7 @@ class Production(models.Model):
                 if line.order_id not in sales:
                     sales.append(line.order_id)
 
-            raise exceptions.ValidationError(_("Production can't be set to draft if sale lines are still linked (in " + ', '.join(sale.name for sale in sales) + ")."))
+            raise exceptions.ValidationError(_("Production can't be set to draft if sale lines are still linked (in ") + ', '.join(sale.name for sale in sales) + ").")
             return False
 
         return super(Production, self).write(values)

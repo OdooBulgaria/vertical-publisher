@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e-20170707\n"
+"Project-Id-Version: Odoo Server 10.0+e-20170907\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-11 09:27+0000\n"
-"PO-Revision-Date: 2017-08-11 09:27+0000\n"
+"POT-Creation-Date: 2017-09-08 09:43+0000\n"
+"PO-Revision-Date: 2017-09-08 09:43+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,40 +16,40 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:376
-#: code:addons/publisher/models/sale_order_line.py:135
+#: code:addons/publisher/models/publisher_production.py:404
+#: code:addons/publisher/models/sale_order_line.py:157
 #, python-format
 msgid " % agency commission"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:376
-#: code:addons/publisher/models/sale_order_line.py:135
-#: code:addons/publisher/models/sale_subscription.py:34
+#: code:addons/publisher/models/publisher_production.py:404
+#: code:addons/publisher/models/sale_order_line.py:157
+#: code:addons/publisher/models/sale_subscription.py:35
 #, python-format
 msgid " % customer discount"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:271
+#: code:addons/publisher/models/publisher_production.py:300
 #, python-format
 msgid " (Attachments).zip"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:53
+#: code:addons/publisher/models/sale_order_line.py:64
 #, python-format
 msgid " : Another line ("
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:75
+#: code:addons/publisher/models/sale_order_line.py:86
 #, python-format
 msgid " attachment(s) added"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:75
+#: code:addons/publisher/models/sale_order_line.py:86
 #, python-format
 msgid " attachment(s) deleted"
 msgstr ""
@@ -61,13 +61,13 @@ msgid "&amp;bull;"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:53
+#: code:addons/publisher/models/sale_order_line.py:64
 #, python-format
 msgid ") has the same location which is set as unique."
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:53
+#: code:addons/publisher/models/sale_order_line.py:64
 #, python-format
 msgid ") in the production ("
 msgstr ""
@@ -75,11 +75,6 @@ msgstr ""
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_invoice_document_publisher
 msgid ", on"
-msgstr ""
-
-#. module: publisher
-#: model:ir.ui.view,arch_db:publisher.report_production_invoice_status_template_document
-msgid "<em>Draft Invoice</em>"
 msgstr ""
 
 #. module: publisher
@@ -180,6 +175,11 @@ msgid "Agency Commission (%)"
 msgstr ""
 
 #. module: publisher
+#: model:ir.model.fields,field_description:publisher.field_publisher_production_sale_line_all_ids
+msgid "All Production Lines"
+msgstr ""
+
+#. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_calendar_view
 msgid "Allow Calendar View"
 msgstr ""
@@ -249,12 +249,8 @@ msgid "Calendar"
 msgstr ""
 
 #. module: publisher
-#: model:ir.ui.view,arch_db:publisher.view_publisher_production_form
-msgid "Cancel"
-msgstr ""
-
-#. module: publisher
-#: code:addons/publisher/models/account_invoice.py:27
+#: code:addons/publisher/models/account_invoice.py:37
+#: code:addons/publisher/models/account_invoice.py:61
 #, python-format
 msgid "Cancelled Invoice"
 msgstr ""
@@ -273,35 +269,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_date_closing
 #: model:ir.ui.view,arch_db:publisher.report_production_template_document
 msgid "Closing Date"
-msgstr ""
-
-#. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_product_product_color_id
-#: model:ir.model.fields,field_description:publisher.field_product_template_color_id
-#: model:ir.model.fields,field_description:publisher.field_sale_order_line_color_id
-#: model:ir.ui.view,arch_db:publisher.report_production_invoice_status_template_document
-#: model:ir.ui.view,arch_db:publisher.report_production_template_document
-#: model:ir.ui.view,arch_db:publisher.view_publisher_color_form
-msgid "Color"
-msgstr ""
-
-#. module: publisher
-#: code:addons/publisher/models/publisher_production.py:373
-#, python-format
-msgid "Color : "
-msgstr ""
-
-#. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_publisher_media_color_needed
-#: model:ir.model.fields,field_description:publisher.field_sale_order_line_color_needed
-msgid "Color Needed"
-msgstr ""
-
-#. module: publisher
-#: model:ir.actions.act_window,name:publisher.menu_sale_publisher_settings_media_colors_action
-#: model:ir.ui.menu,name:publisher.menu_sale_publisher_settings_media_colors
-#: model:ir.ui.view,arch_db:publisher.view_publisher_color_tree
-msgid "Colors"
 msgstr ""
 
 #. module: publisher
@@ -325,6 +292,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_company_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_company_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_company_id
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_company_id
 msgid "Company"
 msgstr ""
 
@@ -362,7 +330,6 @@ msgid "Create invoices"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_publisher_color_create_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_create_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_create_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_create_uid
@@ -370,11 +337,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_create_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_create_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_wizard_create_uid
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_publisher_color_create_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_create_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_create_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_create_date
@@ -382,6 +349,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_create_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_create_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_wizard_create_date
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_create_date
 msgid "Created on"
 msgstr ""
 
@@ -398,7 +366,7 @@ msgid "Customer"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:20
+#: code:addons/publisher/models/sale_subscription.py:21
 #, python-format
 msgid "Customer : "
 msgstr ""
@@ -450,7 +418,6 @@ msgid "Discount (%)"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_publisher_color_display_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_display_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_display_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_display_name
@@ -458,7 +425,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_display_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_display_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_wizard_display_name
-#: model:ir.model.fields,field_description:publisher.field_report_account_report_invoice_display_name
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_display_name
+#: model:ir.model.fields,field_description:publisher.field_report_publisher_report_invoice_publisher_display_name
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_invoice_publisher_duplicate_display_name
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_production_global_template_display_name
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_production_invoice_status_template_display_name
@@ -491,9 +459,15 @@ msgid "Draft"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/account_invoice.py:26
+#: code:addons/publisher/models/account_invoice.py:36
+#: code:addons/publisher/models/account_invoice.py:60
 #, python-format
 msgid "Draft Invoice"
+msgstr ""
+
+#. module: publisher
+#: model:ir.ui.view,arch_db:publisher.report_production_invoice_status_template_document
+msgid "Draft Invoice(s)"
 msgstr ""
 
 #. module: publisher
@@ -502,15 +476,9 @@ msgid "Draft Invoice:"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/account_invoice.py:48
+#: code:addons/publisher/models/account_invoice.py:57
 #, python-format
-msgid "Duplicate invoice"
-msgstr ""
-
-#. module: publisher
-#: code:addons/publisher/models/account_invoice.py:47
-#, python-format
-msgid "Duplicate refund"
+msgid "Duplicate "
 msgstr ""
 
 #. module: publisher
@@ -543,7 +511,7 @@ msgid "Equipment Received"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:72
+#: code:addons/publisher/models/sale_order_line.py:83
 #, python-format
 msgid "Equipment set as not received"
 msgstr ""
@@ -566,6 +534,11 @@ msgid "Export file"
 msgstr ""
 
 #. module: publisher
+#: model:ir.model,name:publisher.model_account_fiscal_position
+msgid "Fiscal Position"
+msgstr ""
+
+#. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_product_product_format_id
 #: model:ir.model.fields,field_description:publisher.field_product_template_format_id
 #: model:ir.model.fields,field_description:publisher.field_sale_order_line_format_id
@@ -576,7 +549,7 @@ msgid "Format"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:371
+#: code:addons/publisher/models/publisher_production.py:400
 #, python-format
 msgid "Format : "
 msgstr ""
@@ -615,20 +588,15 @@ msgid "Full Equipment Received"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:72
+#: code:addons/publisher/models/sale_order_line.py:83
 #, python-format
 msgid "Full equipment is received"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:434
+#: code:addons/publisher/models/publisher_production.py:462
 #, python-format
 msgid "Global Status"
-msgstr ""
-
-#. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_sale_order_has_production
-msgid "Has Production"
 msgstr ""
 
 #. module: publisher
@@ -642,7 +610,6 @@ msgid "IBAN:"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_publisher_color_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_id
@@ -650,8 +617,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_id
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_wizard_id
-#: model:ir.model.fields,field_description:publisher.field_report_account_report_invoice_id
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_id
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_invoice_publisher_duplicate_id
+#: model:ir.model.fields,field_description:publisher.field_report_publisher_report_invoice_publisher_id
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_production_global_template_id
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_production_invoice_status_template_id
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_production_template_id
@@ -668,15 +636,21 @@ msgid "Internal Reference"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_res_partner_invitation_ids
-#: model:ir.model.fields,field_description:publisher.field_res_users_invitation_ids
-msgid "Invitations"
+#: model:ir.ui.view,arch_db:publisher.view_publisher_invitation_form
+msgid "Invitation Group"
 msgstr ""
 
 #. module: publisher
 #: model:ir.actions.act_window,name:publisher.menu_contacts_settings_partners_invitations_action
-#: model:ir.ui.menu,name:publisher.menu_contacts_settings_partners_invitations
-msgid "Invitations Settings"
+#: model:ir.ui.menu,name:publisher.menu_contacts_partners_invitations
+#: model:ir.ui.view,arch_db:publisher.view_publisher_invitation_tree
+msgid "Invitation Groups"
+msgstr ""
+
+#. module: publisher
+#: model:ir.model.fields,field_description:publisher.field_res_partner_invitation_ids
+#: model:ir.model.fields,field_description:publisher.field_res_users_invitation_ids
+msgid "Invitations"
 msgstr ""
 
 #. module: publisher
@@ -686,7 +660,8 @@ msgid "Invited Contacts"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/account_invoice.py:24
+#: code:addons/publisher/models/account_invoice.py:34
+#: code:addons/publisher/models/account_invoice.py:58
 #: model:ir.model,name:publisher.model_account_invoice
 #, python-format
 msgid "Invoice"
@@ -714,10 +689,15 @@ msgid "Invoice Mode"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:451
+#: code:addons/publisher/models/publisher_production.py:479
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_invoice_status
 #, python-format
 msgid "Invoice Status"
+msgstr ""
+
+#. module: publisher
+#: model:ir.actions.report.xml,name:publisher.report_production_invoice_status
+msgid "Invoice Status Report"
 msgstr ""
 
 #. module: publisher
@@ -726,13 +706,14 @@ msgid "Invoice:"
 msgstr ""
 
 #. module: publisher
+#: model:ir.model.fields,field_description:publisher.field_sale_order_line_qty_invoiced_confirmed
 #: model:ir.ui.view,arch_db:publisher.report_production_invoice_status_template_document
 msgid "Invoiced"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:369
-#: code:addons/publisher/models/sale_order_line.py:133
+#: code:addons/publisher/models/publisher_production.py:398
+#: code:addons/publisher/models/sale_order_line.py:155
 #, python-format
 msgid "Invoiced Percentage : "
 msgstr ""
@@ -757,13 +738,29 @@ msgid "Invoicing Mode"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_publisher_color_active
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_active
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_active
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_active
 #: model:ir.model.fields,field_description:publisher.field_publisher_media_active
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_active
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_active
 msgid "Is Active"
+msgstr ""
+
+#. module: publisher
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_is_default_template
+msgid "Is Default Template"
+msgstr ""
+
+#. module: publisher
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_is_production_template
+msgid "Is Production Template"
+msgstr ""
+
+#. module: publisher
+#: model:ir.model.fields,field_description:publisher.field_sale_subscription_free_subscription
+#: model:ir.model.fields,field_description:publisher.field_sale_subscription_line_free_subscription
+msgid "Is a Free Subscription"
 msgstr ""
 
 #. module: publisher
@@ -778,13 +775,12 @@ msgid "Language"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:31
+#: code:addons/publisher/models/sale_subscription.py:32
 #, python-format
 msgid "Language : "
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_publisher_color___last_update
 #: model:ir.model.fields,field_description:publisher.field_publisher_format___last_update
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation___last_update
 #: model:ir.model.fields,field_description:publisher.field_publisher_location___last_update
@@ -792,7 +788,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:publisher.field_publisher_production___last_update
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type___last_update
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_wizard___last_update
-#: model:ir.model.fields,field_description:publisher.field_report_account_report_invoice___last_update
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template___last_update
+#: model:ir.model.fields,field_description:publisher.field_report_publisher_report_invoice_publisher___last_update
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_invoice_publisher_duplicate___last_update
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_production_global_template___last_update
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_production_invoice_status_template___last_update
@@ -803,7 +800,6 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_publisher_color_write_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_write_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_write_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_write_uid
@@ -811,11 +807,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_write_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_wizard_write_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_write_uid
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_publisher_color_write_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_write_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_write_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_write_date
@@ -823,11 +819,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_write_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_wizard_write_date
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_write_date
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:53
+#: code:addons/publisher/models/sale_order_line.py:64
 #, python-format
 msgid "Line "
 msgstr ""
@@ -849,7 +846,7 @@ msgid "Location"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:372
+#: code:addons/publisher/models/publisher_production.py:401
 #, python-format
 msgid "Location : "
 msgstr ""
@@ -874,7 +871,6 @@ msgstr ""
 #: model:ir.ui.menu,name:publisher.menu_sale_publisher_settings_media_media
 #: model:ir.ui.view,arch_db:publisher.report_production_invoice_status_template_document
 #: model:ir.ui.view,arch_db:publisher.report_production_template_document
-#: model:ir.ui.view,arch_db:publisher.view_publisher_invitation_form
 #: model:ir.ui.view,arch_db:publisher.view_publisher_media_form
 msgid "Media"
 msgstr ""
@@ -885,39 +881,37 @@ msgid "Media Options"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_publisher_color_media_ids
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_media_ids
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_media_ids
-#: model:ir.ui.view,arch_db:publisher.view_publisher_invitation_tree
 #: model:ir.ui.view,arch_db:publisher.view_publisher_media_tree
 msgid "Medias"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_publisher_color_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_invitation_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_location_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_media_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_name
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_name
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_name
 #: model:ir.ui.view,arch_db:publisher.report_production_global_template
 msgid "Name"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:47
-#: code:addons/publisher/models/publisher_production.py:78
-#: code:addons/publisher/models/publisher_production.py:79
-#: code:addons/publisher/models/sale_order.py:80
+#: code:addons/publisher/models/publisher_production.py:48
+#: code:addons/publisher/models/publisher_production.py:92
+#: code:addons/publisher/models/publisher_production.py:93
 #: code:addons/publisher/models/sale_order.py:82
 #: code:addons/publisher/models/sale_order.py:84
+#: code:addons/publisher/models/sale_order.py:86
 #, python-format
 msgid "New"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:410
+#: code:addons/publisher/models/publisher_production.py:438
 #, python-format
 msgid "Not any line to invoice, make sure the sale orders are confirmed and the production publication date / invoicing mode are ok."
 msgstr ""
@@ -938,14 +932,15 @@ msgid "Option"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order.py:108
-#: code:addons/publisher/models/sale_order.py:126
+#: code:addons/publisher/models/sale_order.py:110
+#: code:addons/publisher/models/sale_order.py:128
 #, python-format
 msgid "Order"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/account_invoice.py:25
+#: code:addons/publisher/models/account_invoice.py:35
+#: code:addons/publisher/models/account_invoice.py:59
 #, python-format
 msgid "PRO-FORMA"
 msgstr ""
@@ -972,13 +967,18 @@ msgid "Partner Count"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:296
+#: model:ir.model.fields,field_description:publisher.field_publisher_invitation_partner_ids
+msgid "Partners"
+msgstr ""
+
+#. module: publisher
+#: code:addons/publisher/models/publisher_production.py:325
 #, python-format
 msgid "Please define an accounting sale journal for this company."
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:381
+#: code:addons/publisher/models/publisher_production.py:409
 #, python-format
 msgid "Please define income account for this product: \"%s\" (id:%d) - or for its category: \"%s\"."
 msgstr ""
@@ -996,9 +996,9 @@ msgid "Price"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:376
-#: code:addons/publisher/models/sale_order_line.py:135
-#: code:addons/publisher/models/sale_subscription.py:34
+#: code:addons/publisher/models/publisher_production.py:404
+#: code:addons/publisher/models/sale_order_line.py:157
+#: code:addons/publisher/models/sale_subscription.py:35
 #, python-format
 msgid "Price : "
 msgstr ""
@@ -1015,12 +1015,12 @@ msgstr ""
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.view_publisher_production_form
-msgid "Print Invoice Status"
+msgid "Print Invoice Report"
 msgstr ""
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.view_publisher_production_form
-msgid "Print Production"
+msgid "Print Report"
 msgstr ""
 
 #. module: publisher
@@ -1031,6 +1031,7 @@ msgstr ""
 
 #. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_type_product_category_id
+#: model:ir.model.fields,field_description:publisher.field_sale_order_line_product_category_id
 msgid "Product Category"
 msgstr ""
 
@@ -1041,7 +1042,6 @@ msgstr ""
 
 #. module: publisher
 #: code:addons/publisher/models/project_project.py:15
-#: model:ir.actions.report.xml,name:publisher.report_production
 #: model:ir.model.fields,field_description:publisher.field_project_project_production_id
 #: model:ir.model.fields,field_description:publisher.field_sale_order_line_production_id
 #: model:ir.ui.view,arch_db:publisher.report_production_global_template
@@ -1064,11 +1064,6 @@ msgid "Production Count"
 msgstr ""
 
 #. module: publisher
-#: model:ir.actions.report.xml,name:publisher.report_production_invoice_status
-msgid "Production Invoice Status"
-msgstr ""
-
-#. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_product_product_production_line_count
 #: model:ir.model.fields,field_description:publisher.field_product_template_production_line_count
 #: model:ir.model.fields,field_description:publisher.field_res_partner_production_line_count
@@ -1088,6 +1083,11 @@ msgstr ""
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.view_publisher_production_form
 msgid "Production Name"
+msgstr ""
+
+#. module: publisher
+#: model:ir.actions.report.xml,name:publisher.report_production
+msgid "Production Report"
 msgstr ""
 
 #. module: publisher
@@ -1116,9 +1116,9 @@ msgid "Production Types"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:192
+#: code:addons/publisher/models/publisher_production.py:221
 #, python-format
-msgid "Production can't be set to draft if there are production lines."
+msgid "Production can't be set to draft if sale lines are still linked (in , )."
 msgstr ""
 
 #. module: publisher
@@ -1130,6 +1130,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:publisher.menu_sale_publisher_productions_action
 #: model:ir.actions.act_window,name:publisher.production_type_production_action
 #: model:ir.ui.menu,name:publisher.menu_sale_publisher_productions
+#: model:ir.ui.view,arch_db:publisher.view_publisher_production_graph
 #: model:ir.ui.view,arch_db:publisher.view_publisher_production_tree
 #: model:ir.ui.view,arch_db:publisher.view_publisher_production_types_form
 msgid "Productions"
@@ -1138,10 +1139,14 @@ msgstr ""
 #. module: publisher
 #: code:addons/publisher/models/publisher_production_wizard.py:49
 #: model:ir.actions.act_window,name:publisher.production_wizard_action
-#: model:ir.actions.report.xml,name:publisher.report_production_global
 #: model:ir.ui.view,arch_db:publisher.wizard_with_step_form
 #, python-format
 msgid "Productions Global Status"
+msgstr ""
+
+#. module: publisher
+#: model:ir.actions.report.xml,name:publisher.report_production_global
+msgid "Productions Global Status Report"
 msgstr ""
 
 #. module: publisher
@@ -1150,6 +1155,22 @@ msgstr ""
 #: model:ir.ui.view,arch_db:publisher.report_production_invoice_status_template_document
 #: model:ir.ui.view,arch_db:publisher.report_production_template_document
 msgid "Project"
+msgstr ""
+
+#. module: publisher
+#: model:ir.ui.view,arch_db:publisher.view_publisher_project_template_form
+msgid "Project Temlate"
+msgstr ""
+
+#. module: publisher
+#: model:ir.ui.view,arch_db:publisher.view_publisher_project_template_tree
+msgid "Project Temlates"
+msgstr ""
+
+#. module: publisher
+#: model:ir.actions.act_window,name:publisher.menu_publisher_project_template_action
+#: model:ir.ui.menu,name:publisher.menu_publisher_project_template
+msgid "Project Templates"
 msgstr ""
 
 #. module: publisher
@@ -1189,16 +1210,16 @@ msgid "Quantity"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:368
-#: code:addons/publisher/models/sale_order_line.py:132
-#: code:addons/publisher/models/sale_subscription.py:33
+#: code:addons/publisher/models/publisher_production.py:397
+#: code:addons/publisher/models/sale_order_line.py:154
+#: code:addons/publisher/models/sale_subscription.py:34
 #, python-format
 msgid "Quantity : "
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order.py:109
-#: code:addons/publisher/models/sale_order.py:127
+#: code:addons/publisher/models/sale_order.py:111
+#: code:addons/publisher/models/sale_order.py:129
 #, python-format
 msgid "Quotation"
 msgstr ""
@@ -1224,7 +1245,8 @@ msgid "Ratio"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/account_invoice.py:28
+#: code:addons/publisher/models/account_invoice.py:38
+#: code:addons/publisher/models/account_invoice.py:62
 #, python-format
 msgid "Refund"
 msgstr ""
@@ -1302,9 +1324,13 @@ msgid "Sequence Order"
 msgstr ""
 
 #. module: publisher
-#: model:ir.ui.menu,name:publisher.menu_contacts_settings
 #: model:ir.ui.menu,name:publisher.menu_sale_publisher_settings
 msgid "Settings"
+msgstr ""
+
+#. module: publisher
+#: model:ir.ui.view,arch_db:publisher.view_partner_form_publisher
+msgid "Shipments"
 msgstr ""
 
 #. module: publisher
@@ -1315,24 +1341,28 @@ msgstr ""
 
 #. module: publisher
 #: model:ir.actions.act_window,name:publisher.product_template_subscription_shipped_action
-#: model:ir.ui.view,arch_db:publisher.view_partner_form_publisher
 msgid "Shipped Subscriptions"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model.fields,field_description:publisher.field_sale_subscription_line_partner_shipping_id
-msgid "Shipping Address"
-msgstr ""
-
-#. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:21
+#: code:addons/publisher/models/sale_subscription.py:22
 #, python-format
 msgid "Shipping Address : "
 msgstr ""
 
 #. module: publisher
+#: model:ir.model.fields,field_description:publisher.field_sale_subscription_line_partner_shipping_id
+msgid "Shipping Contact"
+msgstr ""
+
+#. module: publisher
 #: model:ir.ui.view,arch_db:publisher.view_project_kanban_publisher
 msgid "Show Production"
+msgstr ""
+
+#. module: publisher
+#: model:ir.model.fields,field_description:publisher.field_publisher_project_template_stage_ids
+msgid "Stages"
 msgstr ""
 
 #. module: publisher
@@ -1360,7 +1390,7 @@ msgid "Subscription Count"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:30
+#: code:addons/publisher/models/sale_subscription.py:31
 #, python-format
 msgid "Subscription Reference : "
 msgstr ""
@@ -1408,6 +1438,7 @@ msgid "To"
 msgstr ""
 
 #. module: publisher
+#: model:ir.model.fields,field_description:publisher.field_sale_order_line_qty_to_invoice_confirmed
 #: model:ir.ui.view,arch_db:publisher.report_production_invoice_status_template_document
 #: selection:publisher.production,invoice_status:0
 msgid "To Invoice"
@@ -1417,6 +1448,11 @@ msgstr ""
 #: code:addons/publisher/models/publisher_production_wizard.py:50
 #, python-format
 msgid "To be closed from"
+msgstr ""
+
+#. module: publisher
+#: model:ir.model.fields,field_description:publisher.field_account_fiscal_position_invoice_display
+msgid "To display on invoices"
 msgstr ""
 
 #. module: publisher
@@ -1443,7 +1479,7 @@ msgid "Turnover Result"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:211
+#: code:addons/publisher/models/publisher_production.py:240
 #, python-format
 msgid "Uncategorized"
 msgstr ""
@@ -1456,9 +1492,9 @@ msgid "Unit Price"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:367
-#: code:addons/publisher/models/sale_order_line.py:131
-#: code:addons/publisher/models/sale_subscription.py:32
+#: code:addons/publisher/models/publisher_production.py:396
+#: code:addons/publisher/models/sale_order_line.py:153
+#: code:addons/publisher/models/sale_subscription.py:33
 #, python-format
 msgid "Unit Price : "
 msgstr ""
@@ -1471,7 +1507,8 @@ msgid "VAT:"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/account_invoice.py:30
+#: code:addons/publisher/models/account_invoice.py:40
+#: code:addons/publisher/models/account_invoice.py:64
 #, python-format
 msgid "Vendor Bill"
 msgstr ""
@@ -1482,7 +1519,8 @@ msgid "Vendor Bill:"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/account_invoice.py:29
+#: code:addons/publisher/models/account_invoice.py:39
+#: code:addons/publisher/models/account_invoice.py:63
 #, python-format
 msgid "Vendor Refund"
 msgstr ""
@@ -1493,15 +1531,10 @@ msgid "Vendor Refund:"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/publisher_production.py:375
-#: code:addons/publisher/models/sale_order_line.py:134
+#: code:addons/publisher/models/publisher_production.py:403
+#: code:addons/publisher/models/sale_order_line.py:156
 #, python-format
 msgid "Your Customer : "
-msgstr ""
-
-#. module: publisher
-#: model:ir.model,name:publisher.model_publisher_color
-msgid "publisher.color"
 msgstr ""
 
 #. module: publisher
@@ -1512,11 +1545,6 @@ msgstr ""
 #. module: publisher
 #: model:ir.model,name:publisher.model_publisher_invitation
 msgid "publisher.invitation"
-msgstr ""
-
-#. module: publisher
-#: model:ir.model,name:publisher.model_publisher_language
-msgid "publisher.language"
 msgstr ""
 
 #. module: publisher
@@ -1545,8 +1573,13 @@ msgid "publisher.production.wizard"
 msgstr ""
 
 #. module: publisher
-#: model:ir.model,name:publisher.model_report_account_report_invoice
-msgid "report.account.report_invoice"
+#: model:ir.model,name:publisher.model_publisher_project_template
+msgid "publisher.project.template"
+msgstr ""
+
+#. module: publisher
+#: model:ir.model,name:publisher.model_report_publisher_report_invoice_publisher
+msgid "report.publisher.report_invoice_publisher"
 msgstr ""
 
 #. module: publisher
@@ -1567,11 +1600,6 @@ msgstr ""
 #. module: publisher
 #: model:ir.model,name:publisher.model_report_publisher_report_production_template
 msgid "report.publisher.report_production_template"
-msgstr ""
-
-#. module: publisher
-#: model:ir.model,name:publisher.model_report_publisher_report_saleorder_noprice
-msgid "report.publisher.report_saleorder_noprice"
 msgstr ""
 
 #. module: publisher

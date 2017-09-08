@@ -5,7 +5,7 @@
             <field name="name">view_publisher_project_template_tree</field>
             <field name="model">publisher.project.template</field>
             <field name="arch" type="xml">
-                <tree string="Project Temlates">
+                <tree string="Project Templates">
                     <field name="name" />
                     <field name="stage_ids" />
                     <field name="is_default_template" />
@@ -18,7 +18,7 @@
             <field name="name">view_publisher_project_template_form</field>
             <field name="model">publisher.project.template</field>
             <field name="arch" type="xml">
-                <form string="Project Temlate">
+                <form string="Project Template">
                     <sheet>
                         <group>
                             <group>

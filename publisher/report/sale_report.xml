@@ -20,21 +20,5 @@
             name="publisher.report_saleorder_publisher_noprice"
             paperformat="publisher.paperformat_lowmargin"
         />
-
-        <!--
-        <report 
-            id="report_sale_order_noprice"
-            string="Quotation / Order (No Price Displayed)"
-            model="sale.order" 
-            report_type="qweb-pdf"
-            file="sale.report_saleorder_noprice"
-            name="publisher.report_saleorder_noprice" 
-        >
-            <field name="paperformat_id" ref="publisher.paperformat_lowmargin" />
-        </report>
-
-        <report id="sale.report_sale_order">
-            <field name="paperformat_id" ref="publisher.paperformat_lowmargin" />
-        </report>-->
     </data>
 </odoo>
