@@ -44,7 +44,7 @@ class SaleSubscription(models.Model):
         current_date = fields.Date.today()
         periods = {'daily': 'days', 'weekly': 'weeks', 'monthly': 'months', 'yearly': 'years'}
         domain = [('id', 'in', self.ids)] if self.ids else [('recurring_next_date', '<=', current_date), ('state', '=', 'open')]
-        domain.append([('free_subscription', '!=', True)])
+        domain.append(('free_subscription', '!=', True))
         sub_data = self.search_read(fields=['id', 'company_id'], domain=domain)
         for company_id in set(data['company_id'][0] for data in sub_data):
             sub_ids = map(lambda s: s['id'], filter(lambda s: s['company_id'][0] == company_id, sub_data))
