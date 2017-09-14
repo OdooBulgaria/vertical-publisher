@@ -57,12 +57,24 @@ class SaleOrderLine(models.Model):
         location_id = self.env['publisher.location'].search([('id', '=', vals['location_id'])]) if vals.get('location_id') else self.location_id
         name = vals.get('name') or self.name
 
-        if location_id and location_id.unique:
-            for line in production_id.sale_line_ids:
-                if line.id != self.id:
-                    if location_id.id == line.location_id.id:
-                        raise exceptions.ValidationError(_('Line ') + name + _(' : Another line (') + line.order_id.name + ' - ' + line.name + _(') in the production (') + production_id.name + _(') has the same location which is set as unique.'))
-                        return False
+        if location_id:
+            if location_id.unique:
+                for line in production_id.sale_line_ids:
+                    if line.id != self.id:
+                        if location_id.id == line.location_id.id:
+                            raise exceptions.ValidationError(_('Line ') + name + _(' : Another line (') + line.order_id.name + ' - ' + line.name + _(') in the production (') + production_id.name + _(') has the same location which is set as unique.'))
+                            return False
+            if location_id.unique_time_range:
+                self_date_start = vals.get('date_start', self.date_start)
+                self_date_end = vals.get('date_end', self.date_end)
+
+                if self_date_start and self_date_end:
+                    for line in production_id.sale_line_ids:
+                        if line.id != self.id:
+                            if location_id.id == line.location_id.id:
+                                if self_date_start <= line.date_end and self_date_end >= line.date_start:
+                                    raise exceptions.ValidationError(_('Line ') + name + _(' : Another line (') + line.order_id.name + ' - ' + line.name + _(') in the production (') + production_id.name + _(') has the same location which is set as unique for a time range but overlaps.'))
+                                    return False
 
         return True
 

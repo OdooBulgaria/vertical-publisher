@@ -77,6 +77,19 @@ class SaleOrder(models.Model):
         self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
         return self.env['report'].get_action(self, 'publisher.report_saleorder_publisher_noprice')
 
+    @api.multi
+    def write(self, vals):
+        response = super(SaleOrder, self).write(vals)
+
+        if response:
+            if vals.get('state'):
+                for line in self.order_line:
+                    if not line._check_publisher_fields({}):
+                        self.state = 'draft'
+                        break
+
+        return response
+
     @api.model
     def create(self, vals):
         if vals.get('name', _('New')) == _('New'):
@@ -85,7 +98,17 @@ class SaleOrder(models.Model):
             else:
                 vals['name'] = self.env['ir.sequence'].next_by_code('sale.order.publisher') or _('New')
 
-        return super(SaleOrder, self).create(vals)
+        response = super(SaleOrder, self).create(vals)
+
+        if response:
+            if vals.get('state'):
+                self = self.env['sale.order'].search([('id', '=', response)])
+                for line in self.order_line:
+                    if not line._check_publisher_fields({}):
+                        self.state = 'draft'
+                        break
+
+        return response
 
     # @api.one
     # @api.depends('order_line')

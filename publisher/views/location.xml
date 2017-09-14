@@ -23,6 +23,7 @@
                             <group>
                                 <field name="name" />
                                 <field name="unique" />
+                                <field name="unique_time_range" />
                             </group>
                             <group>
                                 <field name="active" />
