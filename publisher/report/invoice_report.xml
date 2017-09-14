@@ -8,8 +8,7 @@
             report_type="qweb-pdf"
             name="publisher.report_invoice_publisher"
             file="publisher.report_invoice_publisher"
-            attachment_use="True"
-            attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+            attachment_use="False"
             paperformat="publisher.paperformat_lowmargin"
         />
 
