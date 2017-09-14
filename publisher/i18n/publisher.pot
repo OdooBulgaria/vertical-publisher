@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e-20170907\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-08 10:11+0000\n"
-"PO-Revision-Date: 2017-09-08 10:11+0000\n"
+"POT-Creation-Date: 2017-09-14 14:08+0000\n"
+"PO-Revision-Date: 2017-09-14 14:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,15 +17,15 @@ msgstr ""
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:404
-#: code:addons/publisher/models/sale_order_line.py:157
+#: code:addons/publisher/models/sale_order_line.py:169
 #, python-format
 msgid " % agency commission"
 msgstr ""
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:404
-#: code:addons/publisher/models/sale_order_line.py:157
-#: code:addons/publisher/models/sale_subscription.py:35
+#: code:addons/publisher/models/sale_order_line.py:169
+#: code:addons/publisher/models/sale_subscription.py:36
 #, python-format
 msgid " % customer discount"
 msgstr ""
@@ -37,19 +37,20 @@ msgid " (Attachments).zip"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:64
+#: code:addons/publisher/models/sale_order_line.py:65
+#: code:addons/publisher/models/sale_order_line.py:76
 #, python-format
 msgid " : Another line ("
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:86
+#: code:addons/publisher/models/sale_order_line.py:98
 #, python-format
 msgid " attachment(s) added"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:86
+#: code:addons/publisher/models/sale_order_line.py:98
 #, python-format
 msgid " attachment(s) deleted"
 msgstr ""
@@ -61,13 +62,20 @@ msgid "&amp;bull;"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:64
+#: code:addons/publisher/models/sale_order_line.py:76
+#, python-format
+msgid ") has the same location which is set as unique for a time range but overlaps."
+msgstr ""
+
+#. module: publisher
+#: code:addons/publisher/models/sale_order_line.py:65
 #, python-format
 msgid ") has the same location which is set as unique."
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:64
+#: code:addons/publisher/models/sale_order_line.py:65
+#: code:addons/publisher/models/sale_order_line.py:76
 #, python-format
 msgid ") in the production ("
 msgstr ""
@@ -261,8 +269,8 @@ msgid "Cancelled Invoice:"
 msgstr ""
 
 #. module: publisher
-#: sql_constraint:publisher.production:0
-msgid "Ce numéro de séquence est déjà utilisé"
+#: model:ir.model.fields,field_description:publisher.field_publisher_location_unique_time_range
+msgid "Cannot overlap in another sale for the same prod."
 msgstr ""
 
 #. module: publisher
@@ -371,7 +379,7 @@ msgid "Customer"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:21
+#: code:addons/publisher/models/sale_subscription.py:22
 #, python-format
 msgid "Customer : "
 msgstr ""
@@ -516,7 +524,7 @@ msgid "Equipment Received"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:83
+#: code:addons/publisher/models/sale_order_line.py:95
 #, python-format
 msgid "Equipment set as not received"
 msgstr ""
@@ -593,7 +601,7 @@ msgid "Full Equipment Received"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:83
+#: code:addons/publisher/models/sale_order_line.py:95
 #, python-format
 msgid "Full equipment is received"
 msgstr ""
@@ -718,7 +726,7 @@ msgstr ""
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:398
-#: code:addons/publisher/models/sale_order_line.py:155
+#: code:addons/publisher/models/sale_order_line.py:167
 #, python-format
 msgid "Invoiced Percentage : "
 msgstr ""
@@ -780,7 +788,7 @@ msgid "Language"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:32
+#: code:addons/publisher/models/sale_subscription.py:33
 #, python-format
 msgid "Language : "
 msgstr ""
@@ -829,7 +837,8 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:64
+#: code:addons/publisher/models/sale_order_line.py:65
+#: code:addons/publisher/models/sale_order_line.py:76
 #, python-format
 msgid "Line "
 msgstr ""
@@ -908,9 +917,9 @@ msgstr ""
 #: code:addons/publisher/models/publisher_production.py:48
 #: code:addons/publisher/models/publisher_production.py:92
 #: code:addons/publisher/models/publisher_production.py:93
-#: code:addons/publisher/models/sale_order.py:82
-#: code:addons/publisher/models/sale_order.py:84
-#: code:addons/publisher/models/sale_order.py:86
+#: code:addons/publisher/models/sale_order.py:95
+#: code:addons/publisher/models/sale_order.py:97
+#: code:addons/publisher/models/sale_order.py:99
 #, python-format
 msgid "New"
 msgstr ""
@@ -937,8 +946,8 @@ msgid "Option"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order.py:110
-#: code:addons/publisher/models/sale_order.py:128
+#: code:addons/publisher/models/sale_order.py:133
+#: code:addons/publisher/models/sale_order.py:151
 #, python-format
 msgid "Order"
 msgstr ""
@@ -1002,8 +1011,8 @@ msgstr ""
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:404
-#: code:addons/publisher/models/sale_order_line.py:157
-#: code:addons/publisher/models/sale_subscription.py:35
+#: code:addons/publisher/models/sale_order_line.py:169
+#: code:addons/publisher/models/sale_subscription.py:36
 #, python-format
 msgid "Price : "
 msgstr ""
@@ -1212,15 +1221,15 @@ msgstr ""
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:397
-#: code:addons/publisher/models/sale_order_line.py:154
-#: code:addons/publisher/models/sale_subscription.py:34
+#: code:addons/publisher/models/sale_order_line.py:166
+#: code:addons/publisher/models/sale_subscription.py:35
 #, python-format
 msgid "Quantity : "
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order.py:111
-#: code:addons/publisher/models/sale_order.py:129
+#: code:addons/publisher/models/sale_order.py:134
+#: code:addons/publisher/models/sale_order.py:152
 #, python-format
 msgid "Quotation"
 msgstr ""
@@ -1346,7 +1355,7 @@ msgid "Shipped Subscriptions"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:22
+#: code:addons/publisher/models/sale_subscription.py:23
 #, python-format
 msgid "Shipping Address : "
 msgstr ""
@@ -1391,7 +1400,7 @@ msgid "Subscription Count"
 msgstr ""
 
 #. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:31
+#: code:addons/publisher/models/sale_subscription.py:32
 #, python-format
 msgid "Subscription Reference : "
 msgstr ""
@@ -1428,6 +1437,7 @@ msgstr ""
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:22
+#: sql_constraint:publisher.production:0
 #, python-format
 msgid "This sequence number is already taken"
 msgstr ""
@@ -1493,8 +1503,8 @@ msgstr ""
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:396
-#: code:addons/publisher/models/sale_order_line.py:153
-#: code:addons/publisher/models/sale_subscription.py:33
+#: code:addons/publisher/models/sale_order_line.py:165
+#: code:addons/publisher/models/sale_subscription.py:34
 #, python-format
 msgid "Unit Price : "
 msgstr ""
@@ -1532,7 +1542,7 @@ msgstr ""
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:403
-#: code:addons/publisher/models/sale_order_line.py:156
+#: code:addons/publisher/models/sale_order_line.py:168
 #, python-format
 msgid "Your Customer : "
 msgstr ""

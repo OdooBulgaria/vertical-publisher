@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e-20170907\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-08 10:12+0000\n"
-"PO-Revision-Date: 2017-09-08 10:12+0000\n"
+"POT-Creation-Date: 2017-09-14 14:08+0000\n"
+"PO-Revision-Date: 2017-09-14 14:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,15 +17,15 @@ msgstr ""
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:404
-#: code:addons/publisher/models/sale_order_line.py:157
+#: code:addons/publisher/models/sale_order_line.py:169
 #, python-format
 msgid " % agency commission"
 msgstr " % commission agence"
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:404
-#: code:addons/publisher/models/sale_order_line.py:157
-#: code:addons/publisher/models/sale_subscription.py:35
+#: code:addons/publisher/models/sale_order_line.py:169
+#: code:addons/publisher/models/sale_subscription.py:36
 #, python-format
 msgid " % customer discount"
 msgstr " % remise client"
@@ -37,19 +37,20 @@ msgid " (Attachments).zip"
 msgstr " (Fichiers joints).zip"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:64
+#: code:addons/publisher/models/sale_order_line.py:65
+#: code:addons/publisher/models/sale_order_line.py:76
 #, python-format
 msgid " : Another line ("
 msgstr " : Une autre ligne ("
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:86
+#: code:addons/publisher/models/sale_order_line.py:98
 #, python-format
 msgid " attachment(s) added"
 msgstr " fichier(s) joint(s) ajouté(s)"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:86
+#: code:addons/publisher/models/sale_order_line.py:98
 #, python-format
 msgid " attachment(s) deleted"
 msgstr " fichier(s) joint(s) supprimé(s)"
@@ -61,13 +62,20 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:64
+#: code:addons/publisher/models/sale_order_line.py:76
+#, python-format
+msgid ") has the same location which is set as unique for a time range but overlaps."
+msgstr ") est au même emplacement qui ne peut être utilisé qu'une fois sur une plage de temps mais il y a une intersection."
+
+#. module: publisher
+#: code:addons/publisher/models/sale_order_line.py:65
 #, python-format
 msgid ") has the same location which is set as unique."
 msgstr ") est au même emplacement qui ne peut être utilisé qu'une fois."
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:64
+#: code:addons/publisher/models/sale_order_line.py:65
+#: code:addons/publisher/models/sale_order_line.py:76
 #, python-format
 msgid ") in the production ("
 msgstr ") dans la production ("
@@ -261,9 +269,9 @@ msgid "Cancelled Invoice:"
 msgstr "Facture annulée :"
 
 #. module: publisher
-#: sql_constraint:publisher.production:0
-msgid "Ce numéro de séquence est déjà utilisé"
-msgstr "Ce numéro de séquence est déjà utilisé"
+#: model:ir.model.fields,field_description:publisher.field_publisher_location_unique_time_range
+msgid "Cannot overlap in another sale for the same prod."
+msgstr "Ne peut pas être utilisé plusieurs fois sur la même période pour une même prod."
 
 #. module: publisher
 #: model:ir.ui.view,arch_db:publisher.report_production_global_template
@@ -371,7 +379,7 @@ msgid "Customer"
 msgstr "Client"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:21
+#: code:addons/publisher/models/sale_subscription.py:22
 #, python-format
 msgid "Customer : "
 msgstr "Client : "
@@ -516,7 +524,7 @@ msgid "Equipment Received"
 msgstr "Matériel reçu"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:83
+#: code:addons/publisher/models/sale_order_line.py:95
 #, python-format
 msgid "Equipment set as not received"
 msgstr "Matériel déclaré non reçu"
@@ -593,7 +601,7 @@ msgid "Full Equipment Received"
 msgstr "Matériel reçu"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:83
+#: code:addons/publisher/models/sale_order_line.py:95
 #, python-format
 msgid "Full equipment is received"
 msgstr "Tout le matériel est reçu"
@@ -718,7 +726,7 @@ msgstr "Facturé"
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:398
-#: code:addons/publisher/models/sale_order_line.py:155
+#: code:addons/publisher/models/sale_order_line.py:167
 #, python-format
 msgid "Invoiced Percentage : "
 msgstr "Part facturée : "
@@ -780,7 +788,7 @@ msgid "Language"
 msgstr "Langue"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:32
+#: code:addons/publisher/models/sale_subscription.py:33
 #, python-format
 msgid "Language : "
 msgstr "Langue : "
@@ -802,7 +810,7 @@ msgstr "Langue : "
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_saleorder_publisher___last_update
 #: model:ir.model.fields,field_description:publisher.field_report_publisher_report_saleorder_publisher_noprice___last_update
 msgid "Last Modified on"
-msgstr "Dernière Modification le"
+msgstr "Dernière modification le"
 
 #. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_write_uid
@@ -814,7 +822,7 @@ msgstr "Dernière Modification le"
 #: model:ir.model.fields,field_description:publisher.field_publisher_production_write_uid
 #: model:ir.model.fields,field_description:publisher.field_publisher_project_template_write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Derniere fois mis à jour par"
 
 #. module: publisher
 #: model:ir.model.fields,field_description:publisher.field_publisher_format_write_date
@@ -829,7 +837,8 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order_line.py:64
+#: code:addons/publisher/models/sale_order_line.py:65
+#: code:addons/publisher/models/sale_order_line.py:76
 #, python-format
 msgid "Line "
 msgstr "Ligne "
@@ -908,9 +917,9 @@ msgstr "Nom"
 #: code:addons/publisher/models/publisher_production.py:48
 #: code:addons/publisher/models/publisher_production.py:92
 #: code:addons/publisher/models/publisher_production.py:93
-#: code:addons/publisher/models/sale_order.py:82
-#: code:addons/publisher/models/sale_order.py:84
-#: code:addons/publisher/models/sale_order.py:86
+#: code:addons/publisher/models/sale_order.py:95
+#: code:addons/publisher/models/sale_order.py:97
+#: code:addons/publisher/models/sale_order.py:99
 #, python-format
 msgid "New"
 msgstr "Nouveau"
@@ -937,8 +946,8 @@ msgid "Option"
 msgstr "Option"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order.py:110
-#: code:addons/publisher/models/sale_order.py:128
+#: code:addons/publisher/models/sale_order.py:133
+#: code:addons/publisher/models/sale_order.py:151
 #, python-format
 msgid "Order"
 msgstr "Vente"
@@ -1002,8 +1011,8 @@ msgstr "Prix"
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:404
-#: code:addons/publisher/models/sale_order_line.py:157
-#: code:addons/publisher/models/sale_subscription.py:35
+#: code:addons/publisher/models/sale_order_line.py:169
+#: code:addons/publisher/models/sale_subscription.py:36
 #, python-format
 msgid "Price : "
 msgstr "Prix : "
@@ -1212,15 +1221,15 @@ msgstr "Quantité"
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:397
-#: code:addons/publisher/models/sale_order_line.py:154
-#: code:addons/publisher/models/sale_subscription.py:34
+#: code:addons/publisher/models/sale_order_line.py:166
+#: code:addons/publisher/models/sale_subscription.py:35
 #, python-format
 msgid "Quantity : "
 msgstr "Quantité : "
 
 #. module: publisher
-#: code:addons/publisher/models/sale_order.py:111
-#: code:addons/publisher/models/sale_order.py:129
+#: code:addons/publisher/models/sale_order.py:134
+#: code:addons/publisher/models/sale_order.py:152
 #, python-format
 msgid "Quotation"
 msgstr "Offre"
@@ -1346,7 +1355,7 @@ msgid "Shipped Subscriptions"
 msgstr "Abonnements expédiés"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:22
+#: code:addons/publisher/models/sale_subscription.py:23
 #, python-format
 msgid "Shipping Address : "
 msgstr "Adresse de livraison : "
@@ -1391,7 +1400,7 @@ msgid "Subscription Count"
 msgstr "Nombre d'abonnements"
 
 #. module: publisher
-#: code:addons/publisher/models/sale_subscription.py:31
+#: code:addons/publisher/models/sale_subscription.py:32
 #, python-format
 msgid "Subscription Reference : "
 msgstr "Référence abonnement : "
@@ -1428,6 +1437,7 @@ msgstr "Ce champ contient le fichier exporté pour les fichiers joints."
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:22
+#: sql_constraint:publisher.production:0
 #, python-format
 msgid "This sequence number is already taken"
 msgstr "Ce numéro de séquence est déjà utilisé"
@@ -1493,8 +1503,8 @@ msgstr "Prix unitaire"
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:396
-#: code:addons/publisher/models/sale_order_line.py:153
-#: code:addons/publisher/models/sale_subscription.py:33
+#: code:addons/publisher/models/sale_order_line.py:165
+#: code:addons/publisher/models/sale_subscription.py:34
 #, python-format
 msgid "Unit Price : "
 msgstr "Prix unitaire : "
@@ -1532,7 +1542,7 @@ msgstr "Note de crédit fournisseur :"
 
 #. module: publisher
 #: code:addons/publisher/models/publisher_production.py:403
-#: code:addons/publisher/models/sale_order_line.py:156
+#: code:addons/publisher/models/sale_order_line.py:168
 #, python-format
 msgid "Your Customer : "
 msgstr "Votre client : "
