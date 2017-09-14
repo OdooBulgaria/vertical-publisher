@@ -92,12 +92,6 @@ class SaleOrder(models.Model):
 
     @api.model
     def create(self, vals):
-        if vals.get('name', _('New')) == _('New'):
-            if 'company_id' in vals:
-                vals['name'] = self.env['ir.sequence'].with_context(force_company=vals['company_id']).next_by_code('sale.order.publisher') or _('New')
-            else:
-                vals['name'] = self.env['ir.sequence'].next_by_code('sale.order.publisher') or _('New')
-
         response = super(SaleOrder, self).create(vals)
 
         if response:
