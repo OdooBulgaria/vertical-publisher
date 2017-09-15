@@ -253,23 +253,20 @@ class Production(models.Model):
     def print_production_invoice_status(self):
         return self.env['report'].get_action(self, 'publisher.report_production_invoice_status_template')
 
-    @api.multi
-    def download_attachments(self):
-        self.ensure_one()
+    @api.model
+    def get_valid_filename(self, string):
+        remove_illegals_map = dict((ord(char), None) for char in '\/*?:"<>|')
+        return string.translate(remove_illegals_map)
 
-        def get_valid_filename(string):
-            remove_illegals_map = dict((ord(char), None) for char in '\/*?:"<>|')
-            return string.translate(remove_illegals_map)
-
-        temp_zip = tempfile.mktemp(suffix='.zip')
+    @api.model
+    def append_attachments(self, zip_file_object, prefix = ''):
         temp_file = tempfile.mktemp(suffix='')
-        zip_file_object = zipfile.ZipFile(temp_zip, "w")
 
         existing_folders = {}
 
         for line in self.sale_line_ids:
 
-            base_folder_name = get_valid_filename(line.order_id.partner_id.name + " - " + line.product_id.name + " (" + line.order_id.name + " #" + str(line.sequence_computed) + ")")
+            base_folder_name = prefix + self.get_valid_filename(line.order_id.partner_id.name + " - " + line.product_id.name + " (" + line.order_id.name + " #" + str(line.sequence_computed) + ")")
 
             folder_name = base_folder_name
             counter = 1
@@ -285,6 +282,15 @@ class Production(models.Model):
                 fn.close()
                 zip_file_object.write(temp_file, folder_name+"/"+f.name)
 
+    @api.multi
+    def download_attachments(self):
+        self.ensure_one()
+
+        temp_zip = tempfile.mktemp(suffix='.zip')
+        zip_file_object = zipfile.ZipFile(temp_zip, "w")
+
+        self.append_attachments(zip_file_object)
+
         zip_file_object.close()
 
         fn = open(temp_zip, 'r')
@@ -297,7 +303,34 @@ class Production(models.Model):
                 'model': 'publisher.production',
                 'field': 'export_file',
                 'id': self.id,
-                'filename': get_valid_filename(self.name) + _(" (Attachments).zip")
+                'filename': self.get_valid_filename(self.name) + _(" (Attachments).zip")
+            }),
+            'target': 'blank',
+        }
+
+    @api.multi
+    def download_attachments_project(self):
+        self.ensure_one()
+
+        temp_zip = tempfile.mktemp(suffix='.zip')
+        zip_file_object = zipfile.ZipFile(temp_zip, "w")
+
+        self.append_attachments(zip_file_object, _('Production/'))
+        self.project_id.append_attachments(zip_file_object, _('Project/'))
+
+        zip_file_object.close()
+
+        fn = open(temp_zip, 'r')
+        self.export_file = base64.encodestring(fn.read())
+        fn.close()
+
+        return {
+            'type' : 'ir.actions.act_url',
+            'url': '/web/binary/download_document?' + urllib.urlencode({
+                'model': 'publisher.production',
+                'field': 'export_file',
+                'id': self.id,
+                'filename': self.get_valid_filename(self.name) + _(" & Project") + _(" (Attachments).zip")
             }),
             'target': 'blank',
         }
